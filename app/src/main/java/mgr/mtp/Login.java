@@ -23,6 +23,8 @@ import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 
+// test commit from Android Studio
+
 /**
  *
  * Login Activity Class
