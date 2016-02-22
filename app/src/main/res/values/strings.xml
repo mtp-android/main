@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">mtp</string>
+        <string name="hello_world">Hello world!</string>
+        <string name="action_settings">Ustawienia</string>
+        <string name="title_activity_login">Logowanie</string>
+        <string name="title_activity_home">Ekran główny</string>
+        <string name="register_title">Rejestracja</string>
+        <string name="login_title">Logowanie</string>
+        <string name="name">Nazwa</string>
+        <string name="email">Email</string>
+        <string name="pwd">Hasło</string>
+    <string name="btnRegister">Zarejestruj</string>
+</resources>
