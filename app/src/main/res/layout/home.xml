@@ -13,7 +13,7 @@
         android:layout_gravity="fill_vertical"
         android:layout_marginTop="20pt"
         android:gravity="center_horizontal"
-        android:text="Welcome User"
+        android:text="Ekran główny po zalogowaniu"
         android:textSize="25dip" />
 
 </FrameLayout>

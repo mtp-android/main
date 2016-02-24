@@ -123,7 +123,7 @@ public class Register extends Activity {
                             // Set Default Values for Edit View controls
                             setDefaultValues();
                             // Display successfully registered message using Toast
-                            Toast.makeText(getApplicationContext(), "You are successfully registered!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Pomyślnie zarejestrowano!", Toast.LENGTH_LONG).show();
                         }
                         // Else display error message
                         else{
@@ -146,7 +146,12 @@ public class Register extends Activity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                //String response = new String(responseBody, "UTF-8");
+                if(responseBody != null)
+                    try {
+                        String response = new String(responseBody, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 // Hide Progress Dialog
                 prgDialog.hide();
                 // When Http response code is '404'
