@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,6 +39,9 @@ public class Register extends Activity {
     EditText emailET;
     // Passwprd Edit View Object
     EditText pwdET;
+
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,10 @@ public class Register extends Activity {
         emailET = (EditText)findViewById(R.id.registerEmail);
         // Find Password Edit View control by ID
         pwdET = (EditText)findViewById(R.id.registerPassword);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Rejestracja");
+
         // Instantiate Progress Dialog object
         prgDialog = new ProgressDialog(this);
         // Set Progress Dialog Text
@@ -107,7 +115,7 @@ public class Register extends Activity {
         prgDialog.show();
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2:8080/MTPWebService/register/doregister",params ,new AsyncHttpResponseHandler() {
+        client.get("http://10.0.2.2:8080/register/doregister",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
@@ -132,7 +140,7 @@ public class Register extends Activity {
                         }
                     } catch (JSONException e) {
                         // TODO Auto-generated catch block
-                        Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Błędna odpowiedź JSON!", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
 
                     }
@@ -156,15 +164,15 @@ public class Register extends Activity {
                 prgDialog.hide();
                 // When Http response code is '404'
                 if(statusCode == 404){
-                    Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Brak połączenie z serwerem", Toast.LENGTH_LONG).show();
                 }
                 // When Http response code is '500'
                 else if(statusCode == 500){
-                    Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Błąd serwera", Toast.LENGTH_LONG).show();
                 }
                 // When Http response code other than 404, 500
                 else{
-                    Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Nietypowy wyjątek", Toast.LENGTH_LONG).show();
                 }
 
             }

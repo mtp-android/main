@@ -1,43 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- Name Label -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        />
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dip" >
+        android:text="@string/name" />
 
-        <!-- View Title Label -->
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dip"
-            android:text="@string/register_title"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-        <!-- Name Label -->
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/name" />
-        <!-- Name TextField -->
-
-        <EditText
+    <EditText
             android:id="@+id/registerName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" android:hint="Wpisz swoje imię"/>
-
-        <!-- Email Label -->
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/email" />
-        <!-- Email TextField -->
 
         <EditText
             android:id="@+id/registerEmail"
@@ -46,14 +42,11 @@
             android:hint="Wpisz adres e-mail"
             android:inputType="textEmailAddress" />
 
-        <!-- Password Label -->
-
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dip"
             android:text="@string/pwd" />
-        <!-- Password TextField -->
 
         <EditText
             android:id="@+id/registerPassword"
@@ -62,9 +55,7 @@
             android:hint="Wpisz hasło"
             android:inputType="textPassword" />
 
-        <!-- Error message -->
-
-        <TextView
+    <TextView
             android:id="@+id/register_error"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -73,7 +64,7 @@
             android:textColor="#e30000"
             android:textStyle="bold" />
 
-        <Button
+    <Button
             android:id="@+id/btnRegister"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -95,6 +86,6 @@
             android:text="Zaloguj"
             android:textColor="#228b22"
             android:textStyle="bold" />
-    </LinearLayout>
 
-</ScrollView>
+
+</LinearLayout>
