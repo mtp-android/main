@@ -59,7 +59,7 @@ public class Login extends Activity {
         // Instantiate Progress Dialog object
         prgDialog = new ProgressDialog(this);
         // Set Progress Dialog Text
-        prgDialog.setMessage("Please wait...");
+        prgDialog.setMessage("Proszę czekać...");
         // Set Cancelable as False
         prgDialog.setCancelable(false);
     }
