@@ -95,12 +95,12 @@ public class Register extends Activity {
             }
             // When Email is invalid
             else{
-                Toast.makeText(getApplicationContext(), "Please enter valid email", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Nieprawidłowy format e-mail", Toast.LENGTH_LONG).show();
             }
         }
         // When any of the Edit View control left blank
         else{
-            Toast.makeText(getApplicationContext(), "Please fill the form, don't leave any field blank", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Wypełnij wszystkie pola formularza", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -115,7 +115,7 @@ public class Register extends Activity {
         prgDialog.show();
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2:8080/register/doregister",params ,new AsyncHttpResponseHandler() {
+        client.get("http://10.0.2.2:8081/register/doregister",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
@@ -164,7 +164,7 @@ public class Register extends Activity {
                 prgDialog.hide();
                 // When Http response code is '404'
                 if(statusCode == 404){
-                    Toast.makeText(getApplicationContext(), "Brak połączenie z serwerem", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Brak połączenia z serwerem", Toast.LENGTH_LONG).show();
                 }
                 // When Http response code is '500'
                 else if(statusCode == 500){
