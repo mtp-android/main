@@ -60,6 +60,12 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
+        // sensors prepare
+
+        senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -86,13 +92,6 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
             return;
         }
         lm.requestLocationUpdates(provider, 1000, 1, this);
-
-        // sensors prepare
-
-        senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
-
 
     Log.d("onCreate","Home");
 

@@ -64,8 +64,8 @@ public class Login extends Activity {
 
         boolean savedCredentials = prefs.getBoolean("rememberCredentials", false);
 
-        //if(savedCredentials)
-            //checkIfHasStoredUser();
+        if(savedCredentials)
+            checkIfHasStoredUser();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Logowanie");
@@ -137,7 +137,7 @@ public class Login extends Activity {
         prgDialog.show();
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2:8081/login/dologin", params, new AsyncHttpResponseHandler() {
+        client.get("http://10.0.2.2:8080/login/dologin", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
