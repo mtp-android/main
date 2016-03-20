@@ -36,7 +36,6 @@ import cz.msebera.android.httpclient.Header;
  */
 public class Login extends Activity {
 
-
     public static final String MY_PREFS_NAME = "MyPreferencesFile";
 
     ProgressDialog prgDialog;
@@ -53,8 +52,6 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-
-
         errorMsg = (TextView)findViewById(R.id.login_error);
         emailET = (EditText)findViewById(R.id.loginEmail);
         pwdET = (EditText)findViewById(R.id.loginPassword);
@@ -68,10 +65,10 @@ public class Login extends Activity {
             checkIfHasStoredUser();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Logowanie");
+        toolbar.setTitle(getString(R.string.login));
 
         prgDialog = new ProgressDialog(this);
-        prgDialog.setMessage("Proszę czekać...");
+        prgDialog.setMessage(getString(R.string.pleaseWait));
         prgDialog.setCancelable(false);
     }
 
@@ -96,10 +93,10 @@ public class Login extends Activity {
             }
 
             else{
-                Toast.makeText(getApplicationContext(), "Nieprawidłowy format e-mail", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.invalidMailFormat), Toast.LENGTH_LONG).show();
             }
         } else{
-            Toast.makeText(getApplicationContext(), "Wypełnij wszystkie pola formularza", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.fillAllFields), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -137,7 +134,7 @@ public class Login extends Activity {
         prgDialog.show();
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2:8080/login/dologin", params, new AsyncHttpResponseHandler() {
+        client.get(Constants.host+"/login/dologin", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
@@ -148,7 +145,7 @@ public class Login extends Activity {
                         JSONObject obj = new JSONObject(response);
 
                         if (obj.getBoolean("status")) {
-                            Toast.makeText(getApplicationContext(), "Pomyślnie zalogowano!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),getString(R.string.successLogin), Toast.LENGTH_LONG).show();
                             navigateToHomeActivity();
                         } else {
                             errorMsg.setText(obj.getString("error_msg"));
@@ -156,7 +153,7 @@ public class Login extends Activity {
                         }
                     } catch (JSONException e) {
                         // TODO Auto-generated catch block
-                        Toast.makeText(getApplicationContext(), "Błędna odpowiedź JSON!!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),getString(R.string.wrongJson), Toast.LENGTH_LONG).show();
                         e.printStackTrace();
 
                     }
@@ -173,11 +170,14 @@ public class Login extends Activity {
                     prgDialog.hide();
 
                     if (statusCode == 404) {
-                        Toast.makeText(getApplicationContext(), "Brak połączenia z serwerem", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
                     } else if (statusCode == 500) {
-                        Toast.makeText(getApplicationContext(), "Błąd serwera", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                getString(R.string.serverError), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Nietypowy wyjątek", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
                     }
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();

@@ -22,9 +22,6 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
@@ -34,6 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.Food;
@@ -49,7 +47,6 @@ public class HomeDiet extends Fragment {
     ProgressDialog prgDialog;
     private TextView dietDate;
     private Button setDateBtn;
-    DateFormat queryDateFormat;
 
     Date selectedDate;
     List<String> groupList;
@@ -62,36 +59,18 @@ public class HomeDiet extends Fragment {
     }
 
     private void createGroupList() {
-        groupList = new ArrayList<String>();
-        groupList.add("Śniadanie");
-        groupList.add("II Śniadanie");
-        groupList.add("Obiad");
-        groupList.add("Podwieczorek");
-        groupList.add("Kolacja");
+        groupList = new ArrayList<>();
+        groupList.add(getString(R.string.breakfast));
+        groupList.add(getString(R.string.secondBreakfast));
+        groupList.add(getString(R.string.dinner));
+        groupList.add(getString(R.string.afternoonSnacks));
+        groupList.add(getString(R.string.supper));
     }
 
 
     private void loadChild(List<Food> mealIngredients) {
-            childList = new ArrayList<Food>();
+            childList = new ArrayList<>();
             childList.addAll(mealIngredients);
-    }
-
-    private void setGroupIndicatorToRight() {
-        /* Get the screen width */
-        DisplayMetrics dm = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-
-        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width
-                - getDipsFromPixel(5));
-    }
-
-    // Convert pixel to dip
-    public int getDipsFromPixel(float pixels) {
-        // Get the screen's density scale
-        final float scale = getResources().getDisplayMetrics().density;
-        // Convert the dps to pixels, based on density scale
-        return (int) (pixels * scale + 0.5f);
     }
 
     @Override
@@ -108,8 +87,7 @@ public class HomeDiet extends Fragment {
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
         Date selectedDate = new Date();
-        String today = new SimpleDateFormat("dd-MM-yyyy").format(selectedDate);
-        queryDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String today = Constants.displayDateFormat.format(selectedDate);
 
         dietDate = (TextView) view.findViewById(R.id.dietDate);
         dietDate.setText(today);
@@ -118,7 +96,7 @@ public class HomeDiet extends Fragment {
         setDateBtn.setOnClickListener(setDateBtnListener);
 
         prgDialog = new ProgressDialog(getActivity());
-        prgDialog.setMessage("Proszę czekać...");
+        prgDialog.setMessage(getString(R.string.pleaseWait));
         prgDialog.setCancelable(false);
 
         // prepare static meals
@@ -135,16 +113,6 @@ public class HomeDiet extends Fragment {
         expListView.setAdapter(expListAdapter);
         expListAdapter.setDate(selectedDate);
 
-        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-                setListViewHeight(parent, groupPosition);
-                return false;
-            }
-        });
-
         return view;
     }
 
@@ -154,23 +122,22 @@ public class HomeDiet extends Fragment {
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DAY_OF_MONTH, day);
-        Date preDate = cal.getTime();
-
-        String date = new SimpleDateFormat("yyyy-MM-dd").format(preDate);
+        Date calDate = cal.getTime();
+        String date = Constants.queryDateFormat.format(calDate);
 
         prgDialog.show();
         RequestParams params = new RequestParams();
-        params.put("date",date);
+        params.put("date", date);
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://10.0.2.2:8080/meals/getmeals",params ,new AsyncHttpResponseHandler() {
+        client.get(Constants.host + "/meals/getmeals", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
                     String response = new String(responseBody, "UTF-8");
 
-                        setMealsOnDay(response);
-                        prgDialog.hide();
+                    setMealsOnDay(response);
+                    prgDialog.hide();
 
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
@@ -182,30 +149,31 @@ public class HomeDiet extends Fragment {
                 try {
                     String response = new String(responseBody, "UTF-8");
 
-                    //prgDialog.hide();
+                    prgDialog.hide();
 
                     if (statusCode == 404) {
-                        Toast.makeText(getActivity(), "Brak połączenia z serwerem", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),
+                               getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
                     } else if (statusCode == 500) {
-                        Toast.makeText(getActivity(), "Błąd serwera", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),
+                               getString(R.string.serverError), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getActivity(), "Nietypowy wyjątek", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),
+                               getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
                     }
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
             }
-
-            });
-
+        });
     }
 
 
     public void setMealsOnDay(String response)
     {
         ArrayList<Food> breakfast = new ArrayList<>(),secondBreakfast = new ArrayList<>(),
-                dinner = new ArrayList<>(),afternoonSnacks = new ArrayList<>(),supper = new ArrayList<>()
-                ,all;
+                        dinner = new ArrayList<>(),afternoonSnacks = new ArrayList<>(),
+                        supper = new ArrayList<>(),all;
 
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Food>>(){}.getType();
@@ -217,90 +185,45 @@ public class HomeDiet extends Fragment {
                 case 0:
                     breakfast.add(food);
                     break;
-
                 case 1:
                     secondBreakfast.add(food);
                     break;
-
                 case 2:
                     dinner.add(food);
                     break;
-
                 case 3:
                     afternoonSnacks.add(food);
                     break;
-
                 case 4:
                     supper.add(food);
                     break;
-
                 default:
                     break;
             }
-
         }
 
-        mealsCollection = new LinkedHashMap<String, List<Food>>();
+        mealsCollection = new LinkedHashMap<>();
 
         for (String meal : groupList) {
-            if (meal.equals("Śniadanie")) {
+            if (meal.equals(getString(R.string.breakfast))) {
                 loadChild(breakfast);
-            } else if (meal.equals("II Śniadanie"))
+            } else if (meal.equals(getString(R.string.secondBreakfast)))
                 loadChild(secondBreakfast);
-            else if (meal.equals("Obiad"))
+            else if (meal.equals(getString(R.string.dinner)))
                 loadChild(dinner);
-            else if (meal.equals("Podwieczorek"))
+            else if (meal.equals(getString(R.string.afternoonSnacks)))
                 loadChild(afternoonSnacks);
-            else if (meal.equals("Kolacja"))
+            else if (meal.equals(getString(R.string.supper)))
                 loadChild(supper);
 
             mealsCollection.put(meal, childList);
 
-
         }
-
         expListAdapter.dataChanged(mealsCollection);
         expListAdapter.notifyDataSetChanged();
-
     }
 
-            private void setListViewHeight(ExpandableListView listView,
-                                   int group) {
-        ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
-        int totalHeight = 0;
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
-                View.MeasureSpec.EXACTLY);
-        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
-            View groupItem = listAdapter.getGroupView(i, false, null, listView);
-            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-
-            totalHeight += groupItem.getMeasuredHeight();
-
-            if (((listView.isGroupExpanded(i)) && (i != group))
-                    || ((!listView.isGroupExpanded(i)) && (i == group))) {
-                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
-                    View listItem = listAdapter.getChildView(i, j, false, null,
-                            listView);
-                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-
-                    totalHeight += listItem.getMeasuredHeight();
-
-                }
-            }
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        int height = totalHeight
-                + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
-        if (height < 10)
-            height = 200;
-        params.height = height;
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
-
-
-        private View.OnClickListener setDateBtnListener = new View.OnClickListener() {
+    private View.OnClickListener setDateBtnListener = new View.OnClickListener() {
 
         @Override
 
