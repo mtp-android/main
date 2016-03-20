@@ -5,7 +5,10 @@ package mgr.mtp;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,17 +27,20 @@ import mgr.mtp.DataModel.Food;
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     ImageView addMeal;
+    ImageView removeChildItem;
     Date date;
 
     private Activity context;
     private LinkedHashMap<String, List<Food>> mealsCollection;
     private List<String> groupList;
+    private HomeDiet fragment;
 
     public ExpandableListAdapter(Activity context, List<String> groupList,
-                                 LinkedHashMap<String, List<Food>> mealsCollection) {
+                                 LinkedHashMap<String, List<Food>> mealsCollection, HomeDiet fragment) {
         this.context = context;
         this.mealsCollection = mealsCollection;
         this.groupList = groupList;
+        this.fragment = fragment;
     }
 
     public Object getChild(int groupPosition, int childPosition) {
@@ -47,7 +53,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
     public View getChildView(final int groupPosition, final int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+                             boolean isLastChild, View convertView, final ViewGroup parent) {
         final Food mealIngredient = (Food) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
 
@@ -55,9 +61,31 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.child_item, null);
         }
 
+        removeChildItem = (ImageView) convertView.findViewById(R.id.removeChildItem);
+        removeChildItem.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+                new AlertDialog.Builder(v.getContext())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(fragment.getString(R.string.removeTitle))
+                        .setMessage(fragment.getString(R.string.confirmRemoveText))
+                        .setPositiveButton(fragment.getString(R.string.yes), new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                fragment.removeChild(mealIngredient.getId(), groupPosition, childPosition);
+                            }
+
+                        })
+                        .setNegativeButton(fragment.getString(R.string.no), null)
+                        .show();
+            }
+        });
+
         TextView item = (TextView) convertView.findViewById(R.id.mealIngredient);
 
-        item.setText(mealIngredient.getName());
+        item.setText(mealIngredient.getName()+" - "+mealIngredient.getAmount()+" "+mealIngredient.getUnit());
         return convertView;
     }
 
@@ -96,7 +124,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         addMeal.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Klikniecie w: "+getGroupId(groupPosition)+" pozycje z dnia: "+date,Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"toDo posilek nr: "+getGroupId(groupPosition)+
+                        " z dnia: "+Constants.displayDateFormat.format(date),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,4 +147,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public void dataChanged(LinkedHashMap<String, List<Food>> mealsCollection) {
         this.mealsCollection = mealsCollection;
     }
+
+
 }

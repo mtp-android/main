@@ -21,6 +21,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -103,30 +104,26 @@ public class Register extends Activity {
         client.get(Constants.host+"/register/doregister",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody, StandardCharsets.UTF_8);
+
+                prgDialog.hide();
                 try {
-                    String response = new String(responseBody, "UTF-8");
+                    JSONObject obj = new JSONObject(response);
+                    if(obj.getBoolean("status")){
 
-                    prgDialog.hide();
-                    try {
-                        JSONObject obj = new JSONObject(response);
-                        if(obj.getBoolean("status")){
-
-                            setDefaultValues();
-                            Toast.makeText(getApplicationContext(), getString(R.string.successRegister), Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            errorMsg.setText(obj.getString("error_msg"));
-                            Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_LONG).show();
-                        }
-                    } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        Toast.makeText(getApplicationContext(), getString(R.string.wrongJson), Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
+                        setDefaultValues();
+                        Toast.makeText(getApplicationContext(), getString(R.string.successRegister), Toast.LENGTH_LONG).show();
                     }
-
-                } catch (UnsupportedEncodingException e) {
+                    else{
+                        errorMsg.setText(obj.getString("error_msg"));
+                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), getString(R.string.wrongJson), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
+
             }
 
             @Override

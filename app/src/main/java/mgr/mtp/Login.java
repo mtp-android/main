@@ -24,6 +24,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -137,28 +138,24 @@ public class Login extends Activity {
         client.get(Constants.host+"/login/dologin", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody, StandardCharsets.UTF_8);
+                prgDialog.hide();
                 try {
-                    String response = new String(responseBody, "UTF-8");
-                    prgDialog.hide();
-                    try {
 
-                        JSONObject obj = new JSONObject(response);
+                    JSONObject obj = new JSONObject(response);
 
-                        if (obj.getBoolean("status")) {
-                            Toast.makeText(getApplicationContext(),getString(R.string.successLogin), Toast.LENGTH_LONG).show();
-                            navigateToHomeActivity();
-                        } else {
-                            errorMsg.setText(obj.getString("error_msg"));
-                            Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_LONG).show();
-                        }
-                    } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        Toast.makeText(getApplicationContext(),getString(R.string.wrongJson), Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-
+                    if (obj.getBoolean("status")) {
+                        Toast.makeText(getApplicationContext(),getString(R.string.successLogin), Toast.LENGTH_LONG).show();
+                        navigateToHomeActivity();
+                    } else {
+                        errorMsg.setText(obj.getString("error_msg"));
+                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_LONG).show();
                     }
-                } catch (UnsupportedEncodingException e) {
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(),getString(R.string.wrongJson), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
+
                 }
             }
 

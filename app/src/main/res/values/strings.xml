@@ -28,4 +28,9 @@
     <string name="successRegister">Pomyślnie zarejestrowano</string>
     <string name="registration">Rejestracja</string>
     <string name="login">Logowanie</string>
+    <string name="successRemove">Pomyślnie usunięto</string>
+    <string name="removeTitle">Usuwanie</string>
+    <string name="confirmRemoveText">Czy chcesz usunąć rekord?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
 </resources>

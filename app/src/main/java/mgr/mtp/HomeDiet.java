@@ -24,6 +24,8 @@ import com.loopj.android.http.RequestParams;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ import java.util.List;
 import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.protocol.HTTP;
 import mgr.mtp.DataModel.Food;
 
 /**
@@ -86,7 +89,9 @@ public class HomeDiet extends Fragment {
         View view = inflater.inflate(R.layout.homediet, container, false);
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
-        Date selectedDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        Date selectedDate = cal.getTime();
+
         String today = Constants.displayDateFormat.format(selectedDate);
 
         dietDate = (TextView) view.findViewById(R.id.dietDate);
@@ -103,12 +108,12 @@ public class HomeDiet extends Fragment {
         createGroupList();
 
         // meals details for day
-        getMealsForDay(selectedDate.getYear(),selectedDate.getMonth(), selectedDate.getDay());
+        getMealsForDay(selectedDate);
 
 
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new ExpandableListAdapter(
-                getActivity(), groupList, mealsCollection);
+                getActivity(), groupList, mealsCollection, this);
 
         expListView.setAdapter(expListAdapter);
         expListAdapter.setDate(selectedDate);
@@ -116,14 +121,9 @@ public class HomeDiet extends Fragment {
         return view;
     }
 
-    private void getMealsForDay(int year, int month, int day) {
+    private void getMealsForDay(Date selectedDate) {
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, day);
-        Date calDate = cal.getTime();
-        String date = Constants.queryDateFormat.format(calDate);
+        String date = Constants.queryDateFormat.format(selectedDate);
 
         prgDialog.show();
         RequestParams params = new RequestParams();
@@ -133,36 +133,28 @@ public class HomeDiet extends Fragment {
         client.get(Constants.host + "/meals/getmeals", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-                    String response = new String(responseBody, "UTF-8");
+                String response = new String(responseBody, StandardCharsets.UTF_8);
 
-                    setMealsOnDay(response);
-                    prgDialog.hide();
+                setMealsOnDay(response);
+                prgDialog.hide();
 
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                try {
-                    String response = new String(responseBody, "UTF-8");
+                String response = new String(responseBody,StandardCharsets.UTF_8);
 
-                    prgDialog.hide();
+                prgDialog.hide();
 
-                    if (statusCode == 404) {
-                        Toast.makeText(getActivity(),
-                               getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
-                    } else if (statusCode == 500) {
-                        Toast.makeText(getActivity(),
-                               getString(R.string.serverError), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getActivity(),
-                               getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
-                    }
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                if (statusCode == 404) {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
+                } else if (statusCode == 500) {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.serverError), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -221,6 +213,7 @@ public class HomeDiet extends Fragment {
         }
         expListAdapter.dataChanged(mealsCollection);
         expListAdapter.notifyDataSetChanged();
+
     }
 
     private View.OnClickListener setDateBtnListener = new View.OnClickListener() {
@@ -257,10 +250,14 @@ public class HomeDiet extends Fragment {
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
 
-            Date date = new Date(year,monthOfYear,dayOfMonth);
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, year);
+            cal.set(Calendar.MONTH, monthOfYear);
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            Date date = cal.getTime();
 
             expListAdapter.setDate(date);
-            getMealsForDay(year,monthOfYear,dayOfMonth);
+            getMealsForDay(date);
 
             // update label
             dietDate.setText(
@@ -271,4 +268,44 @@ public class HomeDiet extends Fragment {
     };
 
 
+    public void removeChild(int id, final int groupPosition, final int childPosition) {
+
+        prgDialog.show();
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Constants.host + "/meals/removeitem", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody,StandardCharsets.UTF_8);
+                prgDialog.hide();
+                Toast.makeText(getActivity(),
+                        getString(R.string.successRemove), Toast.LENGTH_LONG).show();
+
+                List<Food> child = mealsCollection.get(groupList.get(groupPosition));
+                child.remove(childPosition);
+                expListAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                String response = new String(responseBody, StandardCharsets.UTF_8);
+
+                prgDialog.hide();
+
+                if (statusCode == 404) {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
+                } else if (statusCode == 500) {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.serverError), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 }
