@@ -1,4 +1,4 @@
-package mgr.mtp;
+package mgr.mtp.Diet;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;

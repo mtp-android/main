@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mobilny Trener Personalny</string>
-        <string name="action_settings">Ustawienia</string>
+        <string name="diet_settings">Ustawienia</string>
         <string name="title_activity_login">Logowanie</string>
         <string name="title_activity_home">Mobilny trener personalny</string>
         <string name="register_title">Rejestracja</string>
@@ -33,4 +33,27 @@
     <string name="confirmRemoveText">Czy chcesz usunąć rekord?</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="search_title">Wyszukiwarka produktów</string>
+    <string name="addProduct_title">Dodawanie produktu</string>
+    <string name="successAdd">Pomyślnie dodano</string>
+    <string name="dietSettings">Ustawienia diety</string>
+    <string name="user_weight">Waga</string>
+    <string name="put_weight">Podaj wagę w kg</string>
+    <string name="user_age">Wiek</string>
+    <string name="put_age">Podaj wiek w latach</string>
+    <string name="user_activityLevel">Poziom aktywności</string>
+    <string name="put_activity">Określ poziom aktywności z listy</string>
+    <string name="user_target">Cel</string>
+    <string name="put_target">Określ cel diety</string>
+    <string name="action_settings">Ustawienia diety</string>
+    <string name="user_gender">Płeć</string>
+    <string name="put_gender">Określ płeć</string>
+    <string name="user_height">Wzrost</string>
+    <string name="put_height">Podaj wzrost w cm</string>
+
+    <string-array name = "spinner_unit">
+        <item>g</item>
+        <item>szt</item>
+    </string-array>
+
 </resources>

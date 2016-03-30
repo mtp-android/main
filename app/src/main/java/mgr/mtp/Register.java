@@ -24,6 +24,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 import cz.msebera.android.httpclient.Header;
+import mgr.mtp.Utils.Constants;
+import mgr.mtp.Utils.Utility;
 
 /**
  *

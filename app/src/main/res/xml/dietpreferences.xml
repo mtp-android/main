@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/dietSettings" >
+
+        <EditTextPreference
+            android:defaultValue="75"
+            android:dialogTitle="@string/user_weight"
+            android:inputType="number"
+            android:key="user_weight"
+            android:summary="@string/put_weight"
+            android:title="@string/user_weight" />
+
+        <EditTextPreference
+            android:defaultValue="170"
+            android:dialogTitle="@string/user_height"
+            android:inputType="number"
+            android:key="user_weight"
+            android:summary="@string/put_height"
+            android:title="@string/user_height" />
+
+        <EditTextPreference
+            android:defaultValue="25"
+            android:dialogTitle="@string/user_age"
+            android:inputType="number"
+            android:key="user_age"
+            android:summary="@string/put_age"
+            android:title="@string/user_age" />
+
+        <ListPreference
+            android:title="@string/user_gender"
+            android:summary="@string/put_gender"
+            android:key="user_gender"
+            android:defaultValue="1"
+            android:entries="@array/genderList"
+            android:entryValues="@array/genderListValues" />
+
+        <ListPreference
+            android:title="@string/user_activityLevel"
+            android:summary="@string/put_activity"
+            android:key="user_activityLevel"
+            android:defaultValue="1"
+            android:entries="@array/activityListArray"
+            android:entryValues="@array/activityListValues" />
+
+        <ListPreference
+            android:title="@string/user_target"
+            android:summary="@string/put_target"
+            android:key="user_target"
+            android:defaultValue="1"
+            android:entries="@array/targetListArray"
+            android:entryValues="@array/targetListValues" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

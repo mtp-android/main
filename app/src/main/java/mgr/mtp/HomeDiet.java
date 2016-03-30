@@ -3,16 +3,18 @@ package mgr.mtp;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,22 +24,20 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.protocol.HTTP;
-import mgr.mtp.DataModel.Food;
+import mgr.mtp.DataModel.Product;
+import mgr.mtp.Diet.DatePickerFragment;
+import mgr.mtp.Diet.ExpandableListAdapter;
+import mgr.mtp.Utils.Constants;
 
 /**
  * Created by lukas on 25.02.2016.
@@ -51,14 +51,17 @@ public class HomeDiet extends Fragment {
     private TextView dietDate;
     private Button setDateBtn;
 
+
     Date selectedDate;
     List<String> groupList;
-    List<Food> childList;
-    LinkedHashMap<String, List<Food>> mealsCollection;
+    List<Product> childList;
+    LinkedHashMap<String, List<Product>> mealsCollection;
+    TextView caloriesTxt,proteinsTxt,fatTxt,carbsTxt;
     ExpandableListView expListView;
+    ProgressBar caloriesBar,proteinsBar,fatBar,carbsBar;
 
     public HomeDiet() {
-        // Required empty public constructor
+
     }
 
     private void createGroupList() {
@@ -71,7 +74,7 @@ public class HomeDiet extends Fragment {
     }
 
 
-    private void loadChild(List<Food> mealIngredients) {
+    private void loadChild(List<Product> mealIngredients) {
             childList = new ArrayList<>();
             childList.addAll(mealIngredients);
     }
@@ -79,6 +82,7 @@ public class HomeDiet extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -88,11 +92,26 @@ public class HomeDiet extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.homediet, container, false);
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        caloriesBar = (ProgressBar) view.findViewById(R.id.caloriesBar);
+        carbsBar = (ProgressBar) view.findViewById(R.id.carbsBar);
+        fatBar = (ProgressBar) view.findViewById(R.id.fatBar);
+        proteinsBar = (ProgressBar) view.findViewById(R.id.proteinBar);
+        caloriesTxt = (TextView) view.findViewById(R.id.caloriesTxt);
+        carbsTxt = (TextView) view.findViewById(R.id.carbsTxt);
+        fatTxt = (TextView) view.findViewById(R.id.fatTxt);
+        proteinsTxt = (TextView) view.findViewById(R.id.proteinTxt);
+
+        refreshBars();
 
         Calendar cal = Calendar.getInstance();
         Date selectedDate = cal.getTime();
 
-        String today = Constants.displayDateFormat.format(selectedDate);
+        String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
+        try {
+            selectedDate = Constants.queryDateFormat.parse(today);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         dietDate = (TextView) view.findViewById(R.id.dietDate);
         dietDate.setText(today);
@@ -103,6 +122,12 @@ public class HomeDiet extends Fragment {
         prgDialog = new ProgressDialog(getActivity());
         prgDialog.setMessage(getString(R.string.pleaseWait));
         prgDialog.setCancelable(false);
+
+
+        caloriesBar.setProgress(2000);
+        fatBar.setProgress(2000);
+        carbsBar.setProgress(2000);
+        proteinsBar.setProgress(2000);
 
         // prepare static meals
         createGroupList();
@@ -142,7 +167,7 @@ public class HomeDiet extends Fragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                String response = new String(responseBody,StandardCharsets.UTF_8);
+                String response = new String(responseBody, StandardCharsets.UTF_8);
 
                 prgDialog.hide();
 
@@ -163,31 +188,31 @@ public class HomeDiet extends Fragment {
 
     public void setMealsOnDay(String response)
     {
-        ArrayList<Food> breakfast = new ArrayList<>(),secondBreakfast = new ArrayList<>(),
+        ArrayList<Product> breakfast = new ArrayList<>(),secondBreakfast = new ArrayList<>(),
                         dinner = new ArrayList<>(),afternoonSnacks = new ArrayList<>(),
                         supper = new ArrayList<>(),all;
 
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<Food>>(){}.getType();
+        Type listType = new TypeToken<List<Product>>(){}.getType();
         all = gson.fromJson(response, listType);
 
-        for(Food food: all){
+        for(Product product : all){
 
-            switch (food.getMeal()) {
+            switch (product.getMeal()) {
                 case 0:
-                    breakfast.add(food);
+                    breakfast.add(product);
                     break;
                 case 1:
-                    secondBreakfast.add(food);
+                    secondBreakfast.add(product);
                     break;
                 case 2:
-                    dinner.add(food);
+                    dinner.add(product);
                     break;
                 case 3:
-                    afternoonSnacks.add(food);
+                    afternoonSnacks.add(product);
                     break;
                 case 4:
-                    supper.add(food);
+                    supper.add(product);
                     break;
                 default:
                     break;
@@ -283,7 +308,7 @@ public class HomeDiet extends Fragment {
                 Toast.makeText(getActivity(),
                         getString(R.string.successRemove), Toast.LENGTH_LONG).show();
 
-                List<Food> child = mealsCollection.get(groupList.get(groupPosition));
+                List<Product> child = mealsCollection.get(groupList.get(groupPosition));
                 child.remove(childPosition);
                 expListAdapter.notifyDataSetChanged();
 
@@ -307,5 +332,31 @@ public class HomeDiet extends Fragment {
                 }
             }
         });
+    }
+
+    public void refreshBars() {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        int calories = prefs.getInt("calculatedCalories", 2000);
+        int proteins = prefs.getInt("calculatedProteins", 100);
+        int fat = prefs.getInt("calculatedFat", 100);
+        int carbs = prefs.getInt("calculatedCarbs", 100);
+
+        carbsBar.setMax(carbs);
+        proteinsBar.setMax(proteins);
+        fatBar.setMax(fat);
+        caloriesBar.setMax(calories);
+
+        caloriesTxt.setText("Kalorie: "+calories);
+        proteinsTxt.setText("Białko: "+proteins);
+        fatTxt.setText("Tłuszcze: "+fat);
+        carbsTxt.setText("Węglowodany: "+carbs);
+
+
+
+
+
+
     }
 }

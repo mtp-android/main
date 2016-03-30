@@ -1,4 +1,4 @@
-package mgr.mtp;
+package mgr.mtp.Utils;
 
 /**
  * Created by lukas on 21.02.2016.

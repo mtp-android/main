@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +26,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 import cz.msebera.android.httpclient.Header;
+import mgr.mtp.Utils.Constants;
+import mgr.mtp.Utils.Utility;
 
 // test commit from Android Studio
 
@@ -138,7 +139,8 @@ public class Login extends Activity {
         client.get(Constants.host+"/login/dologin", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String response = new String(responseBody, StandardCharsets.UTF_8);
+
+               String response = new String(responseBody, StandardCharsets.UTF_8);
                 prgDialog.hide();
                 try {
 

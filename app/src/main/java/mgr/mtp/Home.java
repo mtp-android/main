@@ -6,6 +6,8 @@ package mgr.mtp;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -32,6 +34,8 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import mgr.mtp.Diet.DietSettings;
+
 /**
  *
  * Home Screen Activity
@@ -41,6 +45,7 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    String date;
 
 
     // location variables
@@ -59,6 +64,11 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            date = extras.getString("date");
+        }
 
         // sensors prepare
 
@@ -127,7 +137,7 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
 
     @Override
     public void onProviderEnabled(String provider) {
-        Log.d("Latitude","enable");
+        Log.d("Latitude", "enable");
     }
 
     @Override
@@ -138,7 +148,18 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeDiet(), "Dieta");
+        if(date != null && !date.isEmpty())
+        {
+            Bundle bundle = new Bundle();
+            bundle.putString("date", date);
+            HomeDiet fragobj = new HomeDiet();
+            fragobj.setArguments(bundle);
+            adapter.addFragment(fragobj,"Dieta");
+        }
+        else
+        {
+            adapter.addFragment(new HomeDiet(), "Dieta");
+        }
         adapter.addFragment(new HomeTraining(), "Trening");
         adapter.addFragment(new HomeStatistics(), "Statystyki");
         viewPager.setAdapter(adapter);
@@ -165,7 +186,14 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
     }
 
     protected void onResume() {
+
         super.onResume();
+        List<Fragment> allFragments = getSupportFragmentManager().getFragments();
+        if(allFragments != null)
+        {
+            HomeDiet fragment = (HomeDiet) allFragments.get(0);
+            fragment.refreshBars();
+        }
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
@@ -210,11 +238,15 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+            switch (item.getItemId()) {
+                case R.id.diet_settings:
+                    Intent i = new Intent(this, DietSettings.class);
+                    startActivity(i);
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+
         }
-        return super.onOptionsItemSelected(item);
     }
 
 }

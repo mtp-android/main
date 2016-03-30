@@ -1,4 +1,4 @@
-package mgr.mtp;
+package mgr.mtp.Diet;
 
 /**
  * Created by lmedrzycki on 26.02.2016.
@@ -6,9 +6,9 @@ package mgr.mtp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +16,16 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import mgr.mtp.DataModel.Food;
+import mgr.mtp.DataModel.Product;
+import mgr.mtp.Diet.DietSearchProduct;
+import mgr.mtp.HomeDiet;
+import mgr.mtp.R;
+import mgr.mtp.Utils.Constants;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -31,12 +34,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     Date date;
 
     private Activity context;
-    private LinkedHashMap<String, List<Food>> mealsCollection;
+    private LinkedHashMap<String, List<Product>> mealsCollection;
     private List<String> groupList;
     private HomeDiet fragment;
 
     public ExpandableListAdapter(Activity context, List<String> groupList,
-                                 LinkedHashMap<String, List<Food>> mealsCollection, HomeDiet fragment) {
+                                 LinkedHashMap<String, List<Product>> mealsCollection, HomeDiet fragment) {
         this.context = context;
         this.mealsCollection = mealsCollection;
         this.groupList = groupList;
@@ -54,7 +57,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public View getChildView(final int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, final ViewGroup parent) {
-        final Food mealIngredient = (Food) getChild(groupPosition, childPosition);
+        final Product mealIngredient = (Product) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
 
         if (convertView == null) {
@@ -85,7 +88,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView item = (TextView) convertView.findViewById(R.id.mealIngredient);
 
-        item.setText(mealIngredient.getName()+" - "+mealIngredient.getAmount()+" "+mealIngredient.getUnit());
+        item.setText(mealIngredient.getName()+" - "+mealIngredient.getAmount()+" "+mealIngredient.getUnit()
+        + " / " + mealIngredient.getCalories()+" kcal");
         return convertView;
     }
 
@@ -124,8 +128,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         addMeal.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"toDo posilek nr: "+getGroupId(groupPosition)+
-                        " z dnia: "+Constants.displayDateFormat.format(date),Toast.LENGTH_SHORT).show();
+
+                Intent intent= new Intent(context, DietSearchProduct.class);
+                intent.putExtra("date", Constants.queryDateFormat.format(date));
+                intent.putExtra("meal",getGroupId(groupPosition));
+
+                context.startActivity(intent);
+
+                //Toast.makeText(v.getContext(),"toDo posilek nr: "+getGroupId(groupPosition)+
+                        //" z dnia: "+Constants.displayDateFormat.format(date),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -144,7 +155,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    public void dataChanged(LinkedHashMap<String, List<Food>> mealsCollection) {
+    public void dataChanged(LinkedHashMap<String, List<Product>> mealsCollection) {
         this.mealsCollection = mealsCollection;
     }
 
