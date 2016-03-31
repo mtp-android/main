@@ -1,11 +1,8 @@
 package mgr.mtp.Diet;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -37,9 +33,9 @@ import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import mgr.mtp.DataModel.Product;
+import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.JSONParser;
-import mgr.mtp.R;
 
 /**
  * Created by lukas on 27.03.2016.
@@ -53,8 +49,8 @@ public class DietSearchProduct extends AppCompatActivity {
     int mealId;
     String date;
 
-    ArrayList<Product> productResults = new ArrayList<Product>();
-    ArrayList<Product> filteredProductResults = new ArrayList<Product>();
+    ArrayList<Product> productResults = new ArrayList<>();
+    ArrayList<Product> filteredProductResults = new ArrayList<>();
 
     public String getDate()
     {
@@ -77,11 +73,19 @@ public class DietSearchProduct extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         search = (SearchView) findViewById(R.id.searchView1);
-        search.setQueryHint("Wpisz nazwę...");
-        search.requestFocus();
+        search.setQueryHint("Wpisz nazwę produktu...");
+        search.setFocusable(true);
+        search.setIconified(false);
+        search.requestFocusFromTouch();
 
         searchResults = (ListView) findViewById(R.id.listview_search);
 

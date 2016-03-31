@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 public class Constants {
 
     // on emulator
-    public static String host = "http://10.0.2.2:8080";
+    public static String host = "http://10.0.2.2:8081";
 
     // on device
     //public static String host = "http://192.168.2.5:8080";

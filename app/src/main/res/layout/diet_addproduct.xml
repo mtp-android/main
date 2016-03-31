@@ -9,7 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        app:title="@string/addProduct_title"
         app:layout_scrollFlags="scroll|enterAlways"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
@@ -61,7 +64,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="100"
         android:id="@+id/proteinValue"
-        android:layout_above="@+id/fatValue"
+        android:layout_above="@+id/carbsValue"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -69,7 +72,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="100"
-        android:id="@+id/fatValue"
+        android:id="@+id/carbsValue"
         android:layout_below="@+id/textView7"
         android:layout_alignStart="@+id/proteinValue" />
 
@@ -78,9 +81,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="100"
-        android:id="@+id/carbsValue"
-        android:layout_below="@+id/fatValue"
-        android:layout_alignStart="@+id/fatValue" />
+        android:id="@+id/fatValue"
+        android:layout_below="@+id/carbsValue"
+        android:layout_alignStart="@+id/carbsValue" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -120,8 +123,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="100"
         android:id="@+id/caloriesValue"
-        android:layout_below="@+id/carbsValue"
-        android:layout_alignStart="@+id/carbsValue" />
+        android:layout_below="@+id/fatValue"
+        android:layout_alignStart="@+id/fatValue" />
 
     <Button
         android:layout_width="wrap_content"
@@ -130,7 +133,28 @@
         android:id="@+id/btnAdd"
         android:layout_marginLeft="20dp"
         android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/caloriesValue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="1 szt ="
+        android:id="@+id/textView10"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/unitSpinner"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="100g"
+        android:id="@+id/factorValue"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/textView10"
+        android:layout_toEndOf="@+id/textView10" />
 
 
 </RelativeLayout>

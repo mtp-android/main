@@ -24,6 +24,9 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
@@ -59,6 +62,7 @@ public class HomeDiet extends Fragment {
     TextView caloriesTxt,proteinsTxt,fatTxt,carbsTxt;
     ExpandableListView expListView;
     ProgressBar caloriesBar,proteinsBar,fatBar,carbsBar;
+    int intakeCalories, intakeCarbs, intakeProteins, intakeFat;
 
     public HomeDiet() {
 
@@ -101,8 +105,6 @@ public class HomeDiet extends Fragment {
         fatTxt = (TextView) view.findViewById(R.id.fatTxt);
         proteinsTxt = (TextView) view.findViewById(R.id.proteinTxt);
 
-        refreshBars();
-
         Calendar cal = Calendar.getInstance();
         Date selectedDate = cal.getTime();
 
@@ -124,17 +126,17 @@ public class HomeDiet extends Fragment {
         prgDialog.setCancelable(false);
 
 
-        caloriesBar.setProgress(2000);
-        fatBar.setProgress(2000);
-        carbsBar.setProgress(2000);
-        proteinsBar.setProgress(2000);
-
         // prepare static meals
         createGroupList();
 
         // meals details for day
         getMealsForDay(selectedDate);
 
+
+        // get nutrition intake summary and refresh bars
+        getSummaryForDay(selectedDate);
+
+        refreshBars();
 
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new ExpandableListAdapter(
@@ -144,6 +146,61 @@ public class HomeDiet extends Fragment {
         expListAdapter.setDate(selectedDate);
 
         return view;
+    }
+
+    private void getSummaryForDay(Date selectedDate) {
+        String date = Constants.queryDateFormat.format(selectedDate);
+
+        prgDialog.show();
+        RequestParams params = new RequestParams();
+        params.put("date", date);
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Constants.host + "/meals/getsummary", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody, StandardCharsets.UTF_8);
+
+                setSummaryForDay(response);
+                prgDialog.hide();
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                String response = new String(responseBody, StandardCharsets.UTF_8);
+
+                prgDialog.hide();
+
+                if (statusCode == 404) {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
+                } else if (statusCode == 500) {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.serverError), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(),
+                            getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void setSummaryForDay(String response) {
+        try {
+            JSONObject obj = new JSONObject(response);
+            intakeProteins = (int) obj.getDouble("proteins");
+            intakeCarbs = (int) obj.getDouble("carbs");
+            intakeCalories = (int) obj.getDouble("calories");
+            intakeFat = (int) obj.getDouble("fat");
+
+            refreshBars();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private void getMealsForDay(Date selectedDate) {
@@ -283,6 +340,8 @@ public class HomeDiet extends Fragment {
 
             expListAdapter.setDate(date);
             getMealsForDay(date);
+            getSummaryForDay(date);
+
 
             // update label
             dietDate.setText(
@@ -348,10 +407,15 @@ public class HomeDiet extends Fragment {
         fatBar.setMax(fat);
         caloriesBar.setMax(calories);
 
-        caloriesTxt.setText("Kalorie: "+calories);
-        proteinsTxt.setText("Białko: "+proteins);
-        fatTxt.setText("Tłuszcze: "+fat);
-        carbsTxt.setText("Węglowodany: "+carbs);
+        carbsBar.setProgress(intakeCarbs);
+        caloriesBar.setProgress(intakeCalories);
+        fatBar.setProgress(intakeFat);
+        proteinsBar.setProgress(intakeProteins);
+
+        caloriesTxt.setText("Kcal: " + intakeCalories + "/" + calories);
+        proteinsTxt.setText("Białko: " + intakeProteins + "/" + proteins);
+        fatTxt.setText("Tłuszcze: " + intakeFat + "/" + fat);
+        carbsTxt.setText("Węglowodany: " + intakeCarbs + "/" + carbs);
 
 
 

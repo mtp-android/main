@@ -7,7 +7,6 @@ package mgr.mtp;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -29,7 +28,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -191,7 +189,7 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         List<Fragment> allFragments = getSupportFragmentManager().getFragments();
         if(allFragments != null)
         {
-            HomeDiet fragment = (HomeDiet) allFragments.get(0);
+            HomeDiet fragment = (HomeDiet) allFragments.get(1);
             fragment.refreshBars();
         }
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);

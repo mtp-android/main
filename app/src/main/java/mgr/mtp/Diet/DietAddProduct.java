@@ -1,9 +1,7 @@
 package mgr.mtp.Diet;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +37,7 @@ public class DietAddProduct extends AppCompatActivity {
     float calculatedFat,calculatedProteins,calculatedCalories,calculatedCarbs,calculatedAmount;
     Toolbar toolbar;
     String date,productName,unit;
-    TextView caloriesValue,fatValue,carbsValue,proteinValue,txtProductName;
+    TextView caloriesValue, fatValue, carbsValue, proteinValue, txtProductName, factorValue;
     EditText amount;
     Button btnAdd;
     Spinner sp;
@@ -50,7 +48,13 @@ public class DietAddProduct extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         prgDialog = new ProgressDialog(this);
         prgDialog.setMessage(getString(R.string.pleaseWait));
@@ -71,6 +75,7 @@ public class DietAddProduct extends AppCompatActivity {
 
         caloriesValue = (TextView) findViewById(R.id.caloriesValue);
         proteinValue = (TextView) findViewById(R.id.proteinValue);
+        factorValue = (TextView) findViewById(R.id.factorValue);
         carbsValue = (TextView) findViewById(R.id.carbsValue);
         fatValue = (TextView) findViewById(R.id.fatValue);
         amount = (EditText) findViewById(R.id.amount);
@@ -80,6 +85,7 @@ public class DietAddProduct extends AppCompatActivity {
         proteinValue.setText(""+proteins);
         fatValue.setText(""+fat);
         carbsValue.setText("" + carbs);
+        factorValue.setText("" + factor + " g");
 
         unit = "g";
 

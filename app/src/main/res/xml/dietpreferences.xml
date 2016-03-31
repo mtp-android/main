@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <PreferenceCategory android:title="@string/dietSettings" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
         <EditTextPreference
             android:defaultValue="75"
@@ -16,7 +13,7 @@
             android:defaultValue="170"
             android:dialogTitle="@string/user_height"
             android:inputType="number"
-            android:key="user_weight"
+            android:key="user_height"
             android:summary="@string/put_height"
             android:title="@string/user_height" />
 
@@ -51,7 +48,5 @@
             android:defaultValue="1"
             android:entries="@array/targetListArray"
             android:entryValues="@array/targetListValues" />
-
-    </PreferenceCategory>
 
 </PreferenceScreen>

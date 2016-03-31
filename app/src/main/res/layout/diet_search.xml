@@ -10,6 +10,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
+        app:title="@string/search_title"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <SearchView
@@ -19,8 +22,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="10dp"
+        android:focusable="true"
         android:layout_marginRight="10dp">
-
     </SearchView>
 
     <ListView
