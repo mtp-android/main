@@ -75,13 +75,13 @@ public class DietSettings extends PreferenceActivity {
 
         switch (activityLevel) {
             case 1:
-                calories = calories * 1.0;
+                calories = calories * 1.2;
                 break;
             case 2:
-                calories = calories * 1.4;
+                calories = calories * 1.6;
                 break;
             case 3:
-                calories = calories * 1.6;
+                calories = calories * 1.8;
                 break;
         }
 
@@ -97,8 +97,8 @@ public class DietSettings extends PreferenceActivity {
                 break;
         }
 
-        proteins = calories * 0.3;
-        fat = calories * 0.2;
+        proteins = calories * 0.20;
+        fat = calories * 0.25;
         carbs = (calories - (proteins+fat));
 
         proteins = proteins / 4;

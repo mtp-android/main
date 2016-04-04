@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CheckBox;
@@ -148,7 +149,17 @@ public class Login extends Activity {
 
                     if (obj.getBoolean("status")) {
                         Toast.makeText(getApplicationContext(),getString(R.string.successLogin), Toast.LENGTH_LONG).show();
+
+                        // catch userid
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Login.this);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        int userId = obj.getInt("userId");
+                        editor.putInt("userId", userId);
+                        editor.commit();
+
                         navigateToHomeActivity();
+
+
                     } else {
                         errorMsg.setText(obj.getString("error_msg"));
                         Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_LONG).show();

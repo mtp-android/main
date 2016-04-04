@@ -115,16 +115,13 @@ public class DietSearchProduct extends AppCompatActivity {
                 } else {
                     searchResults.setVisibility(View.INVISIBLE);
                 }
-
                 return false;
             }
         });
-
     }
 
     public void filterProductArray(String newText)
     {
-
         String pName;
 
         filteredProductResults.clear();
@@ -134,10 +131,8 @@ public class DietSearchProduct extends AppCompatActivity {
             if ( pName.contains(newText.toLowerCase()))
             {
                 filteredProductResults.add(productResults.get(i));
-
             }
         }
-
     }
 
     //in this myAsyncTask, we are fetching data from server for the search string entered by user.
@@ -207,7 +202,6 @@ public class DietSearchProduct extends AppCompatActivity {
 
                         for (int j=0; j < productResults.size();j++)
                         {
-
                             if (productResults.get(j).getId() == (tempProduct.getId()))
                             {
                                 matchFound = "Y";
@@ -219,9 +213,7 @@ public class DietSearchProduct extends AppCompatActivity {
                             productResults.add(tempProduct);
                         }
                     }
-
                 }
-
                 return "OK";
 
             } catch (Exception e) {
@@ -229,7 +221,6 @@ public class DietSearchProduct extends AppCompatActivity {
                 return ("Exception Caught");
             }
         }
-
 
     @Override
     protected void onPostExecute(String result) {
@@ -241,7 +232,6 @@ public class DietSearchProduct extends AppCompatActivity {
 
             pd.dismiss();
         } else {
-
             //calling this method to filter the search results from productResults and move them to
             //filteredProductResults
             filterProductArray(textSearch);

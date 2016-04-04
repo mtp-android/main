@@ -4,6 +4,8 @@ package mgr.mtp;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -62,7 +64,7 @@ public class HomeDiet extends Fragment {
     TextView caloriesTxt,proteinsTxt,fatTxt,carbsTxt;
     ExpandableListView expListView;
     ProgressBar caloriesBar,proteinsBar,fatBar,carbsBar;
-    int intakeCalories, intakeCarbs, intakeProteins, intakeFat;
+    int intakeCalories, intakeCarbs, intakeProteins, intakeFat, userId;
 
     public HomeDiet() {
 
@@ -105,8 +107,11 @@ public class HomeDiet extends Fragment {
         fatTxt = (TextView) view.findViewById(R.id.fatTxt);
         proteinsTxt = (TextView) view.findViewById(R.id.proteinTxt);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        userId = prefs.getInt("userId",0);
+
         Calendar cal = Calendar.getInstance();
-        Date selectedDate = cal.getTime();
+        selectedDate = cal.getTime();
 
         String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
         try {
@@ -125,13 +130,11 @@ public class HomeDiet extends Fragment {
         prgDialog.setMessage(getString(R.string.pleaseWait));
         prgDialog.setCancelable(false);
 
-
         // prepare static meals
         createGroupList();
 
         // meals details for day
         getMealsForDay(selectedDate);
-
 
         // get nutrition intake summary and refresh bars
         getSummaryForDay(selectedDate);
@@ -154,6 +157,7 @@ public class HomeDiet extends Fragment {
         prgDialog.show();
         RequestParams params = new RequestParams();
         params.put("date", date);
+        params.put("userId",userId);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Constants.host + "/meals/getsummary", params, new AsyncHttpResponseHandler() {
@@ -168,7 +172,6 @@ public class HomeDiet extends Fragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                String response = new String(responseBody, StandardCharsets.UTF_8);
 
                 prgDialog.hide();
 
@@ -199,8 +202,6 @@ public class HomeDiet extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void getMealsForDay(Date selectedDate) {
@@ -210,6 +211,7 @@ public class HomeDiet extends Fragment {
         prgDialog.show();
         RequestParams params = new RequestParams();
         params.put("date", date);
+        params.put("userId",userId);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Constants.host + "/meals/getmeals", params, new AsyncHttpResponseHandler() {
@@ -224,7 +226,6 @@ public class HomeDiet extends Fragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                String response = new String(responseBody, StandardCharsets.UTF_8);
 
                 prgDialog.hide();
 
@@ -342,7 +343,6 @@ public class HomeDiet extends Fragment {
             getMealsForDay(date);
             getSummaryForDay(date);
 
-
             // update label
             dietDate.setText(
                     String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(year));
@@ -362,10 +362,11 @@ public class HomeDiet extends Fragment {
         client.get(Constants.host + "/meals/removeitem", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String response = new String(responseBody,StandardCharsets.UTF_8);
                 prgDialog.hide();
                 Toast.makeText(getActivity(),
                         getString(R.string.successRemove), Toast.LENGTH_LONG).show();
+
+                getSummaryForDay(selectedDate);
 
                 List<Product> child = mealsCollection.get(groupList.get(groupPosition));
                 child.remove(childPosition);
@@ -375,7 +376,6 @@ public class HomeDiet extends Fragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                String response = new String(responseBody, StandardCharsets.UTF_8);
 
                 prgDialog.hide();
 
@@ -401,6 +401,15 @@ public class HomeDiet extends Fragment {
         int proteins = prefs.getInt("calculatedProteins", 100);
         int fat = prefs.getInt("calculatedFat", 100);
         int carbs = prefs.getInt("calculatedCarbs", 100);
+
+        if(intakeCarbs > carbs)
+            carbsBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        if(intakeCalories > calories)
+            caloriesBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        if(intakeFat > fat)
+            fatBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        if(intakeProteins > proteins)
+            proteinsBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
 
         carbsBar.setMax(carbs);
         proteinsBar.setMax(proteins);

@@ -11,10 +11,10 @@
         android:layout_height="48dp"
         android:layout_weight="0.07">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:src="@drawable/ic_local_dining_black_36dp"
+            android:src="@drawable/catering"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_alignTop="@+id/textView2"
