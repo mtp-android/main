@@ -1,4 +1,4 @@
-package mgr.mtp;
+package mgr.mtp.Diet;
 
 
 import android.app.DatePickerDialog;
@@ -40,16 +40,17 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.Product;
-import mgr.mtp.Diet.DatePickerFragment;
-import mgr.mtp.Diet.ExpandableListAdapter;
+import mgr.mtp.R;
+import mgr.mtp.Utils.DatePickerFragment;
+import mgr.mtp.Diet.DietListAdapter;
 import mgr.mtp.Utils.Constants;
 
 /**
  * Created by lukas on 25.02.2016.
  */
-public class HomeDiet extends Fragment {
+public class DietHome extends Fragment {
 
-    ExpandableListAdapter expListAdapter = null;
+    DietListAdapter expListAdapter = null;
 
     private Toolbar toolbar;
     ProgressDialog prgDialog;
@@ -66,7 +67,7 @@ public class HomeDiet extends Fragment {
     ProgressBar caloriesBar,proteinsBar,fatBar,carbsBar;
     int intakeCalories, intakeCarbs, intakeProteins, intakeFat, userId;
 
-    public HomeDiet() {
+    public DietHome() {
 
     }
 
@@ -142,7 +143,7 @@ public class HomeDiet extends Fragment {
         refreshBars();
 
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        expListAdapter = new ExpandableListAdapter(
+        expListAdapter = new DietListAdapter(
                 getActivity(), groupList, mealsCollection, this);
 
         expListView.setAdapter(expListAdapter);
@@ -425,11 +426,5 @@ public class HomeDiet extends Fragment {
         proteinsTxt.setText("Białko: " + intakeProteins + "/" + proteins);
         fatTxt.setText("Tłuszcze: " + intakeFat + "/" + fat);
         carbsTxt.setText("Węglowodany: " + intakeCarbs + "/" + carbs);
-
-
-
-
-
-
     }
 }

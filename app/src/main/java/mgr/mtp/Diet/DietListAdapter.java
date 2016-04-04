@@ -22,12 +22,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import mgr.mtp.DataModel.Product;
-import mgr.mtp.Diet.DietSearchProduct;
-import mgr.mtp.HomeDiet;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class DietListAdapter extends BaseExpandableListAdapter {
 
     ImageView addMeal;
     ImageView removeChildItem;
@@ -36,10 +34,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Activity context;
     private LinkedHashMap<String, List<Product>> mealsCollection;
     private List<String> groupList;
-    private HomeDiet fragment;
+    private DietHome fragment;
 
-    public ExpandableListAdapter(Activity context, List<String> groupList,
-                                 LinkedHashMap<String, List<Product>> mealsCollection, HomeDiet fragment) {
+    public DietListAdapter(Activity context, List<String> groupList,
+                           LinkedHashMap<String, List<Product>> mealsCollection, DietHome fragment) {
         this.context = context;
         this.mealsCollection = mealsCollection;
         this.groupList = groupList;

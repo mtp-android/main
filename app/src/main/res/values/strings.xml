@@ -50,6 +50,11 @@
     <string name="put_gender">Określ płeć</string>
     <string name="user_height">Wzrost</string>
     <string name="put_height">Podaj wzrost w cm</string>
+    <string name="squats">Przysiady</string>
+    <string name="benchPress">Wyciskanie sztangi poziomo</string>
+    <string name="barbellRow">Wiosłowanie</string>
+    <string name="barbellCurls">Uginanie ramion ze sztangą</string>
+    <string name="dips">Pompki na poręczach</string>
 
     <string-array name = "spinner_unit">
         <item>g</item>

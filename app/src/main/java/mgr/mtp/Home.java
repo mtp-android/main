@@ -32,7 +32,9 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import mgr.mtp.Diet.DietHome;
 import mgr.mtp.Diet.DietSettings;
+import mgr.mtp.Training.TrainingHome;
 
 /**
  *
@@ -150,15 +152,15 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         {
             Bundle bundle = new Bundle();
             bundle.putString("date", date);
-            HomeDiet fragobj = new HomeDiet();
+            DietHome fragobj = new DietHome();
             fragobj.setArguments(bundle);
             adapter.addFragment(fragobj,"Dieta");
         }
         else
         {
-            adapter.addFragment(new HomeDiet(), "Dieta");
+            adapter.addFragment(new DietHome(), "Dieta");
         }
-        adapter.addFragment(new HomeTraining(), "Trening");
+        adapter.addFragment(new TrainingHome(), "Trening");
         adapter.addFragment(new HomeStatistics(), "Statystyki");
         viewPager.setAdapter(adapter);
     }
@@ -189,7 +191,7 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         List<Fragment> allFragments = getSupportFragmentManager().getFragments();
         if(allFragments != null)
         {
-            HomeDiet fragment = (HomeDiet) allFragments.get(1);
+            DietHome fragment = (DietHome) allFragments.get(1);
             fragment.refreshBars();
         }
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
