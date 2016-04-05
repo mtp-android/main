@@ -3,24 +3,33 @@ package mgr.mtp.DataModel;
 /**
  * Created by lukas on 04.04.2016.
  */
-public class Excersise {
+public class ExerciseSet {
 
-    public Excersise(){
+    public ExerciseSet(){
 
     }
 
-    public Excersise(int id,int weight, int reps, int set)
+    public ExerciseSet(int id, int weight, int reps, int setNo)
     {
         this.id = id;
         this.weight = weight;
         this.reps = reps;
-        this.set = set;
+        this.setNo = setNo;
     }
 
     private int id;
+    private String exerciseName;
     private int weight;
     private int reps;
-    private int set;
+    private int setNo;
+
+    public String getExerciseName() {
+        return exerciseName;
+    }
+
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
+    }
 
     public int getId() {
         return id;
@@ -46,11 +55,11 @@ public class Excersise {
         this.reps = reps;
     }
 
-    public int getSet() {
-        return set;
+    public int getSetNo() {
+        return setNo;
     }
 
-    public void setSet(int set) {
-        this.set = set;
+    public void setSetNo(int set) {
+        this.setNo = setNo;
     }
 }

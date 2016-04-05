@@ -2,6 +2,7 @@ package mgr.mtp.Training;
 
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,8 +19,8 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import mgr.mtp.DataModel.Excersise;
-import mgr.mtp.DataModel.Product;
+import mgr.mtp.DataModel.ExerciseSet;
+import mgr.mtp.Diet.DietAddProduct;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.DatePickerFragment;
@@ -31,10 +32,10 @@ public class TrainingHome extends Fragment {
 
     ExpandableListView expListView;
     TrainingListAdapter expListAdapter = null;
-    LinkedHashMap<String, List<Excersise>> excersisesCollection;
+    LinkedHashMap<String, List<ExerciseSet>> excersisesCollection;
 
     List<String> groupList;
-    List<Excersise> childList;
+    List<ExerciseSet> childList;
     TextView trainingDate;
     Button startTraining,setDateBtn;
     Date selectedDate;
@@ -65,7 +66,7 @@ public class TrainingHome extends Fragment {
 
         Calendar cal = Calendar.getInstance();
         selectedDate = cal.getTime();
-        String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
+        String today = getArguments() != null ? getArguments().getString("date") : Constants.displayDateFormat.format(selectedDate);
 
         trainingDate = (TextView) view.findViewById(R.id.trainingDate);
         startTraining = (Button) view.findViewById(R.id.startTraining);
@@ -73,6 +74,10 @@ public class TrainingHome extends Fragment {
 
         trainingDate.setText(today);
         setDateBtn.setOnClickListener(setDateBtnListener);
+        startTraining.setOnClickListener(setStartTrainingListener);
+
+        // prepare static exercises
+        createGroupList();
 
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new TrainingListAdapter(
@@ -84,6 +89,17 @@ public class TrainingHome extends Fragment {
 
         return view;
     }
+
+
+    private View.OnClickListener setStartTrainingListener = new View.OnClickListener() {
+
+        @Override
+
+        public void onClick(View v) {
+            startActivity(new Intent(getContext(), TrainingWorkout.class));
+        }
+
+    };
 
     private View.OnClickListener setDateBtnListener = new View.OnClickListener() {
 
@@ -130,8 +146,7 @@ public class TrainingHome extends Fragment {
             //getSummaryForDay(date);
 
             // update label
-            trainingDate.setText(
-                    String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(year));
+            trainingDate.setText(Constants.displayDateFormat.format(date));
         }
 
 

@@ -59,7 +59,7 @@ public class DietListAdapter extends BaseExpandableListAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.child_item, null);
+            convertView = inflater.inflate(R.layout.child_item_diet, null);
         }
 
         removeChildItem = (ImageView) convertView.findViewById(R.id.removeChildItem);
@@ -118,7 +118,7 @@ public class DietListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.group_item,
+            convertView = infalInflater.inflate(R.layout.group_item_diet,
                     null);
         }
 

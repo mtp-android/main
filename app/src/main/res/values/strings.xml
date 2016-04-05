@@ -55,6 +55,11 @@
     <string name="barbellRow">Wiosłowanie</string>
     <string name="barbellCurls">Uginanie ramion ze sztangą</string>
     <string name="dips">Pompki na poręczach</string>
+    <string name="title_exercise">Nazwa ćwiczenia</string>
+    <string name="title_training">Trening</string>
+    <string name="next">Następne</string>
+    <string name="previous">Poprzednie</string>
+    <string name="finishTraining">Zakończ trening</string>
 
     <string-array name = "spinner_unit">
         <item>g</item>

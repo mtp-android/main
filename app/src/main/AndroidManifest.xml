@@ -52,6 +52,11 @@
             android:name=".Diet.DietSettings"
             android:label="@string/dietSettings" >
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".Training.TrainingWorkout"
+            android:label="@string/title_training" >
+        </activity>
     </application>
 
 </manifest>

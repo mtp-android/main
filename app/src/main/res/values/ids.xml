@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="diet_settings" type="id">Ustawienia diety</item>
+    <item name="mediaPlayer" type="id">mediaPlayer</item>
 </resources>

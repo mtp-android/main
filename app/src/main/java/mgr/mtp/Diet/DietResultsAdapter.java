@@ -58,7 +58,7 @@ public class DietResultsAdapter extends BaseAdapter {
         final Product tempProduct = productDetails.get(position);
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.listtwo_searchresults, null);
+            convertView = layoutInflater.inflate(R.layout.diet_searchresults, null);
             holder = new ViewHolder();
 
             holder.product_name = (TextView) convertView.findViewById(R.id.product_name);

@@ -114,7 +114,7 @@ public class DietHome extends Fragment {
         Calendar cal = Calendar.getInstance();
         selectedDate = cal.getTime();
 
-        String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
+        String today = getArguments() != null ? getArguments().getString("date") : Constants.displayDateFormat.format(selectedDate);
         try {
             selectedDate = Constants.queryDateFormat.parse(today);
         } catch (ParseException e) {
@@ -345,8 +345,7 @@ public class DietHome extends Fragment {
             getSummaryForDay(date);
 
             // update label
-            dietDate.setText(
-                    String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(year));
+            dietDate.setText(Constants.displayDateFormat.format(date));
         }
 
 
