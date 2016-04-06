@@ -5,12 +5,11 @@ package mgr.mtp.DataModel;
  */
 public class ExerciseSet {
 
-    public ExerciseSet(){
+    public ExerciseSet() {
 
     }
 
-    public ExerciseSet(int id, int weight, int reps, int setNo)
-    {
+    public ExerciseSet(int id, int weight, int reps, int setNo) {
         this.id = id;
         this.weight = weight;
         this.reps = reps;
@@ -18,6 +17,7 @@ public class ExerciseSet {
     }
 
     private int id;
+    private int exerciseId;
     private String exerciseName;
     private int weight;
     private int reps;
@@ -61,5 +61,13 @@ public class ExerciseSet {
 
     public void setSetNo(int set) {
         this.setNo = setNo;
+    }
+
+    public int getExerciseId() {
+        return exerciseId;
+    }
+
+    public void setExerciseId(int exerciseId) {
+        this.exerciseId = exerciseId;
     }
 }

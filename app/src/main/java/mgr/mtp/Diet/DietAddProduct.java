@@ -36,11 +36,11 @@ import mgr.mtp.Utils.Constants;
 public class DietAddProduct extends AppCompatActivity {
 
     ProgressDialog prgDialog;
-    int mealId,productId,userId;
-    float proteins,carbs,fat,calories,factor;
-    float calculatedFat,calculatedProteins,calculatedCalories,calculatedCarbs,calculatedAmount;
+    int mealId, productId, userId;
+    float proteins, carbs, fat, calories, factor;
+    float calculatedFat, calculatedProteins, calculatedCalories, calculatedCarbs, calculatedAmount;
     Toolbar toolbar;
-    String date,productName,unit;
+    String date, productName, unit;
     TextView caloriesValue, fatValue, carbsValue, proteinValue, txtProductName, factorValue;
     EditText amount;
     Button btnAdd;
@@ -65,7 +65,7 @@ public class DietAddProduct extends AppCompatActivity {
         prgDialog.setCancelable(false);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        userId = prefs.getInt("userId",0);
+        userId = prefs.getInt("userId", 0);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -95,9 +95,9 @@ public class DietAddProduct extends AppCompatActivity {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
 
-        caloriesValue.setText(""+calories);
-        proteinValue.setText(""+proteins);
-        fatValue.setText(""+fat);
+        caloriesValue.setText("" + calories);
+        proteinValue.setText("" + proteins);
+        fatValue.setText("" + fat);
         carbsValue.setText("" + carbs);
         factorValue.setText("" + factor + " g");
 
@@ -152,23 +152,22 @@ public class DietAddProduct extends AppCompatActivity {
 
                 prgDialog.show();
                 RequestParams params = new RequestParams();
-                params.put("mealId", mealId);
-                params.put("date",date);
-                params.put("productId",productId);
-                params.put("unit",unit);
-                params.put("amount",finalAmount);
-                params.put("calories",calculatedCalories);
-                params.put("fat",calculatedFat);
-                params.put("carbs",calculatedCarbs);
-                params.put("proteins",calculatedProteins);
-                params.put("productName",productName);
-                params.put("userId",userId);
+                params.put("mealId", mealId + 1);
+                params.put("date", date);
+                params.put("productId", productId);
+                params.put("unit", unit);
+                params.put("amount", finalAmount);
+                params.put("calories", calculatedCalories);
+                params.put("fat", calculatedFat);
+                params.put("carbs", calculatedCarbs);
+                params.put("proteins", calculatedProteins);
+                params.put("productName", productName);
+                params.put("userId", userId);
 
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.get(Constants.host + "/meals/additem", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        String response = new String(responseBody, StandardCharsets.UTF_8);
                         prgDialog.hide();
 
                         Intent homeIntent = new Intent(getApplicationContext(), Home.class);
@@ -178,7 +177,6 @@ public class DietAddProduct extends AppCompatActivity {
 
                         Toast.makeText(DietAddProduct.this,
                                 getString(R.string.successAdd), Toast.LENGTH_LONG).show();
-
                     }
 
                     @Override
@@ -199,14 +197,10 @@ public class DietAddProduct extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
             }
         });
 
         sp = (Spinner) findViewById(R.id.unitSpinner);
-
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -230,12 +224,10 @@ public class DietAddProduct extends AppCompatActivity {
                 } else {
                     setLabels((float) 0);
                 }
-
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
-
             }
         });
 
@@ -243,20 +235,19 @@ public class DietAddProduct extends AppCompatActivity {
 
     private void setLabels(Float s) {
 
-        calculatedFat = s * (fat/100);
-        calculatedCalories = s * (calories/100);
-        calculatedCarbs = s * (carbs/100);
-        calculatedProteins = s * (proteins/100);
+        calculatedFat = s * (fat / 100);
+        calculatedCalories = s * (calories / 100);
+        calculatedCarbs = s * (carbs / 100);
+        calculatedProteins = s * (proteins / 100);
 
-        calculatedFat = (float)Math.round(calculatedFat * 100) / 100;
-        calculatedCalories = (float)Math.round(calculatedCalories * 100) / 100;
-        calculatedCarbs =(float)Math.round(calculatedCarbs * 100) / 100;
-        calculatedProteins = (float)Math.round(calculatedProteins * 100) / 100;
+        calculatedFat = (float) Math.round(calculatedFat * 100) / 100;
+        calculatedCalories = (float) Math.round(calculatedCalories * 100) / 100;
+        calculatedCarbs = (float) Math.round(calculatedCarbs * 100) / 100;
+        calculatedProteins = (float) Math.round(calculatedProteins * 100) / 100;
 
-        caloriesValue.setText(String.valueOf(calculatedCalories)+" kcal");
-        carbsValue.setText(String.valueOf(calculatedCarbs)+" g");
-        fatValue.setText(String.valueOf(calculatedFat)+" g");
-        proteinValue.setText(String.valueOf(calculatedProteins)+" g");
-
+        caloriesValue.setText(String.valueOf(calculatedCalories) + " kcal");
+        carbsValue.setText(String.valueOf(calculatedCarbs) + " g");
+        fatValue.setText(String.valueOf(calculatedFat) + " g");
+        proteinValue.setText(String.valueOf(calculatedProteins) + " g");
     }
 }

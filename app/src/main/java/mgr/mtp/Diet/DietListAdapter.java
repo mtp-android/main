@@ -71,8 +71,7 @@ public class DietListAdapter extends BaseExpandableListAdapter {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle(fragment.getString(R.string.removeTitle))
                         .setMessage(fragment.getString(R.string.confirmRemoveText))
-                        .setPositiveButton(fragment.getString(R.string.yes), new DialogInterface.OnClickListener()
-                        {
+                        .setPositiveButton(fragment.getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 fragment.removeChild(mealIngredient.getId(), groupPosition, childPosition);
@@ -86,8 +85,8 @@ public class DietListAdapter extends BaseExpandableListAdapter {
 
         TextView item = (TextView) convertView.findViewById(R.id.mealIngredient);
 
-        item.setText(mealIngredient.getName()+" - "+mealIngredient.getAmount()+" "+mealIngredient.getUnit()
-        + " / " + mealIngredient.getCalories()+" kcal");
+        item.setText(mealIngredient.getName() + " - " + mealIngredient.getAmount() + " " + mealIngredient.getUnit()
+                + " / " + mealIngredient.getCalories() + " kcal");
         return convertView;
     }
 
@@ -103,8 +102,7 @@ public class DietListAdapter extends BaseExpandableListAdapter {
         return groupList.size();
     }
 
-    public void setDate(Date date)
-    {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -127,14 +125,10 @@ public class DietListAdapter extends BaseExpandableListAdapter {
 
             public void onClick(View v) {
 
-                Intent intent= new Intent(context, DietSearchProduct.class);
+                Intent intent = new Intent(context, DietSearchProduct.class);
                 intent.putExtra("date", Constants.queryDateFormat.format(date));
-                intent.putExtra("meal",getGroupId(groupPosition));
-
+                intent.putExtra("meal", getGroupId(groupPosition));
                 context.startActivity(intent);
-
-                //Toast.makeText(v.getContext(),"toDo posilek nr: "+getGroupId(groupPosition)+
-                        //" z dnia: "+Constants.displayDateFormat.format(date),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -156,6 +150,4 @@ public class DietListAdapter extends BaseExpandableListAdapter {
     public void dataChanged(LinkedHashMap<String, List<Product>> mealsCollection) {
         this.mealsCollection = mealsCollection;
     }
-
-
 }

@@ -62,9 +62,9 @@ public class DietHome extends Fragment {
     List<String> groupList;
     List<Product> childList;
     LinkedHashMap<String, List<Product>> mealsCollection;
-    TextView caloriesTxt,proteinsTxt,fatTxt,carbsTxt;
+    TextView caloriesTxt, proteinsTxt, fatTxt, carbsTxt;
     ExpandableListView expListView;
-    ProgressBar caloriesBar,proteinsBar,fatBar,carbsBar;
+    ProgressBar caloriesBar, proteinsBar, fatBar, carbsBar;
     int intakeCalories, intakeCarbs, intakeProteins, intakeFat, userId;
 
     public DietHome() {
@@ -82,8 +82,8 @@ public class DietHome extends Fragment {
 
 
     private void loadChild(List<Product> mealIngredients) {
-            childList = new ArrayList<>();
-            childList.addAll(mealIngredients);
+        childList = new ArrayList<>();
+        childList.addAll(mealIngredients);
     }
 
     @Override
@@ -109,12 +109,12 @@ public class DietHome extends Fragment {
         proteinsTxt = (TextView) view.findViewById(R.id.proteinTxt);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-        userId = prefs.getInt("userId",0);
+        userId = prefs.getInt("userId", 0);
 
         Calendar cal = Calendar.getInstance();
         selectedDate = cal.getTime();
 
-        String today = getArguments() != null ? getArguments().getString("date") : Constants.displayDateFormat.format(selectedDate);
+        String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
         try {
             selectedDate = Constants.queryDateFormat.parse(today);
         } catch (ParseException e) {
@@ -158,7 +158,7 @@ public class DietHome extends Fragment {
         prgDialog.show();
         RequestParams params = new RequestParams();
         params.put("date", date);
-        params.put("userId",userId);
+        params.put("userId", userId);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Constants.host + "/meals/getsummary", params, new AsyncHttpResponseHandler() {
@@ -212,7 +212,7 @@ public class DietHome extends Fragment {
         prgDialog.show();
         RequestParams params = new RequestParams();
         params.put("date", date);
-        params.put("userId",userId);
+        params.put("userId", userId);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Constants.host + "/meals/getmeals", params, new AsyncHttpResponseHandler() {
@@ -245,32 +245,32 @@ public class DietHome extends Fragment {
     }
 
 
-    public void setMealsOnDay(String response)
-    {
-        ArrayList<Product> breakfast = new ArrayList<>(),secondBreakfast = new ArrayList<>(),
-                        dinner = new ArrayList<>(),afternoonSnacks = new ArrayList<>(),
-                        supper = new ArrayList<>(),all;
+    public void setMealsOnDay(String response) {
+        ArrayList<Product> breakfast = new ArrayList<>(), secondBreakfast = new ArrayList<>(),
+                dinner = new ArrayList<>(), afternoonSnacks = new ArrayList<>(),
+                supper = new ArrayList<>(), all;
 
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<Product>>(){}.getType();
+        Type listType = new TypeToken<List<Product>>() {
+        }.getType();
         all = gson.fromJson(response, listType);
 
-        for(Product product : all){
+        for (Product product : all) {
 
             switch (product.getMeal()) {
-                case 0:
+                case 1:
                     breakfast.add(product);
                     break;
-                case 1:
+                case 2:
                     secondBreakfast.add(product);
                     break;
-                case 2:
+                case 3:
                     dinner.add(product);
                     break;
-                case 3:
+                case 4:
                     afternoonSnacks.add(product);
                     break;
-                case 4:
+                case 5:
                     supper.add(product);
                     break;
                 default:
@@ -345,7 +345,7 @@ public class DietHome extends Fragment {
             getSummaryForDay(date);
 
             // update label
-            dietDate.setText(Constants.displayDateFormat.format(date));
+            dietDate.setText(Constants.queryDateFormat.format(date));
         }
 
 
@@ -402,13 +402,13 @@ public class DietHome extends Fragment {
         int fat = prefs.getInt("calculatedFat", 100);
         int carbs = prefs.getInt("calculatedCarbs", 100);
 
-        if(intakeCarbs > carbs)
+        if (intakeCarbs > carbs)
             carbsBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
-        if(intakeCalories > calories)
+        if (intakeCalories > calories)
             caloriesBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
-        if(intakeFat > fat)
+        if (intakeFat > fat)
             fatBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
-        if(intakeProteins > proteins)
+        if (intakeProteins > proteins)
             proteinsBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
 
         carbsBar.setMax(carbs);

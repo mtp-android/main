@@ -23,14 +23,14 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
     Date date;
     private Activity context;
-    private LinkedHashMap<String, List<ExerciseSet>> excersisesCollection;
+    private LinkedHashMap<String, List<ExerciseSet>> exercisesCollection;
     private List<String> groupList;
     private TrainingHome fragment;
 
     public TrainingListAdapter(Activity context, List<String> groupList,
-                           LinkedHashMap<String, List<ExerciseSet>> excersisesCollection, TrainingHome fragment) {
+                               LinkedHashMap<String, List<ExerciseSet>> exercisesCollection, TrainingHome fragment) {
         this.context = context;
-        this.excersisesCollection = excersisesCollection;
+        this.exercisesCollection = exercisesCollection;
         this.groupList = groupList;
         this.fragment = fragment;
     }
@@ -38,7 +38,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return excersisesCollection.get(groupList.get(groupPosition)).size();
+        return exercisesCollection.get(groupList.get(groupPosition)).size();
     }
 
     @Override
@@ -105,13 +105,16 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    public void dataChanged(LinkedHashMap<String, List<ExerciseSet>> exercisesCollection) {
+        this.exercisesCollection = exercisesCollection;
+    }
+
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
     }
 
-    public void setDate(Date date)
-    {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -302,49 +303,44 @@
     </LinearLayout>
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+
 
         <TextView
             android:id="@+id/restLabel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Odpoczynek"
-            android:textSize="17dp" />
-
+            android:text="Przerwa pomiędzy seriami"
+            android:textSize="17dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp" />
 
         <Button
             android:id="@+id/restButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_width="306dp"
+            android:layout_height="wrap_content"
             android:text="START"
-            android:layout_marginRight="10dp"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:layout_gravity="center_horizontal" />
 
 
+    <mgr.mtp.Utils.ProgressWheel
+        android:id="@+id/pw_spinner"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        ProgressWheel:pwText="90"
+        ProgressWheel:pwTextColor="#222"
+        ProgressWheel:pwTextSize="30dp"
+        ProgressWheel:pwRimColor="#330097D6"
+        ProgressWheel:pwBarLength="50dp"
+        ProgressWheel:pwBarColor="#0097D6"
+        ProgressWheel:pwBarWidth="10dp"
+        ProgressWheel:pwContourSize="2dp"
+        ProgressWheel:pwRimWidth="10dp"
+        android:layout_gravity="center_horizontal" />
 
-
-    </LinearLayout>
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/timeProgressBar" />
-
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="90"
-        android:textSize="30dp" />
 
 
 </LinearLayout>
