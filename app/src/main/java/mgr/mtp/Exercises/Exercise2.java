@@ -73,6 +73,7 @@ public class Exercise2 extends WizardStep {
                         final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.alert);
                         mp.start();
                         pw.setProgress(360);
+                        pw.setText("90");
                         btnStart.setEnabled(true);
                     }
                 }.start();
