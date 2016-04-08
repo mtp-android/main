@@ -23,6 +23,9 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -33,7 +36,6 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.ExerciseSet;
-import mgr.mtp.DataModel.Product;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.DatePickerFragment;
@@ -110,6 +112,8 @@ public class TrainingHome extends Fragment {
         // prepare static exercises
         createGroupList();
 
+        getTrainingForDay(selectedDate);
+
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new TrainingListAdapter(
                 getActivity(), groupList, exercisesCollection, this);
@@ -127,7 +131,10 @@ public class TrainingHome extends Fragment {
         @Override
 
         public void onClick(View v) {
-            startActivity(new Intent(getContext(), TrainingWorkout.class));
+            Intent intent= new Intent(getContext(), TrainingWorkout.class);
+            intent.putExtra("date",Constants.queryDateFormat.format(selectedDate));
+
+            getContext().startActivity(intent);
         }
 
     };
@@ -196,8 +203,27 @@ public class TrainingHome extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody, StandardCharsets.UTF_8);
+                JSONObject obj = null;
+                try {
+                    obj = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                setTrainingOnDay(response);
+                try {
+                    if (obj.getBoolean("status"))
+                    {
+                        startTraining.setEnabled(false);
+                        setTrainingOnDay(response);
+                    }
+                    else
+                    {
+                        startTraining.setEnabled(true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 prgDialog.hide();
 
             }

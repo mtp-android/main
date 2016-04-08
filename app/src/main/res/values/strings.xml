@@ -60,6 +60,15 @@
     <string name="next">Następne</string>
     <string name="previous">Poprzednie</string>
     <string name="finishTraining">Zakończ trening</string>
+    <string name="training_settings">Ustawienia treningu</string>
+    <string name="training_completed">Zakończono trening!</string>
+    <string name="trainig_gotonextexercise">Przejdź do następnego ćwiczenia!</string>
+    <string name="answerno">Nie</string>
+    <string name="answeryes">Tak</string>
+    <string name="back">Powrót</string>
+    <string name="ok">Ok</string>
+    <string name="confirmendtraining">Potwierdź zakończenie treningu</string>
+    <string name="confirmed">Potwierdzam</string>
 
     <string-array name = "spinner_unit">
         <item>g</item>

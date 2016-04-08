@@ -76,7 +76,7 @@ public class DietResultsAdapter extends BaseAdapter {
 
         holder.product_name.setText(tempProduct.getName());
         holder.product_proteins.setText(String.valueOf(tempProduct.getProteins()));
-        holder.product_carbs.setText(String.valueOf(tempProduct.getCarbs()));
+        holder.product_carbs.setText(String.valueOf(tempProduct.getCarbohydrates()));
         holder.product_fat.setText(String.valueOf(tempProduct.getFat()));
         holder.product_calories.setText(String.valueOf(tempProduct.getCalories()));
 
@@ -89,7 +89,7 @@ public class DietResultsAdapter extends BaseAdapter {
                 intent.putExtra("name", tempProduct.getName());
                 intent.putExtra("productId",tempProduct.getId());
                 intent.putExtra("productProtein",tempProduct.getProteins());
-                intent.putExtra("productCarbs",tempProduct.getCarbs());
+                intent.putExtra("productCarbs",tempProduct.getCarbohydrates());
                 intent.putExtra("productFat",tempProduct.getFat());
                 intent.putExtra("productCalories",tempProduct.getCalories());
                 intent.putExtra("mealId",mealId);

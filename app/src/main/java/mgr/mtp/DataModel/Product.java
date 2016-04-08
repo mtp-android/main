@@ -11,13 +11,13 @@ public class Product {
     private int amount;
     private String unit;
     private float proteins;
-    private float carbs;
+    private float carbohydrates;
     private float fat;
     private float calories;
     private float factor;
 
     public Product(int id, int meal, String name, int amount, String unit,
-                   float proteins, float carbs, float fat, float calories, float factor)
+                   float proteins, float carbohydrates, float fat, float calories, float factor)
     {
         this.id = id;
         this.meal = meal;
@@ -26,7 +26,7 @@ public class Product {
         this.unit = unit;
         this.calories = calories;
         this.fat = fat;
-        this.carbs = carbs;
+        this.carbohydrates = carbohydrates;
         this.proteins = proteins;
         this.factor = factor;
     }
@@ -44,12 +44,12 @@ public class Product {
         this.calories = calories;
     }
 
-    public float getCarbs() {
-        return carbs;
+    public float getCarbohydrates() {
+        return carbohydrates;
     }
 
-    public void setCarbs(int carbs) {
-        this.carbs = carbs;
+    public void setCarbohydrates(int carbohydrates) {
+        this.carbohydrates = carbohydrates;
     }
 
     public float getFat() {
