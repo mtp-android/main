@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="58dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="0.04">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/statistics"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Aktualna forma na dzień:"
+            android:id="@+id/textView2"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/statDate"
+            android:layout_below="@+id/textView2"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/img1"
+            android:src="@drawable/statscale"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/wegithLbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="Waga"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/statWeight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="95 kg"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/img2"
+            android:src="@drawable/statfat"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/fatLevelLbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="Poziom tkanki tłuszczowej"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/statFatLeve"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="100 %"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/img3"
+            android:src="@drawable/statbicep"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/bicepLbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="Obwód bicepsa"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/statBicep"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="55 cm"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/img4"
+            android:src="@drawable/statchest"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/chestLbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="Obwód klatki piersiowej"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/statChest"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="120 cm"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/img6"
+            android:src="@drawable/statwaist"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/waistLbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="Obwód pasa"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/statWaist"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="80 cm"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/img5"
+            android:src="@drawable/statthigh"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:id="@+id/thighLbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="Obwód uda"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/statThigh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="60 cm"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bodyMeasuresBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Pomiary ciała"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/weightStatisticsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Wyniki siłowe" />
+
+</LinearLayout>

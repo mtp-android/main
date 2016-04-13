@@ -34,6 +34,7 @@ import java.util.List;
 
 import mgr.mtp.Diet.DietHome;
 import mgr.mtp.Diet.DietSettings;
+import mgr.mtp.Statistics.StatisticsHome;
 import mgr.mtp.Training.TrainingHome;
 
 /**
@@ -161,7 +162,7 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
             adapter.addFragment(new DietHome(), "Dieta");
         }
         adapter.addFragment(new TrainingHome(), "Trening");
-        adapter.addFragment(new HomeStatistics(), "Statystyki");
+        adapter.addFragment(new StatisticsHome(), "Statystyki");
         viewPager.setAdapter(adapter);
     }
 

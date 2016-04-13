@@ -96,6 +96,8 @@ public class DietHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mealsCollection = new LinkedHashMap<>();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.homediet, container, false);
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -277,8 +279,6 @@ public class DietHome extends Fragment {
                     break;
             }
         }
-
-        mealsCollection = new LinkedHashMap<>();
 
         for (String meal : groupList) {
             if (meal.equals(getString(R.string.breakfast))) {

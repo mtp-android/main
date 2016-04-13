@@ -91,7 +91,7 @@ public class DietListAdapter extends BaseExpandableListAdapter {
     }
 
     public int getChildrenCount(int groupPosition) {
-        return mealsCollection.get(groupList.get(groupPosition)).size();
+        return mealsCollection.get(groupList.get(groupPosition)) != null ? mealsCollection.get(groupList.get(groupPosition)).size() : 0;
     }
 
     public Object getGroup(int groupPosition) {

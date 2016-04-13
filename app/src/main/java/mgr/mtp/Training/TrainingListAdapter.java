@@ -38,7 +38,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return exercisesCollection.get(groupList.get(groupPosition)).size();
+        return exercisesCollection.get(groupList.get(groupPosition)) != null ? exercisesCollection.get(groupList.get(groupPosition)).size() : 0;
     }
 
     @Override

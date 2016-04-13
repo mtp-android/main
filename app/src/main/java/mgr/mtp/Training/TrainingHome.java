@@ -54,7 +54,7 @@ public class TrainingHome extends Fragment {
     List<String> groupList;
     List<ExerciseSet> childList;
     TextView trainingDate;
-    Button startTraining,setDateBtn;
+    Button startTraining, setDateBtn;
     Date selectedDate;
     int userId;
 
@@ -88,6 +88,8 @@ public class TrainingHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.hometraining, container, false);
 
+        exercisesCollection = new LinkedHashMap<>();
+
         Calendar cal = Calendar.getInstance();
         selectedDate = cal.getTime();
         String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
@@ -107,7 +109,7 @@ public class TrainingHome extends Fragment {
 
         // get user id from settings
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-        userId = prefs.getInt("userId",0);
+        userId = prefs.getInt("userId", 0);
 
         // prepare static exercises
         createGroupList();
@@ -131,8 +133,8 @@ public class TrainingHome extends Fragment {
         @Override
 
         public void onClick(View v) {
-            Intent intent= new Intent(getContext(), TrainingWorkout.class);
-            intent.putExtra("date",Constants.queryDateFormat.format(selectedDate));
+            Intent intent = new Intent(getContext(), TrainingWorkout.class);
+            intent.putExtra("date", Constants.queryDateFormat.format(selectedDate));
 
             getContext().startActivity(intent);
         }
@@ -181,7 +183,7 @@ public class TrainingHome extends Fragment {
 
             expListAdapter.setDate(date);
             getTrainingForDay(date);
-            
+
             // update label
             trainingDate.setText(Constants.queryDateFormat.format(date));
         }
@@ -196,7 +198,7 @@ public class TrainingHome extends Fragment {
         prgDialog.show();
         RequestParams params = new RequestParams();
         params.put("date", date);
-        params.put("userId",userId);
+        params.put("userId", userId);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Constants.host + "/training/gettraining", params, new AsyncHttpResponseHandler() {
@@ -211,13 +213,10 @@ public class TrainingHome extends Fragment {
                 }
 
                 try {
-                    if (obj.getBoolean("status"))
-                    {
+                    if (obj.getBoolean("status")) {
                         startTraining.setEnabled(false);
                         setTrainingOnDay(response);
-                    }
-                    else
-                    {
+                    } else {
                         startTraining.setEnabled(true);
                     }
                 } catch (JSONException e) {
@@ -250,15 +249,16 @@ public class TrainingHome extends Fragment {
 
     private void setTrainingOnDay(String response) {
 
-        ArrayList<ExerciseSet> squats = new ArrayList<>(),benchPress = new ArrayList<>(),
-                barbellRow = new ArrayList<>(),barbellCurls = new ArrayList<>(),
-                dips = new ArrayList<>(),all;
+        ArrayList<ExerciseSet> squats = new ArrayList<>(), benchPress = new ArrayList<>(),
+                barbellRow = new ArrayList<>(), barbellCurls = new ArrayList<>(),
+                dips = new ArrayList<>(), all;
 
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<ExerciseSet>>(){}.getType();
+        Type listType = new TypeToken<List<ExerciseSet>>() {
+        }.getType();
         all = gson.fromJson(response, listType);
 
-        for(ExerciseSet set : all){
+        for (ExerciseSet set : all) {
 
             switch (set.getExerciseId()) {
                 case 1:
@@ -280,8 +280,6 @@ public class TrainingHome extends Fragment {
                     break;
             }
         }
-
-        exercisesCollection = new LinkedHashMap<>();
 
         for (String meal : groupList) {
             if (meal.equals(getString(R.string.breakfast))) {
