@@ -120,7 +120,7 @@ public class DietListAdapter extends BaseExpandableListAdapter {
                     null);
         }
 
-        addMeal = (ImageView) convertView.findViewById(R.id.addMeaIngredient);
+        addMeal = (ImageView) convertView.findViewById(R.id.viewHistory);
         addMeal.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {

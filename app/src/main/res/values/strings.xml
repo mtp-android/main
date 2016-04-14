@@ -69,6 +69,8 @@
     <string name="ok">Ok</string>
     <string name="confirmendtraining">Potwierdź zakończenie treningu</string>
     <string name="confirmed">Potwierdzam</string>
+    <string name="bodyMeasures">Pomiary ciała</string>
+    <string name="powerMeasures">Wyniki siłowe</string>
 
     <string-array name = "spinner_unit">
         <item>g</item>
