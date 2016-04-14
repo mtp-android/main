@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="80"
+        android:dialogTitle="@string/user_weight"
+        android:inputType="number"
+        android:key="user_weight"
+        android:summary="@string/put_weight"
+        android:title="@string/user_weight" />
+
+    <EditTextPreference
+        android:defaultValue="40"
+        android:dialogTitle="@string/bicep_measure"
+        android:inputType="number"
+        android:key="measure_bicep"
+        android:summary="@string/put_bicep"
+        android:title="@string/bicep_measure" />
+
+    <EditTextPreference
+        android:defaultValue="100"
+        android:dialogTitle="@string/chest_measure"
+        android:inputType="number"
+        android:key="measure_bicep"
+        android:summary="@string/put_bicep"
+        android:title="@string/chest_measure" />
+
+    <EditTextPreference
+        android:defaultValue="80"
+        android:dialogTitle="@string/waist_measure"
+        android:inputType="number"
+        android:key="measure_bicep"
+        android:summary="@string/put_bicep"
+        android:title="@string/waist_measure" />
+
+    <EditTextPreference
+        android:defaultValue="50"
+        android:dialogTitle="@string/thigh_measure"
+        android:inputType="number"
+        android:key="measure_bicep"
+        android:summary="@string/put_bicep"
+        android:title="@string/thigh_measure" />
+
+</PreferenceScreen>

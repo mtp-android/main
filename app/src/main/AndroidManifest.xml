@@ -59,6 +59,11 @@
             android:name=".Training.TrainingWorkout"
             android:label="@string/title_training" >
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".Statistics.StatisticsUpdateBodyMeasures"
+            android:label="@string/updateMeasures" >
+        </activity>
     </application>
 
 </manifest>

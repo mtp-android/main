@@ -1,6 +1,7 @@
 package mgr.mtp.Statistics;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.Measure;
 import mgr.mtp.DataModel.Product;
 import mgr.mtp.Diet.DietListAdapter;
+import mgr.mtp.Diet.DietSettings;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 
@@ -51,6 +54,7 @@ public class StatisticsLauncher extends Fragment {
     int userId;
     StatisticsListAdapter expListAdapter = null;
     ProgressDialog prgDialog;
+    Button updateMeasuresBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,9 @@ public class StatisticsLauncher extends Fragment {
         prgDialog = new ProgressDialog(getActivity());
         prgDialog.setMessage(getString(R.string.pleaseWait));
         prgDialog.setCancelable(false);
+
+        updateMeasuresBtn = (Button) view.findViewById(R.id.updateMeasuresBtn);
+        updateMeasuresBtn.setOnClickListener(updateMeasures);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
         userId = prefs.getInt("userId", 0);
@@ -100,6 +107,14 @@ public class StatisticsLauncher extends Fragment {
         return view;
 
     }
+
+    View.OnClickListener updateMeasures = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getContext(), StatisticsUpdateBodyMeasures.class);
+            startActivity(i);
+        }
+    };
 
     private void getCurrentStats() {
 

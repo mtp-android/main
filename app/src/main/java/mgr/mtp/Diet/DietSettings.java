@@ -51,7 +51,7 @@ public class DietSettings extends PreferenceActivity {
         recalculateDiet();
     }
 
-    public void recalculateDiet(){
+    public void recalculateDiet() {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -62,7 +62,7 @@ public class DietSettings extends PreferenceActivity {
         int target = Integer.parseInt(prefs.getString("user_target", "1"));
         int height = Integer.parseInt(prefs.getString("user_height", "170"));
 
-        double calories = 0,proteins,carbs,fat;
+        double calories = 0, proteins, carbs, fat;
 
         switch (gender) {
             case 1:
@@ -99,7 +99,7 @@ public class DietSettings extends PreferenceActivity {
 
         proteins = calories * 0.20;
         fat = calories * 0.25;
-        carbs = (calories - (proteins+fat));
+        carbs = (calories - (proteins + fat));
 
         proteins = proteins / 4;
         fat = fat / 9;

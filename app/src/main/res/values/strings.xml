@@ -71,6 +71,12 @@
     <string name="confirmed">Potwierdzam</string>
     <string name="bodyMeasures">Pomiary ciała</string>
     <string name="powerMeasures">Wyniki siłowe</string>
+    <string name="bicep_measure">Obwód bicepsa</string>
+    <string name="put_bicep">Podaj obwód w cm</string>
+    <string name="chest_measure">Obwód klatki piersiowej</string>
+    <string name="waist_measure">Obwód pasa</string>
+    <string name="thigh_measure">Obwód uda</string>
+    <string name="updateMeasures">Aktualizacja pomiarów ciała</string>
 
     <string-array name = "spinner_unit">
         <item>g</item>
