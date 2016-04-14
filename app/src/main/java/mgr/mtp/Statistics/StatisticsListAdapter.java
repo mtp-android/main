@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,7 +62,8 @@ public class StatisticsListAdapter  extends BaseExpandableListAdapter {
         viewHistory.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Log.d("onClick","clicked!");
+                Intent i = new Intent(context, StatisticsDisplayChart.class);
+                context.startActivity(i);
             }
         });
 

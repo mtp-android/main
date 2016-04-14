@@ -77,6 +77,8 @@
     <string name="waist_measure">Obwód pasa</string>
     <string name="thigh_measure">Obwód uda</string>
     <string name="updateMeasures">Aktualizacja pomiarów ciała</string>
+    <string name="displayChart">Wykres</string>
+    <string name="chart_title">Wykres</string>
 
     <string-array name = "spinner_unit">
         <item>g</item>

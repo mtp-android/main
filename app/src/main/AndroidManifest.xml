@@ -64,6 +64,11 @@
             android:name=".Statistics.StatisticsUpdateBodyMeasures"
             android:label="@string/updateMeasures" >
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".Statistics.StatisticsDisplayChart"
+            android:label="@string/displayChart" >
+        </activity>
     </application>
 
 </manifest>
