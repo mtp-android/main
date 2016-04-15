@@ -205,26 +205,14 @@ public class TrainingHome extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody, StandardCharsets.UTF_8);
-                JSONObject obj = null;
-                try {
-                    obj = new JSONObject(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                try {
-                    if (obj.getBoolean("status")) {
-                        startTraining.setEnabled(false);
-                        setTrainingOnDay(response);
-                    } else {
-                        startTraining.setEnabled(true);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (response.equals("[]")) {
+                    startTraining.setEnabled(true);
+                } else {
+                    startTraining.setEnabled(false);
                 }
-
+                setTrainingOnDay(response);
                 prgDialog.hide();
-
             }
 
             @Override
@@ -281,19 +269,19 @@ public class TrainingHome extends Fragment {
             }
         }
 
-        for (String meal : groupList) {
-            if (meal.equals(getString(R.string.breakfast))) {
+        for (String exercise : groupList) {
+            if (exercise.equals(getString(R.string.squats))) {
                 loadChild(squats);
-            } else if (meal.equals(getString(R.string.secondBreakfast)))
+            } else if (exercise.equals(getString(R.string.benchPress)))
                 loadChild(benchPress);
-            else if (meal.equals(getString(R.string.dinner)))
+            else if (exercise.equals(getString(R.string.barbellRow)))
                 loadChild(barbellRow);
-            else if (meal.equals(getString(R.string.afternoonSnacks)))
+            else if (exercise.equals(getString(R.string.barbellCurls)))
                 loadChild(barbellCurls);
-            else if (meal.equals(getString(R.string.supper)))
+            else if (exercise.equals(getString(R.string.dips)))
                 loadChild(dips);
 
-            exercisesCollection.put(meal, childList);
+            exercisesCollection.put(exercise, childList);
 
         }
         expListAdapter.dataChanged(exercisesCollection);

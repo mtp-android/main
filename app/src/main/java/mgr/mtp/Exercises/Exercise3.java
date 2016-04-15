@@ -155,12 +155,12 @@ public class Exercise3 extends WizardStep {
         exerciseThree.add(new ExerciseSet(1, Integer.parseInt(ex3_firstSetWeightET.getText().toString())
                 , Integer.parseInt(ex3_firstSetRepsET.getText().toString()), 1));
         exerciseThree.add(new ExerciseSet(1, Integer.parseInt(ex3_secondSetWeightET.getText().toString())
-                , Integer.parseInt(ex3_secondSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex3_secondSetRepsET.getText().toString()), 2));
         exerciseThree.add(new ExerciseSet(1, Integer.parseInt(ex3_thirdSetWeightET.getText().toString())
-                , Integer.parseInt(ex3_thirdSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex3_thirdSetRepsET.getText().toString()), 3));
         exerciseThree.add(new ExerciseSet(1, Integer.parseInt(ex3_fourthSetWeightET.getText().toString())
-                , Integer.parseInt(ex3_fourthSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex3_fourthSetRepsET.getText().toString()), 4));
         exerciseThree.add(new ExerciseSet(1, Integer.parseInt(ex3_fifthSetWeightET.getText().toString())
-                , Integer.parseInt(ex3_fifthSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex3_fifthSetRepsET.getText().toString()), 5));
     }
 }

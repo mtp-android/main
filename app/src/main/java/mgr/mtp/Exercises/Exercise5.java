@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.ExerciseSet;
+import mgr.mtp.Home;
 import mgr.mtp.R;
 import mgr.mtp.Training.TrainingHome;
 import mgr.mtp.Training.TrainingWorkout;
@@ -53,7 +56,7 @@ public class Exercise5 extends WizardStep {
     long timeRemaining;
     private boolean isPaused = false;
     private boolean isCanceled = false;
-    int timerCounter = 1;
+    int timerCounter = 1,userId;
 
     @ContextVariable
     private ArrayList<ExerciseSet> exerciseOne;
@@ -79,6 +82,11 @@ public class Exercise5 extends WizardStep {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.training_wizard, container, false);
+
+
+        // get user id from settings
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+        userId = prefs.getInt("userId", 0);
 
         exerciseFive = new ArrayList<>();
 
@@ -194,16 +202,17 @@ public class Exercise5 extends WizardStep {
         }
 
         params.put("date", date);
+        params.put("userId", userId);
 
         AsyncHttpClient client = new AsyncHttpClient();
         final String finalDate = date;
-        client.post(Constants.host + "/trainig/addtrainig", params, new AsyncHttpResponseHandler() {
+        client.get(Constants.host + "/training/addtraining", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 prgDialog.hide();
 
-                Intent homeIntent = new Intent(getActivity(), TrainingHome.class);
+                Intent homeIntent = new Intent(getActivity(), Home.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 homeIntent.putExtra("date", finalDate);
                 startActivity(homeIntent);
@@ -215,7 +224,7 @@ public class Exercise5 extends WizardStep {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                String response = new String(responseBody, StandardCharsets.UTF_8);
+                //String response = new String(responseBody, StandardCharsets.UTF_8);
 
                 prgDialog.hide();
 
@@ -259,13 +268,13 @@ public class Exercise5 extends WizardStep {
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_firstSetWeightET.getText().toString())
                 , Integer.parseInt(ex5_firstSetRepsET.getText().toString()), 1));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_secondSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_secondSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex5_secondSetRepsET.getText().toString()), 2));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_thirdSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_thirdSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex5_thirdSetRepsET.getText().toString()), 3));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_fourthSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_fourthSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex5_fourthSetRepsET.getText().toString()), 4));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_fifthSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_fifthSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex5_fifthSetRepsET.getText().toString()), 5));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(getString(R.string.confirmendtraining))

@@ -59,12 +59,12 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return null;
+        return exercisesCollection.get(groupList.get(groupPosition)).get(childPosition);
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return 0;
+        return childPosition;
     }
 
     @Override
@@ -96,12 +96,12 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.child_item_diet, null);
+            convertView = inflater.inflate(R.layout.child_item_training, null);
         }
 
-        TextView item = (TextView) convertView.findViewById(R.id.mealIngredient);
+        TextView item = (TextView) convertView.findViewById(R.id.exerciseSet);
 
-        item.setText(set.getExerciseName());
+        item.setText(set.getSetNo()+") "+set.getReps()+" x "+set.getWeight()+" kg");
         return convertView;
     }
 
