@@ -181,6 +181,8 @@ public class TrainingHome extends Fragment {
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             Date date = cal.getTime();
 
+            selectedDate = date;
+
             expListAdapter.setDate(date);
             getTrainingForDay(date);
 

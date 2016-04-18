@@ -10,6 +10,8 @@ import android.widget.DatePicker;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import mgr.mtp.R;
+
 /**
  * Created by lmedrzycki on 26.02.2016.
  */
@@ -34,6 +36,6 @@ public class DatePickerFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new DatePickerDialog(getActivity(), ondateSet, year, month, day);
+        return new DatePickerDialog(getActivity(), R.style.DialogTheme, ondateSet, year, month, day);
     }
 }

@@ -75,7 +75,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight ="10dp"
         android:gravity="center"
-        android:drawableLeft="@drawable/ic_add_black_18dp"
+        android:drawableLeft="@drawable/ic_add_black_24dp"
         style="?android:attr/borderlessButtonStyle" />
 
     <TextView

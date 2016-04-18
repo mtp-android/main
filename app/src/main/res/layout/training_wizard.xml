@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -31,7 +31,7 @@
             android:textSize="17dp" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/firstSet_reps"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -45,20 +45,20 @@
             android:id="@+id/firstSet_repTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="powt."
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x"
             android:textSize="15dp" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/firstSet_weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
             android:text="5"
             android:textSize="20dp" />
 
@@ -66,11 +66,20 @@
             android:id="@+id/firstSet_weightTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="kg"
             android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/editone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_mode_edit_black_24dp"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 
@@ -89,7 +98,7 @@
             android:textSize="17dp" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/secondSet_reps"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -103,19 +112,19 @@
             android:id="@+id/secondSet_repTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:text="powt."
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x"
             android:textSize="15dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/secondSet_weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
             android:text="5"
             android:textSize="20dp" />
 
@@ -123,11 +132,20 @@
             android:id="@+id/secondSet_weightTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="kg"
-            android:layout_marginRight="10dp"
             android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/edittwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_mode_edit_black_24dp"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 
@@ -146,13 +164,13 @@
             android:textSize="17dp" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/thirdSet_reps"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
             android:text="5"
             android:textSize="20dp" />
 
@@ -160,19 +178,19 @@
             android:id="@+id/thirdSet_repTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:text="powt."
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x"
             android:textSize="15dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/thirdSet_weight"
             android:layout_width="0dp"
-            android:inputType="number"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
+            android:inputType="number"
             android:text="5"
             android:textSize="20dp" />
 
@@ -180,11 +198,20 @@
             android:id="@+id/thirdSet_weightTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:layout_marginRight="10dp"
             android:text="kg"
             android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/editthree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_mode_edit_black_24dp"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 
@@ -203,13 +230,13 @@
             android:textSize="17dp" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/fourthSet_reps"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
             android:text="5"
             android:textSize="20dp" />
 
@@ -217,13 +244,13 @@
             android:id="@+id/fourthSet_repTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="powt."
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x"
             android:textSize="15dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/fourthSet_weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -236,11 +263,21 @@
             android:id="@+id/fourthSet_weightTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="kg"
             android:textSize="15dp" />
+
+
+        <ImageView
+            android:id="@+id/editfour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_mode_edit_black_24dp"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 
@@ -259,7 +296,7 @@
             android:textSize="17dp" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/fifthSet_reps"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -273,13 +310,13 @@
             android:id="@+id/fifthSet_repTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="powt."
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="x"
             android:textSize="15dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/fifthSet_weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -293,36 +330,42 @@
             android:id="@+id/fifthSet_weightTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:layout_marginRight="10dp"
             android:text="kg"
             android:textSize="15dp" />
 
+        <ImageView
+            android:id="@+id/editfive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_mode_edit_black_24dp"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/restLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_vertical"
+        android:text="Przerwa pomiędzy seriami x/x"
+        android:textSize="17dp" />
 
-
-        <TextView
-            android:id="@+id/restLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Przerwa pomiędzy seriami x/x"
-            android:textSize="17dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="5dp" />
-
-        <Button
-            android:id="@+id/restButton"
-            android:layout_width="306dp"
-            android:layout_height="wrap_content"
-            android:text="START"
-            android:textSize="15dp"
-            android:layout_gravity="center_horizontal" />
+    <Button
+        android:id="@+id/restButton"
+        android:layout_width="306dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="START"
+        android:textSize="15dp" />
 
 
     <mgr.mtp.Utils.ProgressWheel
@@ -330,17 +373,16 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
-        ProgressWheel:pwText="90"
-        ProgressWheel:pwTextColor="#222"
-        ProgressWheel:pwTextSize="30dp"
-        ProgressWheel:pwRimColor="#330097D6"
-        ProgressWheel:pwBarLength="50dp"
+        android:layout_gravity="center_horizontal"
         ProgressWheel:pwBarColor="#0097D6"
+        ProgressWheel:pwBarLength="50dp"
         ProgressWheel:pwBarWidth="10dp"
         ProgressWheel:pwContourSize="2dp"
+        ProgressWheel:pwRimColor="#330097D6"
         ProgressWheel:pwRimWidth="10dp"
-        android:layout_gravity="center_horizontal" />
-
+        ProgressWheel:pwText="90"
+        ProgressWheel:pwTextColor="#222"
+        ProgressWheel:pwTextSize="30dp" />
 
 
 </LinearLayout>

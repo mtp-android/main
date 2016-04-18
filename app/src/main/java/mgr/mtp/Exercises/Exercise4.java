@@ -1,14 +1,18 @@
 package mgr.mtp.Exercises;
 
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +33,7 @@ public class Exercise4 extends WizardStep {
     ProgressWheel pw;
     Toolbar toolbar;
     Button btnStart;
-    EditText ex4_firstSetWeightET, ex4_firstSetRepsET, ex4_secondSetWeightET, ex4_secondSetRepsET,
+    TextView ex4_firstSetWeightET, ex4_firstSetRepsET, ex4_secondSetWeightET, ex4_secondSetRepsET,
             ex4_thirdSetWeightET, ex4_thirdSetRepsET, ex4_fourthSetWeightET, ex4_fourthSetRepsET,
             ex4_fifthSetWeightET, ex4_fifthSetRepsET;
     TextView restLabel;
@@ -37,6 +41,8 @@ public class Exercise4 extends WizardStep {
     private boolean isPaused = false;
     private boolean isCanceled = false;
     int timerCounter = 1;
+    ImageView editOne, editTwo, editThree, editFour, editFive;
+
 
     @ContextVariable
     private ArrayList<ExerciseSet> exerciseOne;
@@ -65,20 +71,32 @@ public class Exercise4 extends WizardStep {
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.barbellCurls);
 
-        ex4_firstSetRepsET = (EditText) v.findViewById(R.id.firstSet_reps);
-        ex4_firstSetWeightET = (EditText) v.findViewById(R.id.firstSet_weight);
+        ex4_firstSetRepsET = (TextView) v.findViewById(R.id.firstSet_reps);
+        ex4_firstSetWeightET = (TextView) v.findViewById(R.id.firstSet_weight);
 
-        ex4_secondSetRepsET = (EditText) v.findViewById(R.id.secondSet_reps);
-        ex4_secondSetWeightET = (EditText) v.findViewById(R.id.secondSet_weight);
+        ex4_secondSetRepsET = (TextView) v.findViewById(R.id.secondSet_reps);
+        ex4_secondSetWeightET = (TextView) v.findViewById(R.id.secondSet_weight);
 
-        ex4_thirdSetRepsET = (EditText) v.findViewById(R.id.thirdSet_reps);
-        ex4_thirdSetWeightET = (EditText) v.findViewById(R.id.thirdSet_weight);
+        ex4_thirdSetRepsET = (TextView) v.findViewById(R.id.thirdSet_reps);
+        ex4_thirdSetWeightET = (TextView) v.findViewById(R.id.thirdSet_weight);
 
-        ex4_fourthSetRepsET = (EditText) v.findViewById(R.id.fourthSet_reps);
-        ex4_fourthSetWeightET = (EditText) v.findViewById(R.id.fourthSet_weight);
+        ex4_fourthSetRepsET = (TextView) v.findViewById(R.id.fourthSet_reps);
+        ex4_fourthSetWeightET = (TextView) v.findViewById(R.id.fourthSet_weight);
 
-        ex4_fifthSetRepsET = (EditText) v.findViewById(R.id.fifthSet_reps);
-        ex4_fifthSetWeightET = (EditText) v.findViewById(R.id.fifthSet_weight);
+        ex4_fifthSetRepsET = (TextView) v.findViewById(R.id.fifthSet_reps);
+        ex4_fifthSetWeightET = (TextView) v.findViewById(R.id.fifthSet_weight);
+
+        editOne = (ImageView) v.findViewById(R.id.editone);
+        editTwo = (ImageView) v.findViewById(R.id.edittwo);
+        editThree = (ImageView) v.findViewById(R.id.editthree);
+        editFour = (ImageView) v.findViewById(R.id.editfour);
+        editFive = (ImageView) v.findViewById(R.id.editfive);
+
+        editOne.setOnClickListener(showNumberPickers);
+        editTwo.setOnClickListener(showNumberPickers);
+        editThree.setOnClickListener(showNumberPickers);
+        editFour.setOnClickListener(showNumberPickers);
+        editFive.setOnClickListener(showNumberPickers);
 
         restLabel = (TextView) v.findViewById(R.id.restLabel);
         updateRestLabel(timerCounter);
@@ -133,6 +151,69 @@ public class Exercise4 extends WizardStep {
 
         return v;
     }
+
+    View.OnClickListener showNumberPickers = new View.OnClickListener() {
+        public void onClick(View v) {
+
+            final int id = v.getId();
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View theView = inflater.inflate(R.layout.training_weight_numberpicker_dialog, null);
+
+            final NumberPicker reps = (NumberPicker) theView.findViewById(R.id.reps_picker);
+            reps.setWrapSelectorWheel(true);
+            reps.setMinValue(5);
+            reps.setMaxValue(15);
+
+            final NumberPicker weight = (NumberPicker) theView.findViewById(R.id.weight_picker);
+            weight.setWrapSelectorWheel(true);
+            weight.setMinValue(5);
+            weight.setMaxValue(150);
+
+            builder.setView(theView)
+                    .setPositiveButton(R.string.confirmed, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            int repsValue = reps.getValue();
+                            int weightValue = weight.getValue();
+
+                            switch (id) {
+                                case R.id.editone:
+                                    ex4_firstSetRepsET.setText(""+repsValue);
+                                    ex4_firstSetWeightET.setText(""+weightValue);
+                                    break;
+                                case R.id.edittwo:
+                                    ex4_secondSetRepsET.setText(""+repsValue);
+                                    ex4_secondSetWeightET.setText(""+weightValue);
+                                    break;
+                                case R.id.editthree:
+                                    ex4_thirdSetRepsET.setText(""+repsValue);
+                                    ex4_thirdSetWeightET.setText(""+weightValue);
+                                    break;
+                                case R.id.editfour:
+                                    ex4_fourthSetRepsET.setText(""+repsValue);
+                                    ex4_fourthSetWeightET.setText(""+weightValue);
+                                    break;
+                                case R.id.editfive:
+                                    ex4_fifthSetRepsET.setText(""+repsValue);
+                                    ex4_fifthSetWeightET.setText(""+weightValue);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            builder.show();
+
+        }
+    };
 
     @Override
     public void onExit(int exitCode) {
