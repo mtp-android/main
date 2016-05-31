@@ -41,9 +41,8 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.Product;
 import mgr.mtp.R;
-import mgr.mtp.Utils.DatePickerFragment;
-import mgr.mtp.Diet.DietListAdapter;
 import mgr.mtp.Utils.Constants;
+import mgr.mtp.Utils.DatePickerFragment;
 
 /**
  * Created by lukas on 25.02.2016.
@@ -147,6 +146,18 @@ public class DietHome extends Fragment {
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new DietListAdapter(
                 getActivity(), groupList, mealsCollection, this);
+
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                for (int i = 0; i < groupList.size(); i++) {
+                    if (i != groupPosition) {
+                        expListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
 
         expListView.setAdapter(expListAdapter);
         expListAdapter.setDate(selectedDate);

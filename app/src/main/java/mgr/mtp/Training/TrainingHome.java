@@ -23,9 +23,6 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -119,6 +116,18 @@ public class TrainingHome extends Fragment {
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new TrainingListAdapter(
                 getActivity(), groupList, exercisesCollection, this);
+
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                for (int i = 0; i < groupList.size(); i++) {
+                    if (i != groupPosition) {
+                        expListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
 
         expListView.setAdapter(expListAdapter);
         expListAdapter.setDate(selectedDate);

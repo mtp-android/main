@@ -92,7 +92,7 @@ public class DietSearchProduct extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                if (newText.length() > 3) {
+                if (newText.length() > 2) {
                     searchResults.setVisibility(View.VISIBLE);
                     myAsyncTask m = (myAsyncTask) new myAsyncTask().execute(newText);
                 } else {

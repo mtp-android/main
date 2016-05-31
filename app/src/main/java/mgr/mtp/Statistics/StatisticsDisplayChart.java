@@ -1,19 +1,17 @@
 package mgr.mtp.Statistics;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.WindowManager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
@@ -25,108 +23,98 @@ import mgr.mtp.R;
  */
 public class StatisticsDisplayChart extends AppCompatActivity {
 
-    protected String[] mMonths = new String[]{
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
-    };
-
     LineChart mChart;
-    Typeface mTf;
+    Toolbar toolbar;
+    String statisticName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            statisticName = extras.getString("statisticName");
+        }
+
         setContentView(R.layout.statistics_chart);
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(statisticName);
+
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mChart = (LineChart) findViewById(R.id.chart);
 
-        LineData data = getData(10, 100);
-        setupChart(mChart, data, Color.WHITE);
+        ArrayList<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(80, 0));
+        entries.add(new Entry(85, 1));
+        entries.add(new Entry(90, 2));
+        entries.add(new Entry(95, 3));
+        entries.add(new Entry(90, 4));
+        entries.add(new Entry(85, 5));
+        entries.add(new Entry(95, 6));
+        entries.add(new Entry(100, 7));
+        entries.add(new Entry(105, 8));
+        entries.add(new Entry(107, 9));
 
-    }
-
-    private void setupChart(LineChart chart, LineData data, int color) {
-
-        ((LineDataSet) data.getDataSetByIndex(0)).setCircleColor(color);
-
-        // no description text
-        chart.setDescription("");
-        chart.setNoDataTextDescription("You need to provide data for the chart.");
-
-        // mChart.setDrawHorizontalGrid(false);
-        //
-        // enable / disable grid background
-        chart.setDrawGridBackground(true);
-//        chart.getRenderer().getGridPaint().setGridColor(Color.WHITE & 0x70FFFFFF);
-
-        // enable touch gestures
-        chart.setTouchEnabled(true);
-
-        // enable scaling and dragging
-        chart.setDragEnabled(true);
-        chart.setScaleEnabled(true);
-
-        // if disabled, scaling can be done on x- and y-axis separately
-        chart.setPinchZoom(false);
-
-        chart.setBackgroundColor(color);
-
-        // add data
-        chart.setData(data);
-
-        // get the legend (only possible after setting data)
-        Legend l = chart.getLegend();
-        l.setEnabled(false);
-
-        chart.getAxisRight().setEnabled(false);
-        chart.getAxisLeft().setEnabled(true);
-        chart.getAxisLeft().setSpaceTop(40);
-        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-        chart.getAxisLeft().setSpaceBottom(40);
-        chart.setViewPortOffsets(100,10,50,10);
-        chart.getAxisLeft().setDrawLabels(true);
-
-        chart.getXAxis().setEnabled(false);
-
-        // animate calls invalidate()...
-        chart.animateX(2500);
-    }
-
-    private LineData getData(int count, float range) {
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            xVals.add(mMonths[i % 12]);
-        }
-
-        ArrayList<Entry> yVals = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-            float val = (float) (Math.random() * range) + 3;
-            yVals.add(new Entry(val, i));
-        }
-
-        // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "DataSet 1");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
-
-        set1.setLineWidth(1.75f);
-        set1.setCircleRadius(5f);
-        set1.setColor(Color.BLACK);
-        set1.setCircleColorHole(Color.BLACK);
-        set1.setHighLightColor(Color.GRAY);
-        set1.setDrawValues(true);
-        set1.setValueTextSize(15);
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
+        labels.add("16.05");
 
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-        dataSets.add(set1); // add the datasets
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setDrawAxisLine(true);
+        xAxis.setTextSize(13);
+        xAxis.setSpaceBetweenLabels(5);
+        xAxis.setYOffset(20);
 
-        // create a data object with the datasets
-        LineData data = new LineData(xVals, dataSets);
 
-        return data;
+        YAxis yAxis = mChart.getAxisLeft();
+        yAxis.setDrawGridLines(true);
+        yAxis.setDrawLabels(false);
+        yAxis.setTextSize(13);
+
+
+
+        YAxis yAxis1 = mChart.getAxisRight();
+        yAxis1.setDrawGridLines(true);
+        yAxis1.setDrawLabels(false);
+
+        LineDataSet dataset = new LineDataSet(entries,"kg");
+        LineData data = new LineData(labels, dataset);
+
+        dataset.setLineWidth(3);
+
+        data.setValueTextSize(13);
+
+
+        dataset.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return ((int) value) + " kg";
+            }
+        });
+
+        mChart.setExtraOffsets(20,10,30,10);
+        mChart.setDescription("");
+        mChart.getLegend().setEnabled(false);
+        mChart.setData(data);
 
     }
 }

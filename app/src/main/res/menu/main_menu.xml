@@ -5,8 +5,9 @@
     <item android:id="@+id/diet_settings"
         android:title="@string/diet_settings"
         app:showAsAction="never"/>
-    <item android:id="@+id/training_settings"
+    <!--<item android:id="@+id/training_settings"
         android:title="@string/training_settings"
         app:showAsAction="never"/>
 
+        -->
 </menu>
