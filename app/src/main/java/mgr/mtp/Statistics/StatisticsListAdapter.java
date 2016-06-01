@@ -61,6 +61,7 @@ public class StatisticsListAdapter  extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 Intent i = new Intent(context, StatisticsDisplayChart.class);
                 i.putExtra("statisticName", measure.getName());
+                i.putExtra("typeId", measure.getTypeId());
                 context.startActivity(i);
             }
         });
@@ -69,7 +70,7 @@ public class StatisticsListAdapter  extends BaseExpandableListAdapter {
         TextView statValue = (TextView) convertView.findViewById(R.id.statValue);
 
         statName.setText(measure.getName());
-        statValue.setText(measure.getValue());
+        statValue.setText(""+measure.getValue()+" "+measure.getUnit());
 
         return convertView;
     }

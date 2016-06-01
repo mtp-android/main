@@ -21,7 +21,7 @@
         android:defaultValue="100"
         android:dialogTitle="@string/chest_measure"
         android:inputType="number"
-        android:key="measure_bicep"
+        android:key="measure_chest"
         android:summary="@string/put_bicep"
         android:title="@string/chest_measure" />
 
@@ -29,7 +29,7 @@
         android:defaultValue="80"
         android:dialogTitle="@string/waist_measure"
         android:inputType="number"
-        android:key="measure_bicep"
+        android:key="measure_waist"
         android:summary="@string/put_bicep"
         android:title="@string/waist_measure" />
 
@@ -37,7 +37,7 @@
         android:defaultValue="50"
         android:dialogTitle="@string/thigh_measure"
         android:inputType="number"
-        android:key="measure_bicep"
+        android:key="measure_thigh"
         android:summary="@string/put_bicep"
         android:title="@string/thigh_measure" />
 

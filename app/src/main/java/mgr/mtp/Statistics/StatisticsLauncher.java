@@ -108,6 +108,12 @@ public class StatisticsLauncher extends Fragment {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        getCurrentStats();
+    }
+
     View.OnClickListener updateMeasures = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
