@@ -60,6 +60,7 @@ public class Exercise5 extends WizardStep {
     private boolean isCanceled = false;
     int timerCounter = 1,userId;
     ImageView editOne, editTwo, editThree, editFour, editFive;
+    int set1max,set2max,set3max,set4max,set5max;
 
 
     @ContextVariable
@@ -108,6 +109,14 @@ public class Exercise5 extends WizardStep {
 
         ex5_fifthSetRepsET = (TextView) v.findViewById(R.id.fifthSet_reps);
         ex5_fifthSetWeightET = (TextView) v.findViewById(R.id.fifthSet_weight);
+
+        getWeightFromPreferences();
+
+        ex5_firstSetWeightET.setText(""+set1max);
+        ex5_secondSetWeightET.setText(""+set2max);
+        ex5_thirdSetWeightET.setText(""+set3max);
+        ex5_fourthSetWeightET.setText(""+set4max);
+        ex5_fifthSetWeightET.setText(""+set5max);
 
         editOne = (ImageView) v.findViewById(R.id.editone);
         editTwo = (ImageView) v.findViewById(R.id.edittwo);
@@ -355,9 +364,40 @@ public class Exercise5 extends WizardStep {
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_fifthSetWeightET.getText().toString())
                 , Integer.parseInt(ex5_fifthSetRepsET.getText().toString()), 5));
 
+
+        int finalSet1 = Integer.parseInt(ex5_firstSetWeightET.getText().toString());
+        int finalSet2 = Integer.parseInt(ex5_secondSetWeightET.getText().toString());
+        int finalSet3 = Integer.parseInt(ex5_thirdSetWeightET.getText().toString());
+        int finalSet4 = Integer.parseInt(ex5_fourthSetWeightET.getText().toString());
+        int finalSet5 = Integer.parseInt(ex5_fifthSetWeightET.getText().toString());
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("ex5set1max", set1max >= finalSet1 ? set1max : finalSet1);
+        editor.putInt("ex5set2max", set2max >= finalSet1 ? set2max : finalSet2);
+        editor.putInt("ex5set3max", set3max >= finalSet1 ? set3max : finalSet3);
+        editor.putInt("ex5set4max", set4max >= finalSet1 ? set4max : finalSet4);
+        editor.putInt("ex5set5max", set5max >= finalSet1 ? set5max : finalSet5);
+
+        editor.commit();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(getString(R.string.confirmendtraining))
                 .setNegativeButton(getString(R.string.back), dialogClickListener).setPositiveButton(getString(R.string.confirmed), dialogClickListener).show();
+    }
+
+    private void getWeightFromPreferences(){
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        set1max = prefs.getInt("ex5set1max", 5);
+        set2max = prefs.getInt("ex5set2max", 5);
+        set3max = prefs.getInt("ex5set3max", 5);
+        set4max = prefs.getInt("ex5set4max", 5);
+        set5max = prefs.getInt("ex5set5max", 5);
+
+
     }
 
 }

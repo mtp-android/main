@@ -1,9 +1,11 @@
 package mgr.mtp.Exercises;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -42,7 +44,7 @@ public class Exercise4 extends WizardStep {
     private boolean isCanceled = false;
     int timerCounter = 1;
     ImageView editOne, editTwo, editThree, editFour, editFive;
-
+    int set1max,set2max,set3max,set4max,set5max;
 
     @ContextVariable
     private ArrayList<ExerciseSet> exerciseOne;
@@ -85,6 +87,14 @@ public class Exercise4 extends WizardStep {
 
         ex4_fifthSetRepsET = (TextView) v.findViewById(R.id.fifthSet_reps);
         ex4_fifthSetWeightET = (TextView) v.findViewById(R.id.fifthSet_weight);
+
+        getWeightFromPreferences();
+
+        ex4_firstSetWeightET.setText(""+set1max);
+        ex4_secondSetWeightET.setText(""+set2max);
+        ex4_thirdSetWeightET.setText(""+set3max);
+        ex4_fourthSetWeightET.setText(""+set4max);
+        ex4_fifthSetWeightET.setText(""+set5max);
 
         editOne = (ImageView) v.findViewById(R.id.editone);
         editTwo = (ImageView) v.findViewById(R.id.edittwo);
@@ -246,6 +256,36 @@ public class Exercise4 extends WizardStep {
                 , Integer.parseInt(ex4_fourthSetRepsET.getText().toString()), 4));
         exerciseFour.add(new ExerciseSet(1, Integer.parseInt(ex4_fifthSetWeightET.getText().toString())
                 , Integer.parseInt(ex4_fifthSetRepsET.getText().toString()), 5));
+
+        int finalSet1 = Integer.parseInt(ex4_firstSetWeightET.getText().toString());
+        int finalSet2 = Integer.parseInt(ex4_secondSetWeightET.getText().toString());
+        int finalSet3 = Integer.parseInt(ex4_thirdSetWeightET.getText().toString());
+        int finalSet4 = Integer.parseInt(ex4_fourthSetWeightET.getText().toString());
+        int finalSet5 = Integer.parseInt(ex4_fifthSetWeightET.getText().toString());
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("ex4set1max", set1max >= finalSet1 ? set1max : finalSet1);
+        editor.putInt("ex4set2max", set2max >= finalSet1 ? set2max : finalSet2);
+        editor.putInt("ex4set3max", set3max >= finalSet1 ? set3max : finalSet3);
+        editor.putInt("ex4set4max", set4max >= finalSet1 ? set4max : finalSet4);
+        editor.putInt("ex4set5max", set5max >= finalSet1 ? set5max : finalSet5);
+
+        editor.commit();
+    }
+
+    private void getWeightFromPreferences(){
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        set1max = prefs.getInt("ex4set1max", 5);
+        set2max = prefs.getInt("ex4set2max", 5);
+        set3max = prefs.getInt("ex4set3max", 5);
+        set4max = prefs.getInt("ex4set4max", 5);
+        set5max = prefs.getInt("ex4set5max", 5);
+
+
     }
 
 }

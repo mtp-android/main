@@ -71,7 +71,7 @@
             <TextView
             android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
+                android:textSize="14dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Kalorie:"
             android:id="@+id/caloriesTxt"
@@ -79,7 +79,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Węglowodany:"
@@ -118,7 +118,7 @@
             <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:textSize="12dp"
+                android:textSize="14dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Białko:"
             android:id="@+id/proteinTxt"
@@ -126,7 +126,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Tłuszcze:"

@@ -127,7 +127,7 @@ public class DietListAdapter extends BaseExpandableListAdapter {
 
                 Intent intent = new Intent(context, DietSearchProduct.class);
                 intent.putExtra("date", Constants.queryDateFormat.format(date));
-                intent.putExtra("meal", getGroupId(groupPosition));
+                intent.putExtra("mealId", groupPosition);
                 context.startActivity(intent);
             }
         });
