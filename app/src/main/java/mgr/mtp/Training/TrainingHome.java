@@ -219,8 +219,10 @@ public class TrainingHome extends Fragment {
 
                 if (response.equals("[]")) {
                     startTraining.setEnabled(true);
+                    expListView.setVisibility(View.INVISIBLE);
                 } else {
                     startTraining.setEnabled(false);
+                    expListView.setVisibility(View.VISIBLE);
                 }
                 setTrainingOnDay(response);
                 prgDialog.hide();

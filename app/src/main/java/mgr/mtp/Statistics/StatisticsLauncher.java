@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,15 +24,11 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.Measure;
-import mgr.mtp.DataModel.Product;
-import mgr.mtp.Diet.DietListAdapter;
-import mgr.mtp.Diet.DietSettings;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 

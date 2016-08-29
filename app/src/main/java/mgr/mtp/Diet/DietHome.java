@@ -13,17 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -31,17 +27,12 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import mgr.mtp.DataModel.Product;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.DatePickerFragment;
@@ -51,7 +42,7 @@ import mgr.mtp.Utils.DatePickerFragment;
  */
 public class DietHome extends Fragment {
 
-    DietListAdapter expListAdapter = null;
+    DietHomeListAdapter listViewAdapter = null;
 
     private Toolbar toolbar;
     ProgressDialog prgDialog;
@@ -60,32 +51,14 @@ public class DietHome extends Fragment {
 
 
     Date selectedDate;
-    List<String> groupList;
-    List<Product> childList;
-    LinkedHashMap<String, List<Product>> mealsCollection;
+    int[] calories = {0,0,0,0,0};
     TextView caloriesTxt, proteinsTxt, fatTxt, carbsTxt;
-    ExpandableListView expListView;
     ListView listView;
     ProgressBar caloriesBar, proteinsBar, fatBar, carbsBar;
     int intakeCalories, intakeCarbs, intakeProteins, intakeFat, userId;
 
     public DietHome() {
 
-    }
-
-    private void createGroupList() {
-        groupList = new ArrayList<>();
-        groupList.add(getString(R.string.breakfast));
-        groupList.add(getString(R.string.secondBreakfast));
-        groupList.add(getString(R.string.dinner));
-        groupList.add(getString(R.string.afternoonSnacks));
-        groupList.add(getString(R.string.supper));
-    }
-
-
-    private void loadChild(List<Product> mealIngredients) {
-        childList = new ArrayList<>();
-        childList.addAll(mealIngredients);
     }
 
     @Override
@@ -98,7 +71,7 @@ public class DietHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mealsCollection = new LinkedHashMap<>();
+        calories = new int[5];
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.homediet, container, false);
@@ -135,11 +108,8 @@ public class DietHome extends Fragment {
         prgDialog.setMessage(getString(R.string.pleaseWait));
         prgDialog.setCancelable(false);
 
-        // prepare static meals
-        createGroupList();
-
         // meals details for day
-        //getMealsForDay(selectedDate);
+        getMealsHeadersForDay(selectedDate);
 
         // get nutrition intake summary and refresh bars
         getSummaryForDay(selectedDate);
@@ -152,31 +122,11 @@ public class DietHome extends Fragment {
                 "Podwieczorek", "Kolacja"
         };
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
         // Assign adapter to ListView
-        listView.setAdapter(adapter);
+        listViewAdapter = new DietHomeListAdapter(getActivity(), values, userId);
+        listView.setAdapter(listViewAdapter);
 
-/*        expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        expListAdapter = new DietListAdapter(
-                getActivity(), groupList, mealsCollection, this);
-
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                for (int i = 0; i < groupList.size(); i++) {
-                    if (i != groupPosition) {
-                        expListView.collapseGroup(i);
-                    }
-                }
-            }
-        });
-
-        expListView.setAdapter(expListAdapter);
-        expListAdapter.setDate(selectedDate);*/
+        listViewAdapter.setDate(selectedDate);
 
         return view;
     }
@@ -234,7 +184,7 @@ public class DietHome extends Fragment {
         }
     }
 
-    private void getMealsForDay(Date selectedDate) {
+    private void getMealsHeadersForDay(Date selectedDate) {
 
         String date = Constants.queryDateFormat.format(selectedDate);
 
@@ -244,7 +194,7 @@ public class DietHome extends Fragment {
         params.put("userId", userId);
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(Constants.host + "/meals/getmeals", params, new AsyncHttpResponseHandler() {
+        client.get(Constants.host + "/meals/getmealsheaders", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody, StandardCharsets.UTF_8);
@@ -275,55 +225,18 @@ public class DietHome extends Fragment {
 
 
     public void setMealsOnDay(String response) {
-        ArrayList<Product> breakfast = new ArrayList<>(), secondBreakfast = new ArrayList<>(),
-                dinner = new ArrayList<>(), afternoonSnacks = new ArrayList<>(),
-                supper = new ArrayList<>(), all;
 
-        Gson gson = new Gson();
-        Type listType = new TypeToken<List<Product>>() {
-        }.getType();
-        all = gson.fromJson(response, listType);
+        response = response.replace("]","");
+        response = response.replace("[","");
 
-        for (Product product : all) {
-
-            switch (product.getMeal()) {
-                case 1:
-                    breakfast.add(product);
-                    break;
-                case 2:
-                    secondBreakfast.add(product);
-                    break;
-                case 3:
-                    dinner.add(product);
-                    break;
-                case 4:
-                    afternoonSnacks.add(product);
-                    break;
-                case 5:
-                    supper.add(product);
-                    break;
-                default:
-                    break;
-            }
+        String[] strArray = response.split(",");
+        int[] calories = new int[strArray.length];
+        for(int i = 0; i < strArray.length; i++) {
+            calories[i] = Integer.parseInt(strArray[i]);
         }
 
-        for (String meal : groupList) {
-            if (meal.equals(getString(R.string.breakfast))) {
-                loadChild(breakfast);
-            } else if (meal.equals(getString(R.string.secondBreakfast)))
-                loadChild(secondBreakfast);
-            else if (meal.equals(getString(R.string.dinner)))
-                loadChild(dinner);
-            else if (meal.equals(getString(R.string.afternoonSnacks)))
-                loadChild(afternoonSnacks);
-            else if (meal.equals(getString(R.string.supper)))
-                loadChild(supper);
-
-            mealsCollection.put(meal, childList);
-
-        }
-        expListAdapter.dataChanged(mealsCollection);
-        expListAdapter.notifyDataSetChanged();
+        listViewAdapter.dataChanged(calories);
+        listViewAdapter.notifyDataSetChanged();
 
     }
 
@@ -367,8 +280,8 @@ public class DietHome extends Fragment {
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             Date date = cal.getTime();
 
-            expListAdapter.setDate(date);
-            getMealsForDay(date);
+            listViewAdapter.setDate(date);
+            getMealsHeadersForDay(date);
             getSummaryForDay(date);
 
             // update label
@@ -395,9 +308,9 @@ public class DietHome extends Fragment {
 
                 getSummaryForDay(selectedDate);
 
-                List<Product> child = mealsCollection.get(groupList.get(groupPosition));
-                child.remove(childPosition);
-                expListAdapter.notifyDataSetChanged();
+                //List<Product> child = mealsCollection.get(groupList.get(groupPosition));
+                //child.remove(childPosition);
+                //expListAdapter.notifyDataSetChanged();
 
             }
 

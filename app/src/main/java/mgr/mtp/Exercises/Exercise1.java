@@ -1,6 +1,5 @@
 package mgr.mtp.Exercises;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -9,13 +8,11 @@ import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -65,7 +62,7 @@ public class Exercise1 extends WizardStep {
         exerciseOne = new ArrayList<>();
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.squats);
+        toolbar.setTitle(R.string.trainingSquats);
 
         ex1_firstSetRepsET = (TextView) v.findViewById(R.id.firstSet_reps);
         ex1_firstSetWeightET = (TextView) v.findViewById(R.id.firstSet_weight);
@@ -125,7 +122,7 @@ public class Exercise1 extends WizardStep {
                     btnStart.setEnabled(false);
 
                     CountDownTimer timer;
-                    long millisInFuture = 90000; //90 seconds
+                    long millisInFuture = 10000; //90 seconds
                     long countDownInterval = 1000; //1 second
 
                     timer = new CountDownTimer(millisInFuture, countDownInterval) {

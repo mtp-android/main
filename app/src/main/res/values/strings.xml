@@ -1,13 +1,21 @@
 <resources>
     <string name="app_name">Mobilny Trener Personalny</string>
-        <string name="diet_settings">Ustawienia diety</string>
-        <string name="title_activity_login">Logowanie</string>
-        <string name="title_activity_home">Mobilny trener personalny</string>
-        <string name="register_title">Rejestracja</string>
-        <string name="login_title">Logowanie</string>
-        <string name="name">Nazwa</string>
-        <string name="email">Email</string>
-        <string name="pwd">Hasło</string>
+        
+    <string name="diet_settings">Ustawienia diety</string>
+        
+    <string name="title_activity_login">Logowanie</string>
+        
+    <string name="title_activity_home">Mobilny trener personalny</string>
+        
+    <string name="register_title">Rejestracja</string>
+        
+    <string name="login_title">Logowanie</string>
+        
+    <string name="name">Nazwa</string>
+        
+    <string name="email">Email</string>
+        
+    <string name="pwd">Hasło</string>
     <string name="btnRegister">Zarejestruj</string>
     <string name="title_activity_homeDiet">Dieta</string>
     <string name="title_activity_homeStatistics">Statystyki</string>
@@ -55,6 +63,11 @@
     <string name="barbellRow">Wiosłowanie</string>
     <string name="barbellCurls">Uginanie ramion ze sztangą</string>
     <string name="dips">Pompki na poręczach</string>
+    <string name="trainingSquats">1/5 Przysiady</string>
+    <string name="trainingBenchPress">2/5 Wyciskanie sztangi poziomo</string>
+    <string name="trainingBarbellRow">3/5 Wiosłowanie</string>
+    <string name="trainingBarbellCurls">4/5 Uginanie ramion ze sztangą</string>
+    <string name="trainingDips">5/5 Pompki na poręczach</string>
     <string name="title_exercise">Nazwa ćwiczenia</string>
     <string name="title_training">Trening</string>
     <string name="next">Następne</string>
@@ -83,9 +96,11 @@
     <string name="point_symbol">.</string>
     <string name="cancel">Powrót</string>
 
-    <string-array name = "spinner_unit">
+    <string-array name="spinner_unit">
         <item>g</item>
         <item>szt</item>
     </string-array>
+    <string name="title_activity_diet_meal_home">DietMealHome</string>
+    <string name="meal_details">Szczegóły posiłku</string>
 
 </resources>

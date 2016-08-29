@@ -194,7 +194,7 @@
                 android:gravity="right"
                 android:textAlignment="gravity"
                 android:layout_weight="0.8"
-                android:id="@+id/caloriesValue"
+                android:id="@+id/productAmount"
                 android:layout_marginRight="10dp" />
         </TableRow>
 

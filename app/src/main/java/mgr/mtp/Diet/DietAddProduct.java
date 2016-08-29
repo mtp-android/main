@@ -80,7 +80,7 @@ public class DietAddProduct extends AppCompatActivity {
             factor = extras.getFloat("factor");
         }
 
-        caloriesValue = (TextView) findViewById(R.id.caloriesValue);
+        caloriesValue = (TextView) findViewById(R.id.productAmount);
         proteinValue = (TextView) findViewById(R.id.proteinValue);
         factorValue = (TextView) findViewById(R.id.factorValue);
         carbsValue = (TextView) findViewById(R.id.carbsValue);

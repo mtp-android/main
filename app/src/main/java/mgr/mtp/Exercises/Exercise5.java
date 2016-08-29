@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -30,14 +29,12 @@ import com.loopj.android.http.RequestParams;
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.ExerciseSet;
 import mgr.mtp.Home;
 import mgr.mtp.R;
-import mgr.mtp.Training.TrainingHome;
 import mgr.mtp.Training.TrainingWorkout;
 import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.ProgressWheel;
@@ -134,7 +131,7 @@ public class Exercise5 extends WizardStep {
         updateRestLabel(timerCounter);
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.dips);
+        toolbar.setTitle(R.string.trainingDips);
 
         pw = (ProgressWheel) v.findViewById(R.id.pw_spinner);
         pw.setProgress(360);

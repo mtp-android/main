@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -69,7 +68,7 @@ public class Exercise3 extends WizardStep {
         exerciseThree = new ArrayList<>();
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.barbellRow);
+        toolbar.setTitle(R.string.trainingBarbellRow);
 
         ex3_firstSetRepsET = (TextView) v.findViewById(R.id.firstSet_reps);
         ex3_firstSetWeightET = (TextView) v.findViewById(R.id.firstSet_weight);
