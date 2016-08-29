@@ -111,8 +111,8 @@ public class TrainingHome extends Fragment {
         // prepare static exercises
         createGroupList();
 
-        getTrainingForDay(selectedDate);
-
+//        getTrainingForDay(selectedDate);
+/*
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new TrainingListAdapter(
                 getActivity(), groupList, exercisesCollection, this);
@@ -130,7 +130,7 @@ public class TrainingHome extends Fragment {
         });
 
         expListView.setAdapter(expListAdapter);
-        expListAdapter.setDate(selectedDate);
+        expListAdapter.setDate(selectedDate);*/
 
 
         return view;

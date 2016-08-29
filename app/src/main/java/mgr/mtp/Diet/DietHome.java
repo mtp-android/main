@@ -13,9 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +65,7 @@ public class DietHome extends Fragment {
     LinkedHashMap<String, List<Product>> mealsCollection;
     TextView caloriesTxt, proteinsTxt, fatTxt, carbsTxt;
     ExpandableListView expListView;
+    ListView listView;
     ProgressBar caloriesBar, proteinsBar, fatBar, carbsBar;
     int intakeCalories, intakeCarbs, intakeProteins, intakeFat, userId;
 
@@ -136,14 +139,27 @@ public class DietHome extends Fragment {
         createGroupList();
 
         // meals details for day
-        getMealsForDay(selectedDate);
+        //getMealsForDay(selectedDate);
 
         // get nutrition intake summary and refresh bars
         getSummaryForDay(selectedDate);
 
         refreshBars();
 
-        expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
+        listView = (ListView) view.findViewById(R.id.listView);
+
+        String[] values = new String[] { "Śniadanie", "II Śniadanie", "Obiad",
+                "Podwieczorek", "Kolacja"
+        };
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+        // Assign adapter to ListView
+        listView.setAdapter(adapter);
+
+/*        expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expListAdapter = new DietListAdapter(
                 getActivity(), groupList, mealsCollection, this);
 
@@ -160,7 +176,7 @@ public class DietHome extends Fragment {
         });
 
         expListView.setAdapter(expListAdapter);
-        expListAdapter.setDate(selectedDate);
+        expListAdapter.setDate(selectedDate);*/
 
         return view;
     }

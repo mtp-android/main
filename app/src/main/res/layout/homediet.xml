@@ -51,13 +51,40 @@
 
     </RelativeLayout>
 
-    <ExpandableListView
-            android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:id="@+id/expandableListView"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-        android:layout_weight="0.64" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Lista posiłków"
+        android:id="@+id/textView14"
+        android:layout_weight="0.07"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tapnij nazwę posiłku aby wyświetlić szczegóły"
+        android:id="@+id/textView15"
+        android:layout_weight="0.07"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="274dp"
+        android:id="@+id/listView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Bilans:"
+        android:id="@+id/textView11"
+        android:layout_weight="0.07"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp" />
 
     <TableLayout
         android:layout_width="match_parent"
