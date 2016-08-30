@@ -17,16 +17,16 @@ import mgr.mtp.R;
 /**
  * Created by lukas on 04.04.2016.
  */
-public class DietResultsAdapter extends BaseAdapter {
+public class DietSearchProductResultsAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
 
     private ArrayList<Product> productDetails = new ArrayList<>();
     int count,mealId;
-    String date;
+    String date, mealName;
     Context context;
 
     //constructor method
-    public DietResultsAdapter(Context context, ArrayList<Product> product_details, String date, int mealId) {
+    public DietSearchProductResultsAdapter(Context context, ArrayList<Product> product_details, String date, int mealId, String mealName) {
 
         layoutInflater = LayoutInflater.from(context);
         this.mealId = mealId;
@@ -34,6 +34,7 @@ public class DietResultsAdapter extends BaseAdapter {
         this.productDetails = product_details;
         this.count = product_details.size();
         this.context = context;
+        this.mealName = mealName;
     }
 
     @Override
@@ -86,6 +87,7 @@ public class DietResultsAdapter extends BaseAdapter {
 
                 Intent intent= new Intent(context, DietAddProduct.class);
                 intent.putExtra("date",date);
+                intent.putExtra("mealName", mealName);
                 intent.putExtra("name", tempProduct.getName());
                 intent.putExtra("productId",tempProduct.getId());
                 intent.putExtra("productProtein",tempProduct.getProteins());

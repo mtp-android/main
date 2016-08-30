@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Wybierz posiłek z listy aby wyświetlić szczegóły"
+        android:text="Wybierz nazwę posiłku aby wyświetlić szczegóły"
         android:id="@+id/textView15"
         android:layout_weight="0.07"
         android:layout_marginLeft="15dp"

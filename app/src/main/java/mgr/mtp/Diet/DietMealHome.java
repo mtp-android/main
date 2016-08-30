@@ -1,6 +1,7 @@
 package mgr.mtp.Diet;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -65,6 +66,7 @@ public class DietMealHome extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });
@@ -81,8 +83,15 @@ public class DietMealHome extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Intent intent = new Intent(DietMealHome.this, DietSearchProduct.class);
+                                intent.putExtra("date", date);
+                                intent.putExtra("mealId", mealId);
+                                intent.putExtra("mealName", mealName);
+                                DietMealHome.this.startActivity(intent);
+
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
     }
@@ -125,7 +134,7 @@ public class DietMealHome extends AppCompatActivity {
         });
     }
 
-    public void setProductsForMeal(String response) {
+        public void setProductsForMeal(String response) {
         ArrayList<Product> products = new ArrayList<>();
 
         products.clear();

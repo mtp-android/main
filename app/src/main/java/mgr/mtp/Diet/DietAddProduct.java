@@ -40,7 +40,7 @@ public class DietAddProduct extends AppCompatActivity {
     float proteins, carbs, fat, calories, factor;
     float calculatedFat, calculatedProteins, calculatedCalories, calculatedCarbs, calculatedAmount;
     Toolbar toolbar;
-    String date, productName, unit;
+    String date, productName, unit, mealName;
     TextView caloriesValue, fatValue, carbsValue, proteinValue, txtProductName, factorValue;
     EditText amount;
     Button btnAdd;
@@ -71,6 +71,7 @@ public class DietAddProduct extends AppCompatActivity {
         if (extras != null) {
             date = extras.getString("date");
             mealId = extras.getInt("mealId");
+            mealName = extras.getString("mealName");
             productName = extras.getString("name");
             productId = extras.getInt("productId");
             proteins = extras.getFloat("productProtein");
@@ -170,10 +171,13 @@ public class DietAddProduct extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         prgDialog.hide();
 
-                        Intent homeIntent = new Intent(getApplicationContext(), Home.class);
-                        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        homeIntent.putExtra("date", date);
-                        startActivity(homeIntent);
+                        Intent dietMealHome = new Intent(getApplicationContext(), DietMealHome.class);
+                        dietMealHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        dietMealHome.putExtra("date", date);
+                        dietMealHome.putExtra("mealId", mealId);
+                        dietMealHome.putExtra("userId", userId);
+                        dietMealHome.putExtra("mealName",mealName);
+                        startActivity(dietMealHome);
 
                         Toast.makeText(DietAddProduct.this,
                                 getString(R.string.successAdd), Toast.LENGTH_LONG).show();

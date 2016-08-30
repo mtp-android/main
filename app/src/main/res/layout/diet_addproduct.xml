@@ -15,26 +15,14 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Wartości odżywcze:"
-        android:id="@+id/textView6"
-        android:layout_marginLeft="10dp"
-        android:textSize="16dp"
-        android:layout_below="@+id/tableLayout2"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="10dp" />
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="2"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tableLayout2">
+        android:id="@+id/tableLayout2"
+        android:layout_below="@+id/textView25"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -63,19 +51,19 @@
         android:layout_height="wrap_content"
         android:text="Dodaj"
         android:id="@+id/btnAdd"
-        android:layout_below="@+id/tableLayout"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/tableLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="2"
         android:id="@+id/tableLayout"
-        android:layout_below="@+id/textView6"
+        android:layout_centerVertical="true"
         android:layout_alignParentStart="true">
 
 
@@ -199,5 +187,50 @@
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Określ wagę produktu"
+        android:id="@+id/textView24"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignStart="@+id/textView25"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aby zmienić jednostkę miary użyj listy rozwijanej"
+        android:id="@+id/textView25"
+        android:layout_below="@+id/textView24"
+        android:layout_alignStart="@+id/btnAdd"
+        android:textColor="#d50000"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Wartości odżywcze"
+        android:id="@+id/textView26"
+        android:layout_below="@+id/tableLayout2"
+        android:layout_alignStart="@+id/textView25"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Automatycznie przeliczane dla podanej wagi"
+        android:id="@+id/textView27"
+        android:layout_below="@+id/textView26"
+        android:layout_alignStart="@+id/textView26"
+        android:layout_marginBottom="10dp"
+        android:textColor="#d50000" />
 
 </RelativeLayout>

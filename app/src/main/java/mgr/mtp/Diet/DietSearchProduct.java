@@ -3,6 +3,7 @@ package mgr.mtp.Diet;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -39,7 +40,8 @@ public class DietSearchProduct extends AppCompatActivity {
     ListView searchResults;
     Toolbar toolbar;
     int mealId;
-    String date;
+    public String date, mealName;
+    View mRoot;
 
     ArrayList<Product> productResults = new ArrayList<>();
     ArrayList<Product> filteredProductResults = new ArrayList<>();
@@ -52,7 +54,10 @@ public class DietSearchProduct extends AppCompatActivity {
         if (extras != null) {
             date = extras.getString("date");
             mealId = extras.getInt("mealId");
+            mealName = extras.getString("mealName");
         }
+
+        mRoot = findViewById(R.id.dietSearchView);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -164,6 +169,11 @@ public class DietSearchProduct extends AppCompatActivity {
 
                 JSONArray responseArray = new JSONArray(json);
 
+                if(responseArray.length() == 0){
+                    Snackbar.make(mRoot, "Nie znaleziono produktów.", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+                }
+
                 for (int i = 0; i < responseArray.length(); i++) {
                     JSONObject obj = responseArray.getJSONObject(i);
 
@@ -218,7 +228,7 @@ public class DietSearchProduct extends AppCompatActivity {
             //calling this method to filter the search results from productResults and move them to
             //filteredProductResults
             filterProductArray(textSearch);
-            searchResults.setAdapter(new DietResultsAdapter(DietSearchProduct.this, filteredProductResults, date, mealId));
+            searchResults.setAdapter(new DietSearchProductResultsAdapter(DietSearchProduct.this, filteredProductResults, date, mealId, mealName));
             pd.dismiss();
         }}
     }

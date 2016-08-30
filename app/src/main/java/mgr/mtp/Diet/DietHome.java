@@ -50,7 +50,7 @@ public class DietHome extends Fragment {
     private Button setDateBtn;
 
 
-    Date selectedDate;
+    public Date selectedDate;
     int[] calories = {0,0,0,0,0};
     TextView caloriesTxt, proteinsTxt, fatTxt, carbsTxt;
     ListView listView;
@@ -131,7 +131,7 @@ public class DietHome extends Fragment {
         return view;
     }
 
-    private void getSummaryForDay(Date selectedDate) {
+    public void getSummaryForDay(Date selectedDate) {
         String date = Constants.queryDateFormat.format(selectedDate);
 
         prgDialog.show();
@@ -184,7 +184,7 @@ public class DietHome extends Fragment {
         }
     }
 
-    private void getMealsHeadersForDay(Date selectedDate) {
+    public void getMealsHeadersForDay(Date selectedDate) {
 
         String date = Constants.queryDateFormat.format(selectedDate);
 
