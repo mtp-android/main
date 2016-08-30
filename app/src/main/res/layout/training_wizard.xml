@@ -16,16 +16,37 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/title_training" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Przebieg ćwiczenia:"
+        android:id="@+id/textView38"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Użyj ikony ołówka w celu edycji ciężaru oraz ilości powtórzeń"
+        android:id="@+id/textView40"
+        android:layout_marginLeft="15dp"
+        android:textColor="#d50000"
+        android:layout_marginBottom="10dp" />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/firstSetName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="3"
             android:gravity="center_vertical"
             android:text="1. seria"
             android:textSize="17dp" />
@@ -76,8 +97,8 @@
             android:id="@+id/editone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_mode_edit_black_24dp"
             android:gravity="center_vertical" />
 
@@ -85,14 +106,14 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/secondSetName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="3"
             android:gravity="center_vertical"
             android:text="2. seria"
             android:textSize="17dp" />
@@ -142,8 +163,8 @@
             android:id="@+id/edittwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_mode_edit_black_24dp"
             android:gravity="center_vertical" />
 
@@ -151,14 +172,14 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/thirdSetName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="3"
             android:gravity="center_vertical"
             android:text="3. seria"
             android:textSize="17dp" />
@@ -208,8 +229,8 @@
             android:id="@+id/editthree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_mode_edit_black_24dp"
             android:gravity="center_vertical" />
 
@@ -217,14 +238,14 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/fourthSetName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="3"
             android:gravity="center_vertical"
             android:text="4. seria"
             android:textSize="17dp" />
@@ -274,8 +295,8 @@
             android:id="@+id/editfour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_mode_edit_black_24dp"
             android:gravity="center_vertical" />
 
@@ -283,14 +304,14 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/fifthSetName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="4"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="3"
             android:gravity="center_vertical"
             android:text="5. seria"
             android:textSize="17dp" />
@@ -340,8 +361,8 @@
             android:id="@+id/editfive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_mode_edit_black_24dp"
             android:gravity="center_vertical" />
 
@@ -349,40 +370,61 @@
 
 
     <TextView
-        android:id="@+id/restLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center_vertical"
-        android:text="Przerwa pomiędzy seriami x/x"
-        android:textSize="17dp" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Minutnik"
+        android:id="@+id/textView42"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
 
-    <Button
-        android:id="@+id/restButton"
-        android:layout_width="306dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="START"
-        android:textSize="15dp" />
-
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Odmierza czas odpoczynku pomiędzy seriami"
+        android:id="@+id/textView44"
+        android:layout_marginLeft="15dp"
+        android:textColor="#d50000" />
 
     <mgr.mtp.Utils.ProgressWheel
         android:id="@+id/pw_spinner"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="58dp"
+        android:layout_height="62dp"
         android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
         ProgressWheel:pwBarColor="#0097D6"
         ProgressWheel:pwBarLength="50dp"
-        ProgressWheel:pwBarWidth="10dp"
+        ProgressWheel:pwBarWidth="5dp"
         ProgressWheel:pwContourSize="2dp"
         ProgressWheel:pwRimColor="#330097D6"
-        ProgressWheel:pwRimWidth="10dp"
+        ProgressWheel:pwRimWidth="5dp"
         ProgressWheel:pwText="90"
         ProgressWheel:pwTextColor="#222"
-        ProgressWheel:pwTextSize="30dp" />
+        ProgressWheel:pwTextSize="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/restButton"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="ODPOCZYNEK"
+        android:textSize="15dp"
+        android:layout_marginTop="-55dp" />
+
+    <TextView
+        android:id="@+id/restLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:text="Przerwa pomiędzy seriami x/x"
+        android:textSize="17dp"
+        android:layout_marginLeft="15dp" />
 
 
 </LinearLayout>

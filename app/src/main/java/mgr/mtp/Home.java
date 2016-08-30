@@ -29,16 +29,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import mgr.mtp.Diet.DietHome;
 import mgr.mtp.Diet.DietSettings;
 import mgr.mtp.Statistics.StatisticsHome;
 import mgr.mtp.Training.TrainingHome;
-import mgr.mtp.Utils.Constants;
 
 /**
  *
@@ -50,6 +47,7 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
     private TabLayout tabLayout;
     private ViewPager viewPager;
     String date;
+    int tab = 0;
 
 
     // location variables
@@ -72,6 +70,7 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             date = extras.getString("date");
+            tab = extras.getInt("tab");
         }
 
         // sensors prepare
@@ -91,6 +90,9 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        if(tab != 0){
+            switchTab(tab);
+        }
         // location prepare
 
         cr = new Criteria();
@@ -150,6 +152,11 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         Log.d("Latitude", "status");
     }
 
+    public void switchTab(int tab){
+        TabLayout.Tab selectedTab = tabLayout.getTabAt(tab);
+        selectedTab.select();
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         if(date != null && !date.isEmpty())
@@ -164,7 +171,19 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         {
             adapter.addFragment(new DietHome(), "Dieta");
         }
-        adapter.addFragment(new TrainingHome(), "Trening");
+
+        if(date != null && !date.isEmpty())
+        {
+            Bundle bundle = new Bundle();
+            bundle.putString("date", date);
+            TrainingHome fragobj = new TrainingHome();
+            fragobj.setArguments(bundle);
+            adapter.addFragment(fragobj,"Trening");
+        }
+        else
+        {
+            adapter.addFragment(new TrainingHome(), "Trening");
+        }
         adapter.addFragment(new StatisticsHome(), "Postępy");
         viewPager.setAdapter(adapter);
     }

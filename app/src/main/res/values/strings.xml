@@ -63,11 +63,11 @@
     <string name="barbellRow">Wiosłowanie</string>
     <string name="barbellCurls">Uginanie ramion ze sztangą</string>
     <string name="dips">Pompki na poręczach</string>
-    <string name="trainingSquats">1/5 Przysiady</string>
-    <string name="trainingBenchPress">2/5 Wyciskanie sztangi poziomo</string>
-    <string name="trainingBarbellRow">3/5 Wiosłowanie</string>
-    <string name="trainingBarbellCurls">4/5 Uginanie ramion ze sztangą</string>
-    <string name="trainingDips">5/5 Pompki na poręczach</string>
+    <string name="trainingSquats">Ćw. 1 z 5 Przysiady</string>
+    <string name="trainingBenchPress">Ćw. 2 z5 Wyciskanie sztangi poziomo</string>
+    <string name="trainingBarbellRow">Ćw. 3 z 5 Wiosłowanie</string>
+    <string name="trainingBarbellCurls">Ćw. 4 z 5 Uginanie ramion ze sztangą</string>
+    <string name="trainingDips">Ćw. 5 z 5 Pompki na poręczach</string>
     <string name="title_exercise">Nazwa ćwiczenia</string>
     <string name="title_training">Trening</string>
     <string name="next">Następne</string>

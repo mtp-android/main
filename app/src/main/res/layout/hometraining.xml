@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:layout_weight="0.27">
+        android:layout_weight="0.46">
         <ImageView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -77,15 +77,15 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="326dp"
-        android:id="@+id/trainingListView"
-        android:layout_weight="0.43" />
+        android:layout_height="311dp"
+        android:id="@+id/trainingListView" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rozpocznij trening"
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/startTraining"
-        android:layout_weight="0.07" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_black_24dp" />
 
 </LinearLayout>

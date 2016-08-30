@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +27,6 @@ import com.loopj.android.http.RequestParams;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -141,7 +141,6 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         XAxis xAxis = mChart.getXAxis();
         xAxis.setDrawAxisLine(true);
         xAxis.setTextSize(13);
-        xAxis.setSpaceBetweenLabels(5);
         xAxis.setYOffset(20);
 
 
@@ -156,10 +155,8 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         yAxis1.setDrawGridLines(true);
         yAxis1.setDrawLabels(false);
 
-        LineDataSet dataSet = new LineDataSet(entries,"");
-        LineData data = new LineData(labels, dataSet);
-
-        dataSet.setLineWidth(3);
+        ILineDataSet dataSet = new LineDataSet(entries,"");
+        LineData data = new LineData(dataSet);
 
         data.setValueTextSize(13);
 

@@ -154,6 +154,8 @@ public class Exercise5 extends WizardStep {
                     isCanceled = false;
 
                     btnStart.setEnabled(false);
+                    btnStart.setText("Odliczam...");
+
 
                     CountDownTimer timer;
                     long millisInFuture = 90000; //90 seconds
@@ -180,6 +182,7 @@ public class Exercise5 extends WizardStep {
                             pw.setProgress(360);
                             pw.setText("90");
                             btnStart.setEnabled(true);
+                            btnStart.setText("Odpoczynek");
                             getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         }
                     }.start();
@@ -300,6 +303,8 @@ public class Exercise5 extends WizardStep {
                 Intent homeIntent = new Intent(getActivity(), Home.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 homeIntent.putExtra("date", finalDate);
+                homeIntent.putExtra("tab", 1);
+
                 startActivity(homeIntent);
 
                 Toast.makeText(getActivity(),
@@ -341,7 +346,7 @@ public class Exercise5 extends WizardStep {
     }
 
     private void updateRestLabel(int timerCounter) {
-        restLabel.setText("Przerwa pomiędzy seriami " + timerCounter + "/5");
+        restLabel.setText("Przerwa pomiędzy seriami " + timerCounter + " z 5");
     }
 
     private void bindDataFields() {

@@ -3,22 +3,17 @@ package mgr.mtp.Training;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import mgr.mtp.DataModel.ExerciseSet;
-import mgr.mtp.Diet.DietMealHome;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 
@@ -73,18 +68,21 @@ public class TrainingHomeListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
 
-                ArrayList<Integer> weightsTemp = new ArrayList<Integer>();
+                ArrayList<Integer> weights = new ArrayList<Integer>();
+                ArrayList<Integer> reps = new ArrayList<Integer>();
 
                 for (ExerciseSet set: all) {
-                    if(set.getExerciseId() == position){
-                        weightsTemp.add(set.getWeight());
+                    if(set.getExerciseId() == position+1){
+                        weights.add(set.getWeight());
+                        reps.add(set.getReps());
                     }
                 }
 
                 Intent intent = new Intent(context, TrainingExerciseDetails.class);
                 intent.putExtra("date", Constants.queryDateFormat.format(date));
                 intent.putExtra("exerciseName", exercises[position]);
-                intent.putExtra("weights", weightsTemp);
+                intent.putExtra("reps", reps);
+                intent.putExtra("weights", weights);
                 intent.putExtra("userId", userId);
                 context.startActivity(intent);
 

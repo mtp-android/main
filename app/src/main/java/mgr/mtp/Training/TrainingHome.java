@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,19 +24,15 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.ExerciseSet;
-import mgr.mtp.Diet.DietHomeListAdapter;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.DatePickerFragment;
@@ -51,7 +47,8 @@ public class TrainingHome extends Fragment {
     TrainingHomeListAdapter listViewAdapter;
 
     TextView trainingDate, trainingTooltip;
-    Button startTraining, setDateBtn;
+    FloatingActionButton startTraining;
+    Button setDateBtn;
     Date selectedDate;
     int userId;
 
@@ -84,7 +81,7 @@ public class TrainingHome extends Fragment {
         trainingTooltip = (TextView) view.findViewById(R.id.trainingToolTip);
 
         trainingDate = (TextView) view.findViewById(R.id.trainingDate);
-        startTraining = (Button) view.findViewById(R.id.startTraining);
+        startTraining = (FloatingActionButton) view.findViewById(R.id.startTraining);
         setDateBtn = (Button) view.findViewById(R.id.setDateBtn);
 
         trainingDate.setText(today);
@@ -198,11 +195,11 @@ public class TrainingHome extends Fragment {
                 String response = new String(responseBody, StandardCharsets.UTF_8);
 
                 if (response.equals("[]")) {
-                    startTraining.setEnabled(true);
+                    startTraining.setVisibility(View.VISIBLE);
                     trainingTooltip.setText("Brak zalogowanego treningu. Do dzieła!");
                     listView.setVisibility(View.INVISIBLE);
                 } else {
-                    startTraining.setEnabled(false);
+                    startTraining.setVisibility(View.INVISIBLE);
                     trainingTooltip.setText("Wybierz nazwę ćwiczenia aby poznać szczegóły");
                     listView.setVisibility(View.VISIBLE);
                 }

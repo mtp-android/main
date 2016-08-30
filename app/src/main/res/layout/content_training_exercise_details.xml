@@ -29,7 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Wyniki:"
         android:id="@+id/textView20"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/textView19"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -48,50 +48,282 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="1. seria"
         android:id="@+id/textView29"
         android:layout_below="@+id/textView20"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="2. seria"
         android:id="@+id/textView30"
         android:layout_below="@+id/textView29"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="3. seria"
         android:id="@+id/textView31"
         android:layout_below="@+id/textView30"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="4. seria"
         android:id="@+id/textView32"
         android:layout_below="@+id/textView31"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="5. seria"
+        android:id="@+id/textView33"
+        android:layout_below="@+id/textView32"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="5"
+        android:id="@+id/set1reps"
+        android:layout_alignTop="@+id/textView29"
+        android:layout_toEndOf="@+id/textView20"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="powtórzeń po"
+        android:id="@+id/textView35"
+        android:layout_alignBottom="@+id/set1reps"
+        android:layout_toEndOf="@+id/set1reps"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="200"
+        android:id="@+id/set1weight"
+        android:layout_alignBottom="@+id/textView35"
+        android:layout_toEndOf="@+id/textView35"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="kg"
+        android:id="@+id/textView37"
+        android:layout_alignBottom="@+id/set1weight"
+        android:layout_toEndOf="@+id/set1weight"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="5"
+        android:id="@+id/set2reps"
+        android:layout_alignTop="@+id/textView39"
+        android:layout_alignStart="@+id/set1reps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="powtórzeń po"
+        android:id="@+id/textView39"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/textView30"
+        android:layout_toStartOf="@+id/set1weight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="200"
+        android:id="@+id/set2weight"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/textView39"
+        android:layout_toEndOf="@+id/textView39" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="kg"
+        android:id="@+id/textView41"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/set2weight"
+        android:layout_toEndOf="@+id/set2weight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="5"
+        android:id="@+id/set3reps"
+        android:layout_alignTop="@+id/textView31"
+        android:layout_alignStart="@+id/set2reps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="powtórzeń po"
+        android:id="@+id/textView43"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/textView30"
+        android:layout_toEndOf="@+id/set3reps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="200"
+        android:id="@+id/set3weight"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/textView43"
+        android:layout_toEndOf="@+id/textView43" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="kg"
+        android:id="@+id/textView45"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/set3weight"
+        android:layout_toEndOf="@+id/set3weight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="5"
+        android:id="@+id/set4reps"
+        android:layout_alignTop="@+id/textView32"
+        android:layout_alignStart="@+id/set3reps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="powtórzeń po"
+        android:id="@+id/textView47"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/set4reps"
+        android:layout_toEndOf="@+id/set4reps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="200"
+        android:id="@+id/set4weight"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/textView47"
+        android:layout_toStartOf="@+id/textView45" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="kg"
+        android:id="@+id/textView49"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/set4weight"
+        android:layout_toEndOf="@+id/set4weight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="5"
+        android:id="@+id/set5reps"
+        android:layout_alignTop="@+id/textView33"
+        android:layout_alignStart="@+id/set4reps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="powtórzeń po"
+        android:id="@+id/textView51"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/set5reps"
+        android:layout_toEndOf="@+id/set5reps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="200"
+        android:id="@+id/set5weight"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/textView51"
+        android:layout_toStartOf="@+id/textView49" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="kg"
+        android:id="@+id/textView53"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/set5weight"
+        android:layout_toEndOf="@+id/set5weight" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/compareChart"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView36" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="5. seria"
-        android:id="@+id/textView33"
-        android:layout_below="@+id/textView32"
-        android:layout_alignParentStart="true" />
+        android:text="Postęp:"
+        android:id="@+id/textView34"
+        android:layout_below="@+id/textView33"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="W odniesieniu do poprzedniej sesji treningowej (czerwona linia)."
+        android:id="@+id/textView36"
+        android:layout_below="@+id/textView34"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:textColor="#d50000" />
 
 </RelativeLayout>

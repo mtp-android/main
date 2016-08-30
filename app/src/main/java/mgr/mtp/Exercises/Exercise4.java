@@ -126,6 +126,7 @@ public class Exercise4 extends WizardStep {
                     isCanceled = false;
 
                     btnStart.setEnabled(false);
+                    btnStart.setText("Odliczam...");
 
                     CountDownTimer timer;
                     long millisInFuture = 90000; //90 seconds
@@ -152,6 +153,7 @@ public class Exercise4 extends WizardStep {
                             pw.setProgress(360);
                             pw.setText("90");
                             btnStart.setEnabled(true);
+                            btnStart.setText("Odpoczynek");
                         }
                     }.start();
                 }
@@ -236,7 +238,7 @@ public class Exercise4 extends WizardStep {
     }
 
     private void updateRestLabel(int timerCounter) {
-        restLabel.setText("Przerwa pomiędzy seriami " + timerCounter + "/5");
+        restLabel.setText("Przerwa pomiędzy seriami " + timerCounter + " z 5");
     }
 
     private void bindDataFields() {
