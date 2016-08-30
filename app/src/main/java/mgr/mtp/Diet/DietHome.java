@@ -118,12 +118,12 @@ public class DietHome extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.listView);
 
-        String[] values = new String[] { "Śniadanie", "II Śniadanie", "Obiad",
+        String[] mealNames = new String[] { "Śniadanie", "II Śniadanie", "Obiad",
                 "Podwieczorek", "Kolacja"
         };
 
         // Assign adapter to ListView
-        listViewAdapter = new DietHomeListAdapter(getActivity(), values, userId);
+        listViewAdapter = new DietHomeListAdapter(getActivity(), mealNames, userId);
         listView.setAdapter(listViewAdapter);
 
         listViewAdapter.setDate(selectedDate);
@@ -290,48 +290,6 @@ public class DietHome extends Fragment {
 
 
     };
-
-
-    public void removeChild(int id, final int groupPosition, final int childPosition) {
-
-        prgDialog.show();
-        RequestParams params = new RequestParams();
-        params.put("id", id);
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(Constants.host + "/meals/removeitem", params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                prgDialog.hide();
-                Toast.makeText(getActivity(),
-                        getString(R.string.successRemove), Toast.LENGTH_LONG).show();
-
-                getSummaryForDay(selectedDate);
-
-                //List<Product> child = mealsCollection.get(groupList.get(groupPosition));
-                //child.remove(childPosition);
-                //expListAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                prgDialog.hide();
-
-                if (statusCode == 404) {
-                    Toast.makeText(getActivity(),
-                            getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
-                } else if (statusCode == 500) {
-                    Toast.makeText(getActivity(),
-                            getString(R.string.serverError), Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getActivity(),
-                            getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
 
     public void refreshBars() {
 

@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Wybierz nazwę ćwiczenia aby poznać szczegóły"
-        android:id="@+id/textView13"
+        android:id="@+id/trainingToolTip"
         android:layout_weight="0.07"
         android:layout_marginLeft="15dp"
         android:textColor="#d32f2f" />
@@ -78,7 +78,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="326dp"
-        android:id="@+id/listView2" />
+        android:id="@+id/trainingListView"
+        android:layout_weight="0.43" />
 
     <Button
         android:layout_width="match_parent"

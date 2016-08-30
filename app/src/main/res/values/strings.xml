@@ -102,5 +102,6 @@
     </string-array>
     <string name="title_activity_diet_meal_home">DietMealHome</string>
     <string name="meal_details">Szczegóły posiłku</string>
+    <string name="title_activity_training_exercise_details">TrainingExerciseDetails</string>
 
 </resources>

@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -26,7 +25,7 @@
         <activity
             android:name=".Register"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Login"
             android:label="@string/app_name"
@@ -40,34 +39,38 @@
         <activity
             android:name=".Home"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Diet.DietSearchProduct"
             android:label="@string/search_title"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Diet.DietAddProduct"
             android:label="@string/addProduct_title"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Diet.DietSettings"
             android:label="@string/dietSettings"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Training.TrainingWorkout"
             android:label="@string/title_training"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Statistics.StatisticsUpdateBodyMeasures"
             android:label="@string/updateMeasures"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Statistics.StatisticsDisplayChart"
             android:label="@string/displayChart"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Diet.DietMealHome"
             android:label="@string/title_activity_diet_meal_home"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Training.TrainingExerciseDetails"
+            android:label="@string/title_activity_training_exercise_details"
             android:theme="@style/AppTheme"></activity>
     </application>
 

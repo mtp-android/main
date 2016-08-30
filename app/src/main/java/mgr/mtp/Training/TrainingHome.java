@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
@@ -33,6 +36,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.ExerciseSet;
+import mgr.mtp.Diet.DietHomeListAdapter;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.DatePickerFragment;
@@ -42,37 +46,25 @@ import mgr.mtp.Utils.DatePickerFragment;
  */
 public class TrainingHome extends Fragment {
 
-    ExpandableListView expListView;
-    TrainingListAdapter expListAdapter = null;
-    LinkedHashMap<String, List<ExerciseSet>> exercisesCollection;
     ProgressDialog prgDialog;
+    ListView listView;
+    TrainingHomeListAdapter listViewAdapter;
 
-
-    List<String> groupList;
-    List<ExerciseSet> childList;
-    TextView trainingDate;
+    TextView trainingDate, trainingTooltip;
     Button startTraining, setDateBtn;
     Date selectedDate;
     int userId;
 
+    ArrayList<ExerciseSet> squats;
+    ArrayList<ExerciseSet> benchPress;
+    ArrayList<ExerciseSet> barbellRow = new ArrayList<>();
+    ArrayList<ExerciseSet> barbellCurls = new ArrayList<>();
+    ArrayList<ExerciseSet> dips = new ArrayList<>();
+    ArrayList<ExerciseSet> all = new ArrayList<>();
+
     public TrainingHome() {
         // Required empty public constructor
     }
-
-    private void createGroupList() {
-        groupList = new ArrayList<>();
-        groupList.add(getString(R.string.squats));
-        groupList.add(getString(R.string.benchPress));
-        groupList.add(getString(R.string.barbellRow));
-        groupList.add(getString(R.string.barbellCurls));
-        groupList.add(getString(R.string.dips));
-    }
-
-    private void loadChild(List<ExerciseSet> sets) {
-        childList = new ArrayList<>();
-        childList.addAll(sets);
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,11 +77,11 @@ public class TrainingHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.hometraining, container, false);
 
-        exercisesCollection = new LinkedHashMap<>();
-
         Calendar cal = Calendar.getInstance();
         selectedDate = cal.getTime();
         String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
+
+        trainingTooltip = (TextView) view.findViewById(R.id.trainingToolTip);
 
         trainingDate = (TextView) view.findViewById(R.id.trainingDate);
         startTraining = (Button) view.findViewById(R.id.startTraining);
@@ -108,30 +100,18 @@ public class TrainingHome extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
         userId = prefs.getInt("userId", 0);
 
+        listView = (ListView) view.findViewById(R.id.trainingListView);
+
+        getTrainingForDay(selectedDate);
+
         // prepare static exercises
-        createGroupList();
+        String[] exercises = {getString(R.string.squats),getString(R.string.benchPress), getString(R.string.barbellRow),
+                getString(R.string.barbellCurls), getString(R.string.dips)};
 
-//        getTrainingForDay(selectedDate);
-/*
-        expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        expListAdapter = new TrainingListAdapter(
-                getActivity(), groupList, exercisesCollection, this);
+        listViewAdapter = new TrainingHomeListAdapter(getActivity(), exercises, userId);
+        listView.setAdapter(listViewAdapter);
 
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                for (int i = 0; i < groupList.size(); i++) {
-                    if (i != groupPosition) {
-                        expListView.collapseGroup(i);
-                    }
-                }
-            }
-        });
-
-        expListView.setAdapter(expListAdapter);
-        expListAdapter.setDate(selectedDate);*/
-
+        listViewAdapter.setDate(selectedDate);
 
         return view;
     }
@@ -192,7 +172,7 @@ public class TrainingHome extends Fragment {
 
             selectedDate = date;
 
-            expListAdapter.setDate(date);
+            listViewAdapter.setDate(date);
             getTrainingForDay(date);
 
             // update label
@@ -219,10 +199,12 @@ public class TrainingHome extends Fragment {
 
                 if (response.equals("[]")) {
                     startTraining.setEnabled(true);
-                    expListView.setVisibility(View.INVISIBLE);
+                    trainingTooltip.setText("Brak zalogowanego treningu. Do dzieła!");
+                    listView.setVisibility(View.INVISIBLE);
                 } else {
                     startTraining.setEnabled(false);
-                    expListView.setVisibility(View.VISIBLE);
+                    trainingTooltip.setText("Wybierz nazwę ćwiczenia aby poznać szczegóły");
+                    listView.setVisibility(View.VISIBLE);
                 }
                 setTrainingOnDay(response);
                 prgDialog.hide();
@@ -250,9 +232,12 @@ public class TrainingHome extends Fragment {
 
     private void setTrainingOnDay(String response) {
 
-        ArrayList<ExerciseSet> squats = new ArrayList<>(), benchPress = new ArrayList<>(),
-                barbellRow = new ArrayList<>(), barbellCurls = new ArrayList<>(),
-                dips = new ArrayList<>(), all;
+        squats = new ArrayList<>();
+        benchPress = new ArrayList<>();
+        barbellRow = new ArrayList<>();
+        barbellCurls = new ArrayList<>();
+        dips = new ArrayList<>();
+        all = new ArrayList<>();
 
         Gson gson = new Gson();
         Type listType = new TypeToken<List<ExerciseSet>>() {
@@ -282,24 +267,7 @@ public class TrainingHome extends Fragment {
             }
         }
 
-        for (String exercise : groupList) {
-            if (exercise.equals(getString(R.string.squats))) {
-                loadChild(squats);
-            } else if (exercise.equals(getString(R.string.benchPress)))
-                loadChild(benchPress);
-            else if (exercise.equals(getString(R.string.barbellRow)))
-                loadChild(barbellRow);
-            else if (exercise.equals(getString(R.string.barbellCurls)))
-                loadChild(barbellCurls);
-            else if (exercise.equals(getString(R.string.dips)))
-                loadChild(dips);
-
-            exercisesCollection.put(exercise, childList);
-
-        }
-        expListAdapter.dataChanged(exercisesCollection);
-        expListAdapter.notifyDataSetChanged();
-
+        listViewAdapter.dataChanged(all);
     }
 
 }
