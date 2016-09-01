@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_weight="0.31">
+        android:layout_height="65dp">
         <ImageView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -46,9 +45,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Grupy pomiarów"
+        android:text="Wyniki"
+        android:id="@+id/textView34"
+        android:layout_marginLeft="15dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Wybierz jedną z grup aby poznać szczegóły"
+        android:id="@+id/textView17"
+        android:layout_marginLeft="15dp"
+        android:textColor="#d32f2f"
+        android:layout_marginBottom="10dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:id="@+id/measuresGroupsList" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Aktualizacja danych"
         android:id="@+id/textView16"
-        android:layout_weight="0.05"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:textColor="#000000"
@@ -58,25 +82,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Tapnij nazwę grupy aby wyświetlić szczegóły"
-        android:id="@+id/textView17"
-        android:layout_weight="0.05"
+        android:text="Użyj jednej z poniższych opcji w celu aktualizacji wymiarów ciała oraz celów diety"
+        android:id="@+id/textView35"
+        android:layout_weight="0.06"
         android:layout_marginLeft="15dp"
-        android:textColor="#d32f2f" />
-
-    <ExpandableListView
-        android:layout_width="match_parent"
-        android:id="@+id/measureExpList"
-        android:layout_height="326dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="0.64" />
+        android:textColor="#d50000"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aktualizacja pomiarów"
-        android:id="@+id/updateMeasuresBtn"
-        android:layout_weight="0.07" />
+        android:id="@+id/updateMeasuresBtn" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aktualizacja celów diety"
+        android:id="@+id/updateDietBtn" />
 
 </LinearLayout>

@@ -73,11 +73,12 @@
         android:id="@+id/trainingToolTip"
         android:layout_weight="0.07"
         android:layout_marginLeft="15dp"
-        android:textColor="#d32f2f" />
+        android:textColor="#d32f2f"
+        android:layout_marginBottom="10dp" />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="311dp"
+        android:layout_height="286dp"
         android:id="@+id/trainingListView" />
 
     <android.support.design.widget.FloatingActionButton

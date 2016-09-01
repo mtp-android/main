@@ -71,18 +71,36 @@ public class StatisticsUpdateBodyMeasures extends PreferenceActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         int weight = Integer.parseInt(prefs.getString("user_weight", "1"));
+        int height = Integer.parseInt(prefs.getString("user_height", "1"));
         int bicep = Integer.parseInt(prefs.getString("measure_bicep", "1"));
         int chest = Integer.parseInt(prefs.getString("measure_chest", "1"));
         int waist = Integer.parseInt(prefs.getString("measure_waist", "1"));
         int thigh = Integer.parseInt(prefs.getString("measure_thigh", "1"));
+        int neck = Integer.parseInt(prefs.getString("measure_neck", "1"));
+        int gender = Integer.parseInt(prefs.getString("user_gender", "1"));
 
         RequestParams params = new RequestParams();
         params.put("userId", userId);
         params.put("weight", weight);
+        params.put("height", height);
         params.put("bicep", bicep);
         params.put("chest", chest);
         params.put("waist", waist);
         params.put("thigh", thigh);
+        params.put("neck", neck);
+
+        double a = (4.15 * waist);
+        double b = a / 2.54;
+        double c = 0.082 * weight * 2.2;
+        double d = b - c - (gender == 1? 98.42 : 76.76);
+        double e = weight * 2.2;
+        Double bodyFat = d / e * 100;
+
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("bodyFat", bodyFat.intValue());
+        params.put("bodyFat", bodyFat.intValue());
+        editor.commit();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Constants.host + "/stats/savebodymeasures", params, new AsyncHttpResponseHandler() {

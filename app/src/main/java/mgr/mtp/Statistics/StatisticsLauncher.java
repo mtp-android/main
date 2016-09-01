@@ -9,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.Measure;
+import mgr.mtp.Diet.DietSettings;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 
@@ -41,15 +45,15 @@ public class StatisticsLauncher extends Fragment {
         // Required empty public constructor
     }
 
+    ArrayList<Measure> body;
+    ArrayList<Measure> power;
+    ArrayList<Measure > all;
+
     TextView statDate;
-    List<String> groupList;
-    List<Measure> childList;
-    ExpandableListView expListView;
-    LinkedHashMap<String, List<Measure>> measuresCollection;
     int userId;
-    StatisticsListAdapter expListAdapter = null;
     ProgressDialog prgDialog;
-    Button updateMeasuresBtn;
+    Button updateMeasuresBtn, updateDietBtn;
+    ListView measuresGroupsList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,35 +73,49 @@ public class StatisticsLauncher extends Fragment {
         updateMeasuresBtn = (Button) view.findViewById(R.id.updateMeasuresBtn);
         updateMeasuresBtn.setOnClickListener(updateMeasures);
 
+        updateDietBtn = (Button) view.findViewById(R.id.updateDietBtn);
+        updateDietBtn.setOnClickListener(updateDiet);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
         userId = prefs.getInt("userId", 0);
 
-        measuresCollection = new LinkedHashMap<>();
-        createGroupList();
         getCurrentStats();
 
         statDate = (TextView) view.findViewById(R.id.statDate);
         Calendar cal = Calendar.getInstance();
         statDate.setText(Constants.queryDateFormat.format(cal.getTime()));
-        expListView = (ExpandableListView) view.findViewById(R.id.measureExpList);
-        expListAdapter = new StatisticsListAdapter(
-                getActivity(), groupList, measuresCollection, this);
 
-        expListView.setAdapter(expListAdapter);
-        expListView.expandGroup(0);
+        final String[] groups = {"Pomiary ciała", "Wyniki siłowe"};
 
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        measuresGroupsList = (ListView) view.findViewById(R.id.measuresGroupsList);
+        measuresGroupsList.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.statistics_header, groups));
 
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                for (int i = 0; i < groupList.size(); i++) {
-                    if (i != groupPosition) {
-                        expListView.collapseGroup(i);
+        measuresGroupsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int pos,   long id) {
+
+                ArrayList<Integer> measures = new ArrayList<Integer>();
+
+                if(pos == 0){
+
+                    for (Measure el: body) {
+                        measures.add(el.getValue());
                     }
+
+                    Intent i = new Intent(getContext(), StatisticsBodyMeasures.class);
+                    i.putExtra("stats", measures);
+                    getContext().startActivity(i);
+                }else if(pos == 1){
+
+                    for (Measure el: power) {
+                        measures.add(el.getValue());
+                    }
+
+                    Intent i = new Intent(getContext(), StatisticsTrainingMeasures.class);
+                    i.putExtra("stats", measures);
+                    getContext().startActivity(i);
                 }
             }
         });
-
 
         return view;
 
@@ -113,6 +131,14 @@ public class StatisticsLauncher extends Fragment {
         @Override
         public void onClick(View v) {
             Intent i = new Intent(getContext(), StatisticsUpdateBodyMeasures.class);
+            startActivity(i);
+        }
+    };
+
+    View.OnClickListener updateDiet = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getContext(), DietSettings.class);
             startActivity(i);
         }
     };
@@ -154,7 +180,10 @@ public class StatisticsLauncher extends Fragment {
     }
 
     private void setCurrentStats(String response) {
-        ArrayList<Measure> body = new ArrayList<>(), power = new ArrayList<>(), all;
+
+        body = new ArrayList<>();
+        power = new ArrayList<>();
+        all = new ArrayList<>();
 
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Measure>>() {
@@ -175,27 +204,9 @@ public class StatisticsLauncher extends Fragment {
             }
         }
 
-        for (String measure : groupList) {
-            if (measure.equals(getString(R.string.bodyMeasures))) {
-                loadChild(body);
-            } else if (measure.equals(getString(R.string.powerMeasures)))
-                loadChild(power);
-
-            measuresCollection.put(measure, childList);
         }
-        expListAdapter.notifyDataSetChanged();
-    }
 
-    private void createGroupList() {
-        groupList = new ArrayList<>();
-        groupList.add(getString(R.string.bodyMeasures));
-        groupList.add(getString(R.string.powerMeasures));
     }
 
 
-    private void loadChild(List<Measure> measures) {
-        childList = new ArrayList<>();
-        childList.addAll(measures);
-    }
 
-}

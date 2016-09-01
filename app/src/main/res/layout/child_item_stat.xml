@@ -19,13 +19,4 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/history" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="90 kg"
-        android:id="@+id/statValue"
-        android:layout_marginEnd="42dp"
-        android:layout_alignTop="@+id/viewHistory"
-        android:layout_toStartOf="@+id/viewHistory" />
-
 </RelativeLayout>

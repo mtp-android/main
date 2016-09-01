@@ -67,10 +67,10 @@ public class StatisticsListAdapter  extends BaseExpandableListAdapter {
         });
 
         TextView statName = (TextView) convertView.findViewById(R.id.statName);
-        TextView statValue = (TextView) convertView.findViewById(R.id.statValue);
+        //TextView statValue = (TextView) convertView.findViewById(R.id.statValue);
 
         statName.setText(measure.getName());
-        statValue.setText(""+measure.getValue()+" "+measure.getUnit());
+        //statValue.setText(""+measure.getValue()+" "+measure.getUnit());
 
         return convertView;
     }

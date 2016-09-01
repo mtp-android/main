@@ -41,4 +41,12 @@
         android:summary="@string/put_bicep"
         android:title="@string/thigh_measure" />
 
+    <EditTextPreference
+        android:defaultValue="50"
+        android:dialogTitle="@string/neck_measure"
+        android:inputType="number"
+        android:key="measure_neck"
+        android:summary="@string/put_bicep"
+        android:title="@string/neck_measure" />
+
 </PreferenceScreen>

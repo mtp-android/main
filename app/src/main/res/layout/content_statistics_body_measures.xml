@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="mgr.mtp.Statistics.StatisticsBodyMeasures"
+    tools:showIn="@layout/activity_statistics_body_measures">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/body"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/bodyFatLabel"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Aktualne pomiary:"
+        android:id="@+id/textView46"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="W celu podglądu archiwalnych pomiarów wybierz nazwę pomiaru."
+        android:id="@+id/textView48"
+        android:layout_below="@+id/textView46"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="15dp"
+        android:textColor="#d50000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Waga:"
+        android:id="@+id/weightLabel"
+        android:layout_below="@+id/textView48"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Poziom tłuszczu:"
+        android:id="@+id/bodyFatLabel"
+        android:layout_below="@+id/weightLabel"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Biceps:"
+        android:id="@+id/bicepLabel"
+        android:textStyle="bold"
+        android:layout_below="@+id/chestLabel"
+        android:layout_toEndOf="@+id/bodyFatLabel"
+        android:layout_marginTop="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Udo:"
+        android:id="@+id/thighLabel"
+        android:layout_marginTop="31dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/waistLabel"
+        android:layout_alignStart="@+id/waistLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Szyja:"
+        android:id="@+id/neckLabel"
+        android:layout_marginTop="36dp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignStart="@+id/chestLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Klatka piersiowa"
+        android:id="@+id/chestLabel"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/neckLabel"
+        android:layout_alignStart="@+id/bicepLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Pas:"
+        android:id="@+id/waistLabel"
+        android:layout_marginTop="43dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/bicepLabel"
+        android:layout_alignStart="@+id/bicepLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="cm"
+        android:id="@+id/textView59"
+        android:layout_alignTop="@+id/chestLabel"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="cm"
+        android:id="@+id/textView60"
+        android:layout_alignTop="@+id/neckLabel"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="cm"
+        android:id="@+id/textView61"
+        android:layout_alignTop="@+id/bicepLabel"
+        android:layout_alignEnd="@+id/textView59" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="cm"
+        android:id="@+id/textView62"
+        android:layout_alignTop="@+id/waistLabel"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="cm"
+        android:id="@+id/textView63"
+        android:layout_alignTop="@+id/thighLabel"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="kg"
+        android:id="@+id/textView64"
+        android:layout_above="@+id/textView65"
+        android:layout_toEndOf="@+id/chestLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="%"
+        android:id="@+id/textView65"
+        android:layout_alignTop="@+id/bodyFatLabel"
+        android:layout_alignStart="@+id/textView64" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="150"
+        android:id="@+id/neckMeasure"
+        android:layout_alignTop="@+id/textView60"
+        android:layout_toStartOf="@+id/textView60"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="150"
+        android:id="@+id/chestMeasure"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/textView59"
+        android:layout_alignStart="@+id/neckMeasure" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="150"
+        android:id="@+id/bicepMeasure"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/textView61"
+        android:layout_alignStart="@+id/chestMeasure" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="150"
+        android:id="@+id/waistMeasure"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/textView62"
+        android:layout_toStartOf="@+id/textView62" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="150"
+        android:id="@+id/thighMeasure"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/textView63"
+        android:layout_alignStart="@+id/waistMeasure" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="120"
+        android:id="@+id/weightMeasure"
+        android:layout_alignTop="@+id/textView64"
+        android:layout_toStartOf="@+id/textView64"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="18"
+        android:id="@+id/bodyFatMeasure"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/weightMeasure"
+        android:layout_toStartOf="@+id/textView64" />
+
+</RelativeLayout>

@@ -71,6 +71,11 @@
         <activity
             android:name=".Training.TrainingExerciseDetails"
             android:label="@string/title_activity_training_exercise_details"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Statistics.StatisticsBodyMeasures" />
+        <activity
+            android:name=".Statistics.StatisticsTrainingMeasures"
+            android:label="@string/title_activity_statistics_training_measures"
             android:theme="@style/AppTheme"></activity>
     </application>
 

@@ -2,19 +2,23 @@ package mgr.mtp.Statistics;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -44,6 +48,7 @@ public class StatisticsDisplayChart extends AppCompatActivity {
     String statisticName = "";
     ProgressDialog prgDialog;
     Integer userId, typeId;
+    TextView chartMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +67,11 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = prefs.getInt("userId", 0);
 
-
         setContentView(R.layout.statistics_chart);
-
+        chartMessage = (TextView) findViewById(R.id.chartMessage);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(statisticName);
+        toolbar.setTitle(statisticName.replace(":",""));
 
         setSupportActionBar(toolbar);
 
@@ -131,11 +135,18 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         measures = gson.fromJson(response, listType);
 
         ArrayList<Entry> entries = new ArrayList<>();
-        ArrayList<String> labels = new ArrayList<>();
+        final ArrayList<String> labels = new ArrayList<>();
 
         for(int i = 0; i < measures.size(); i++){
-            entries.add(new Entry(measures.get(i).getValue(), i));
+            entries.add(new Entry(i, measures.get(i).getValue()));
             labels.add(measures.get(i).getDate());
+        }
+
+        if(entries.size() == 0){
+            mChart.setVisibility(View.INVISIBLE);
+            chartMessage.setText("Brak zapisanych pomiarów.");
+        }else{
+            mChart.setVisibility(View.VISIBLE);
         }
 
         XAxis xAxis = mChart.getXAxis();
@@ -149,17 +160,18 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         yAxis.setDrawLabels(false);
         yAxis.setTextSize(13);
 
-
-
         YAxis yAxis1 = mChart.getAxisRight();
         yAxis1.setDrawGridLines(true);
         yAxis1.setDrawLabels(false);
 
-        ILineDataSet dataSet = new LineDataSet(entries,"");
+        LineDataSet dataSet = new LineDataSet(entries,"");
+        dataSet.setLineWidth(4);
         LineData data = new LineData(dataSet);
+
 
         data.setValueTextSize(13);
 
+        final String[] xLabels = labels.toArray(new String[labels.size()]);
 
         dataSet.setValueFormatter(new ValueFormatter() {
             @Override
@@ -167,6 +179,19 @@ public class StatisticsDisplayChart extends AppCompatActivity {
                 return ((int) value) + " "+ measures.get(dataSetIndex).getUnit();
             }
         });
+
+        AxisValueFormatter formatter = new AxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return xLabels[(int) value];
+            }
+
+            // we don't draw numbers, so no decimal digits needed
+            @Override
+            public int getDecimalDigits() {  return 0; }
+        };
+
+        xAxis.setValueFormatter(formatter);
 
         mChart.setExtraOffsets(25,10,30,10);
         mChart.setDescription("");

@@ -128,7 +128,7 @@
         android:id="@+id/set1weight"
         android:layout_alignBottom="@+id/textView35"
         android:layout_toEndOf="@+id/textView35"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -165,7 +165,7 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="200"
         android:id="@+id/set2weight"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="15dp"
         android:layout_alignTop="@+id/textView39"
         android:layout_toEndOf="@+id/textView39" />
 
@@ -204,7 +204,7 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="200"
         android:id="@+id/set3weight"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="15dp"
         android:layout_alignTop="@+id/textView43"
         android:layout_toEndOf="@+id/textView43" />
 
@@ -243,7 +243,7 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="200"
         android:id="@+id/set4weight"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="15dp"
         android:layout_alignTop="@+id/textView47"
         android:layout_toStartOf="@+id/textView45" />
 
@@ -282,7 +282,7 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:text="200"
         android:id="@+id/set5weight"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="15dp"
         android:layout_alignTop="@+id/textView51"
         android:layout_toStartOf="@+id/textView49" />
 

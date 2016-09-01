@@ -8,10 +8,10 @@ import java.text.SimpleDateFormat;
 public class Constants {
 
     // on emulator
-    public static String host = "http://10.0.2.2:8080";
+    public static String host = "http://10.0.2.2:8081";
 
     // on device - router
-    //public static String host = "http://192.168.0.12:8080";
+    //public static String host = "http:/169.168.7.113:8081";
 
     // on device
     //public static String host = "http://env-9479195.unicloud.pl/mtp";

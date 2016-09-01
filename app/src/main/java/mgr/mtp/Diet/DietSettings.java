@@ -34,7 +34,7 @@ public class DietSettings extends PreferenceActivity {
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DietSettings.this, "Zapisano ustawienia", Toast.LENGTH_LONG).show();
+                Toast.makeText(DietSettings.this, "Zapisano cele", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
