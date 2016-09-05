@@ -9,11 +9,12 @@ public class ExerciseSet {
 
     }
 
-    public ExerciseSet(int id, int weight, int reps, int setNo) {
+    public ExerciseSet(int id, int weight, int reps, int setNo, int trainingSetId) {
         this.id = id;
         this.weight = weight;
         this.reps = reps;
         this.setNo = setNo;
+        this.trainingSetId = trainingSetId;
     }
 
     private int id;
@@ -22,6 +23,16 @@ public class ExerciseSet {
     private int weight;
     private int reps;
     private int setNo;
+    private int trainingSetId;
+
+
+    public void setTrainigSetId(int trainigSetId) {
+        this.trainingSetId = trainingSetId;
+    }
+
+    public int getTrainigSetId() {
+        return trainingSetId;
+    }
 
     public String getExerciseName() {
         return exerciseName;

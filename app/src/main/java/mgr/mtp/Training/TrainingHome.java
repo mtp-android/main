@@ -26,6 +26,7 @@ import com.loopj.android.http.RequestParams;
 
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,6 +52,7 @@ public class TrainingHome extends Fragment {
     Button setDateBtn;
     Date selectedDate;
     int userId;
+    int trainingSetId;
 
     ArrayList<ExerciseSet> squats;
     ArrayList<ExerciseSet> benchPress;
@@ -58,6 +60,7 @@ public class TrainingHome extends Fragment {
     ArrayList<ExerciseSet> barbellCurls = new ArrayList<>();
     ArrayList<ExerciseSet> dips = new ArrayList<>();
     ArrayList<ExerciseSet> all = new ArrayList<>();
+    String[] trainingSetA, trainingSetB, trainingSetC;
 
     public TrainingHome() {
         // Required empty public constructor
@@ -77,6 +80,12 @@ public class TrainingHome extends Fragment {
         Calendar cal = Calendar.getInstance();
         selectedDate = cal.getTime();
         String today = getArguments() != null ? getArguments().getString("date") : Constants.queryDateFormat.format(selectedDate);
+
+        try {
+            selectedDate = Constants.queryDateFormat.parse(today);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         trainingTooltip = (TextView) view.findViewById(R.id.trainingToolTip);
 
@@ -101,11 +110,20 @@ public class TrainingHome extends Fragment {
 
         getTrainingForDay(selectedDate);
 
-        // prepare static exercises
-        String[] exercises = {getString(R.string.squats),getString(R.string.benchPress), getString(R.string.barbellRow),
-                getString(R.string.barbellCurls), getString(R.string.dips)};
+        // training set A
+        trainingSetA = new String[]{"Przysiady ze sztangą", "Podciąganie na drążku w szerokim uchwycie", "Wyciskanie sztangi w pozycji leżącej (płasko)",
+        "Wyciskanie sztangi nad głową", "Uginanie przedramion z hantlami", "Skłony w pozycji leżącej"};
 
-        listViewAdapter = new TrainingHomeListAdapter(getActivity(), exercises, userId);
+        // training set B
+        trainingSetB = new String[]{"Rzymski martwy ciąg", "Wiosłowanie sztangi w pozycji półprostej", "Wyciskanie sztangi na ławce w pozycji skośnej",
+                "Unoszenie hantli bokiem w pozycji siedzącej/stojącej", "Prostowanie ramion w dół na wyciągu górnym", "Unoszenie nóg w zwisie na drążku"};
+
+        // training set C
+        trainingSetC = new String[]{"Prostowanie łydek", "Wznoszenie ramion z hantlami", "Rozpiętki z hantlami w pozycji leżącej",
+                "Odwrotne rozpiętki na maszynie", "Zginanie nadgarstków z wykorzystaniem nachwytu", "Skręty tułowia"};
+
+
+        listViewAdapter = new TrainingHomeListAdapter(getActivity(), trainingSetA, userId);
         listView.setAdapter(listViewAdapter);
 
         listViewAdapter.setDate(selectedDate);
@@ -119,8 +137,10 @@ public class TrainingHome extends Fragment {
         @Override
 
         public void onClick(View v) {
+
             Intent intent = new Intent(getContext(), TrainingWorkout.class);
             intent.putExtra("date", Constants.queryDateFormat.format(selectedDate));
+            intent.putExtra("trainingSetId", trainingSetId == 3 ? 1 : trainingSetId + 1);
 
             getContext().startActivity(intent);
         }
@@ -194,7 +214,8 @@ public class TrainingHome extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody, StandardCharsets.UTF_8);
 
-                if (response.equals("[]")) {
+                if (response.equals("1") || response.equals("2") || response.equals("3") || response.equals("[]")) {
+                    trainingSetId = response.equals("[]") ? 0 : Integer.parseInt(response);
                     startTraining.setVisibility(View.VISIBLE);
                     trainingTooltip.setText("Brak zalogowanego treningu. Do dzieła!");
                     listView.setVisibility(View.INVISIBLE);
@@ -202,8 +223,8 @@ public class TrainingHome extends Fragment {
                     startTraining.setVisibility(View.INVISIBLE);
                     trainingTooltip.setText("Wybierz nazwę ćwiczenia aby poznać szczegóły");
                     listView.setVisibility(View.VISIBLE);
+                    setTrainingOnDay(response);
                 }
-                setTrainingOnDay(response);
                 prgDialog.hide();
             }
 
@@ -264,6 +285,10 @@ public class TrainingHome extends Fragment {
             }
         }
 
+        int exSetId = all.size() == 0 ? 1 : all.get(0).getTrainigSetId();
+
+        listViewAdapter.setExercises(exSetId == 1 ? trainingSetA : exSetId == 2 ? trainingSetB : trainingSetC );
+        listViewAdapter.notifyDataSetChanged();
         listViewAdapter.dataChanged(all);
     }
 

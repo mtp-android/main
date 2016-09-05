@@ -1,9 +1,7 @@
 package mgr.mtp.Exercises;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,29 +12,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import cz.msebera.android.httpclient.Header;
 import mgr.mtp.DataModel.ExerciseSet;
-import mgr.mtp.Home;
 import mgr.mtp.R;
 import mgr.mtp.Training.TrainingWorkout;
-import mgr.mtp.Utils.Constants;
 import mgr.mtp.Utils.ProgressWheel;
 
 /**
@@ -45,7 +35,6 @@ import mgr.mtp.Utils.ProgressWheel;
 public class Exercise5 extends WizardStep {
 
     ProgressWheel pw;
-    ProgressDialog prgDialog;
     Toolbar toolbar;
     Button btnStart;
     TextView ex5_firstSetWeightET, ex5_firstSetRepsET, ex5_secondSetWeightET, ex5_secondSetRepsET,
@@ -55,10 +44,10 @@ public class Exercise5 extends WizardStep {
     long timeRemaining;
     private boolean isPaused = false;
     private boolean isCanceled = false;
-    int timerCounter = 1,userId;
+    int timerCounter = 1;
     ImageView editOne, editTwo, editThree, editFour, editFive;
     int set1max,set2max,set3max,set4max,set5max;
-
+    int trainingSetId;
 
     @ContextVariable
     private ArrayList<ExerciseSet> exerciseOne;
@@ -85,12 +74,40 @@ public class Exercise5 extends WizardStep {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.training_wizard, container, false);
 
-
-        // get user id from settings
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(v.getContext());
-        userId = prefs.getInt("userId", 0);
-
         exerciseFive = new ArrayList<>();
+
+        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        toolbar.setTitle("Ćwiczenie 5 z 6");
+        TextView exName = (TextView) v.findViewById(R.id.exName);
+
+        Activity trainingWorkout = getActivity();
+        trainingSetId = 0;
+
+
+        if (trainingWorkout instanceof TrainingWorkout) {
+            trainingSetId = ((TrainingWorkout) trainingWorkout).getTrainingSetId();
+        }
+
+        String name = "";
+
+        switch (trainingSetId) {
+            case 1:
+                name = "Uginanie przedramion z hantlami";
+                break;
+
+            case 2:
+                name = "Prostowanie ramion w dół na wyciągu górnym";
+                break;
+
+            case 3:
+                name = "Zginanie nadgarstków z wykorzystaniem nachwytu";
+                break;
+
+            default:
+                break;
+        }
+
+        exName.setText(name);
 
         ex5_firstSetRepsET = (TextView) v.findViewById(R.id.firstSet_reps);
         ex5_firstSetWeightET = (TextView) v.findViewById(R.id.firstSet_weight);
@@ -130,15 +147,8 @@ public class Exercise5 extends WizardStep {
         restLabel = (TextView) v.findViewById(R.id.restLabel);
         updateRestLabel(timerCounter);
 
-        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.trainingDips);
-
         pw = (ProgressWheel) v.findViewById(R.id.pw_spinner);
         pw.setProgress(360);
-
-        prgDialog = new ProgressDialog(getActivity());
-        prgDialog.setMessage(getString(R.string.pleaseWait));
-        prgDialog.setCancelable(false);
 
         btnStart = (Button) v.findViewById(R.id.restButton);
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -149,13 +159,11 @@ public class Exercise5 extends WizardStep {
                     Toast.makeText(getActivity(),
                             getString(R.string.trainig_gotonextexercise), Toast.LENGTH_LONG).show();
                 } else {
-                    getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     isPaused = false;
                     isCanceled = false;
 
                     btnStart.setEnabled(false);
                     btnStart.setText("Odliczam...");
-
 
                     CountDownTimer timer;
                     long millisInFuture = 90000; //90 seconds
@@ -183,7 +191,6 @@ public class Exercise5 extends WizardStep {
                             pw.setText("90");
                             btnStart.setEnabled(true);
                             btnStart.setText("Odpoczynek");
-                            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         }
                     }.start();
                 }
@@ -256,84 +263,6 @@ public class Exercise5 extends WizardStep {
         }
     };
 
-    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which) {
-                case DialogInterface.BUTTON_POSITIVE:
-                    saveTrainingToDatabase();
-                    break;
-                case DialogInterface.BUTTON_NEGATIVE:
-                    break;
-            }
-        }
-    };
-
-    private void saveTrainingToDatabase() {
-
-        String date = null;
-
-        prgDialog.show();
-        RequestParams params = new RequestParams();
-        Gson gson = new Gson();
-
-        params.put("ex1", gson.toJson(exerciseOne));
-        params.put("ex2", gson.toJson(exerciseTwo));
-        params.put("ex3", gson.toJson(exerciseThree));
-        params.put("ex4", gson.toJson(exerciseFour));
-        params.put("ex5", gson.toJson(exerciseFive));
-
-        Activity trainingWorkout = getActivity();
-
-        if (trainingWorkout instanceof TrainingWorkout) {
-            date = ((TrainingWorkout) trainingWorkout).getDate();
-        }
-
-        params.put("date", date);
-        params.put("userId", userId);
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        final String finalDate = date;
-        client.get(Constants.host + "/training/addtraining", params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-                prgDialog.hide();
-
-                Intent homeIntent = new Intent(getActivity(), Home.class);
-                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                homeIntent.putExtra("date", finalDate);
-                homeIntent.putExtra("tab", 1);
-
-                startActivity(homeIntent);
-
-                Toast.makeText(getActivity(),
-                        getString(R.string.training_completed), Toast.LENGTH_LONG).show();
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                //String response = new String(responseBody, StandardCharsets.UTF_8);
-
-                prgDialog.hide();
-
-                if (statusCode == 404) {
-                    Toast.makeText(getActivity(),
-                            getString(R.string.noConnectionToServer), Toast.LENGTH_LONG).show();
-                } else if (statusCode == 500) {
-                    Toast.makeText(getActivity(),
-                            getString(R.string.serverError), Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getActivity(),
-                            getString(R.string.unexpectedError), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-    }
-
-
     @Override
     public void onExit(int exitCode) {
         switch (exitCode) {
@@ -356,16 +285,15 @@ public class Exercise5 extends WizardStep {
         //and will be populated in the next steps only if the same field names are used.
 
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_firstSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_firstSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex5_firstSetRepsET.getText().toString()), 1, trainingSetId));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_secondSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_secondSetRepsET.getText().toString()), 2));
+                , Integer.parseInt(ex5_secondSetRepsET.getText().toString()), 2, trainingSetId));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_thirdSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_thirdSetRepsET.getText().toString()), 3));
+                , Integer.parseInt(ex5_thirdSetRepsET.getText().toString()), 3, trainingSetId));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_fourthSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_fourthSetRepsET.getText().toString()), 4));
+                , Integer.parseInt(ex5_fourthSetRepsET.getText().toString()), 4, trainingSetId));
         exerciseFive.add(new ExerciseSet(1, Integer.parseInt(ex5_fifthSetWeightET.getText().toString())
-                , Integer.parseInt(ex5_fifthSetRepsET.getText().toString()), 5));
-
+                , Integer.parseInt(ex5_fifthSetRepsET.getText().toString()), 5, trainingSetId));
 
         int finalSet1 = Integer.parseInt(ex5_firstSetWeightET.getText().toString());
         int finalSet2 = Integer.parseInt(ex5_secondSetWeightET.getText().toString());
@@ -383,10 +311,6 @@ public class Exercise5 extends WizardStep {
         editor.putInt("ex5set5max", set5max >= finalSet1 ? set5max : finalSet5);
 
         editor.commit();
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(getString(R.string.confirmendtraining))
-                .setNegativeButton(getString(R.string.back), dialogClickListener).setPositiveButton(getString(R.string.confirmed), dialogClickListener).show();
     }
 
     private void getWeightFromPreferences(){

@@ -96,6 +96,10 @@ public class TrainingHomeListAdapter extends BaseAdapter{
         TextView exerciseName;
     }
 
+    public void setExercises(String[] exercises) {
+        this.exercises = exercises;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }

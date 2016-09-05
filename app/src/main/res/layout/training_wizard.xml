@@ -20,6 +20,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nazwa ćwiczenia"
+        android:id="@+id/exName"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Przebieg ćwiczenia:"
         android:id="@+id/textView38"
         android:layout_marginLeft="15dp"

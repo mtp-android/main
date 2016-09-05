@@ -8,6 +8,7 @@ import mgr.mtp.Exercises.Exercise2;
 import mgr.mtp.Exercises.Exercise3;
 import mgr.mtp.Exercises.Exercise4;
 import mgr.mtp.Exercises.Exercise5;
+import mgr.mtp.Exercises.Exercise6;
 import mgr.mtp.R;
 
 /**
@@ -37,6 +38,7 @@ public class TrainingWizard extends BasicWizardLayout {
                 .addStep(Exercise3.class)
                 .addStep(Exercise4.class)
                 .addStep(Exercise5.class)
+                .addStep(Exercise6.class)
                 .create();
     }
 }

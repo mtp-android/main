@@ -1,5 +1,6 @@
 package mgr.mtp.Exercises;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 import mgr.mtp.DataModel.ExerciseSet;
 import mgr.mtp.R;
+import mgr.mtp.Training.TrainingWorkout;
 import mgr.mtp.Utils.ProgressWheel;
 
 /**
@@ -44,6 +46,7 @@ public class Exercise2 extends WizardStep {
     int timerCounter = 1;
     ImageView editOne, editTwo, editThree, editFour, editFive;
     int set1max,set2max,set3max,set4max,set5max;
+    int trainingSetId;
 
     @ContextVariable
     private ArrayList<ExerciseSet> exerciseOne;
@@ -64,7 +67,37 @@ public class Exercise2 extends WizardStep {
         exerciseTwo = new ArrayList<>();
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.trainingBenchPress);
+        toolbar.setTitle("Ćwiczenie 2 z 6");
+        TextView exName = (TextView) v.findViewById(R.id.exName);
+
+        Activity trainingWorkout = getActivity();
+        trainingSetId = 0;
+
+
+        if (trainingWorkout instanceof TrainingWorkout) {
+            trainingSetId = ((TrainingWorkout) trainingWorkout).getTrainingSetId();
+        }
+
+        String name = "";
+
+        switch (trainingSetId) {
+            case 1:
+                name = "Podciąganie na drążku w szerokim uchwycie";
+                break;
+
+            case 2:
+                name = "Wiosłowanie sztangi w pozycji półprostej";
+                break;
+
+            case 3:
+                name = "Wznoszenie ramion z hantlami";
+                break;
+
+            default:
+                break;
+        }
+
+        exName.setText(name);
 
         ex2_firstSetRepsET = (TextView) v.findViewById(R.id.firstSet_reps);
         ex2_firstSetWeightET = (TextView) v.findViewById(R.id.firstSet_weight);
@@ -243,15 +276,15 @@ public class Exercise2 extends WizardStep {
         //and will be populated in the next steps only if the same field names are used.
 
         exerciseTwo.add(new ExerciseSet(1, Integer.parseInt(ex2_firstSetWeightET.getText().toString())
-                , Integer.parseInt(ex2_firstSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex2_firstSetRepsET.getText().toString()), 1, trainingSetId));
         exerciseTwo.add(new ExerciseSet(1, Integer.parseInt(ex2_secondSetWeightET.getText().toString())
-                , Integer.parseInt(ex2_secondSetRepsET.getText().toString()), 2));
+                , Integer.parseInt(ex2_secondSetRepsET.getText().toString()), 2, trainingSetId));
         exerciseTwo.add(new ExerciseSet(1, Integer.parseInt(ex2_thirdSetWeightET.getText().toString())
-                , Integer.parseInt(ex2_thirdSetRepsET.getText().toString()), 3));
+                , Integer.parseInt(ex2_thirdSetRepsET.getText().toString()), 3, trainingSetId));
         exerciseTwo.add(new ExerciseSet(1, Integer.parseInt(ex2_fourthSetWeightET.getText().toString())
-                , Integer.parseInt(ex2_fourthSetRepsET.getText().toString()), 4));
+                , Integer.parseInt(ex2_fourthSetRepsET.getText().toString()), 4, trainingSetId));
         exerciseTwo.add(new ExerciseSet(1, Integer.parseInt(ex2_fifthSetWeightET.getText().toString())
-                , Integer.parseInt(ex2_fifthSetRepsET.getText().toString()), 5));
+                , Integer.parseInt(ex2_fifthSetRepsET.getText().toString()), 5, trainingSetId));
 
         int finalSet1 = Integer.parseInt(ex2_firstSetWeightET.getText().toString());
         int finalSet2 = Integer.parseInt(ex2_secondSetWeightET.getText().toString());

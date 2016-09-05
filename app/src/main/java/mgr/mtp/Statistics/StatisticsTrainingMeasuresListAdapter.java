@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Date;
 
-import mgr.mtp.DataModel.ExerciseSet;
 import mgr.mtp.R;
 
 /**

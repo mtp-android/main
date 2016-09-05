@@ -79,7 +79,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="286dp"
-        android:id="@+id/trainingListView" />
+        android:id="@+id/trainingListView"
+        android:layout_weight="0.63" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/startTraining"

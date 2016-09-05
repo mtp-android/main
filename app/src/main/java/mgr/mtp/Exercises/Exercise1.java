@@ -1,5 +1,6 @@
 package mgr.mtp.Exercises;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 import mgr.mtp.DataModel.ExerciseSet;
 import mgr.mtp.R;
+import mgr.mtp.Training.TrainingWorkout;
 import mgr.mtp.Utils.ProgressWheel;
 
 /**
@@ -45,6 +47,7 @@ public class Exercise1 extends WizardStep {
     int timerCounter = 1;
     ImageView editOne, editTwo, editThree, editFour, editFive;
     int set1max,set2max,set3max,set4max,set5max;
+    int trainingSetId;
 
     @ContextVariable
     private ArrayList<ExerciseSet> exerciseOne;
@@ -62,7 +65,37 @@ public class Exercise1 extends WizardStep {
         exerciseOne = new ArrayList<>();
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.trainingSquats);
+        toolbar.setTitle("Ćwiczenie 1 z 6");
+        TextView exName = (TextView) v.findViewById(R.id.exName);
+
+        Activity trainingWorkout = getActivity();
+        trainingSetId = 0;
+
+
+        if (trainingWorkout instanceof TrainingWorkout) {
+            trainingSetId = ((TrainingWorkout) trainingWorkout).getTrainingSetId();
+        }
+
+        String name = "";
+
+        switch (trainingSetId) {
+            case 1:
+                name = "Przysiady ze sztangą";
+                break;
+
+            case 2:
+                name = "Rzymski martwy ciąg";
+                break;
+
+            case 3:
+                name = "Prostowanie łydek";
+                break;
+
+            default:
+                break;
+        }
+
+        exName.setText(name);
 
         ex1_firstSetRepsET = (TextView) v.findViewById(R.id.firstSet_reps);
         ex1_firstSetWeightET = (TextView) v.findViewById(R.id.firstSet_weight);
@@ -243,16 +276,18 @@ public class Exercise1 extends WizardStep {
         //The values of these fields will be automatically stored in the wizard context
         //and will be populated in the next steps only if the same field names are used.
 
+
+
         exerciseOne.add(new ExerciseSet(1, Integer.parseInt(ex1_firstSetWeightET.getText().toString())
-                , Integer.parseInt(ex1_firstSetRepsET.getText().toString()), 1));
+                , Integer.parseInt(ex1_firstSetRepsET.getText().toString()), 1, trainingSetId));
         exerciseOne.add(new ExerciseSet(1, Integer.parseInt(ex1_secondSetWeightET.getText().toString())
-                , Integer.parseInt(ex1_secondSetRepsET.getText().toString()), 2));
+                , Integer.parseInt(ex1_secondSetRepsET.getText().toString()), 2, trainingSetId));
         exerciseOne.add(new ExerciseSet(1, Integer.parseInt(ex1_thirdSetWeightET.getText().toString())
-                , Integer.parseInt(ex1_thirdSetRepsET.getText().toString()), 3));
+                , Integer.parseInt(ex1_thirdSetRepsET.getText().toString()), 3, trainingSetId));
         exerciseOne.add(new ExerciseSet(1, Integer.parseInt(ex1_fourthSetWeightET.getText().toString())
-                , Integer.parseInt(ex1_fourthSetRepsET.getText().toString()), 4));
+                , Integer.parseInt(ex1_fourthSetRepsET.getText().toString()), 4, trainingSetId));
         exerciseOne.add(new ExerciseSet(1, Integer.parseInt(ex1_fifthSetWeightET.getText().toString())
-                , Integer.parseInt(ex1_fifthSetRepsET.getText().toString()), 5));
+                , Integer.parseInt(ex1_fifthSetRepsET.getText().toString()), 5, trainingSetId));
 
         int finalSet1 = Integer.parseInt(ex1_firstSetWeightET.getText().toString());
         int finalSet2 = Integer.parseInt(ex1_secondSetWeightET.getText().toString());

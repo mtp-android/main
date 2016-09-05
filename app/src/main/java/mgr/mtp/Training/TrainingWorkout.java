@@ -11,6 +11,7 @@ import mgr.mtp.R;
 public class TrainingWorkout extends FragmentActivity {
 
     String date;
+    int trainingSetId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,11 +21,16 @@ public class TrainingWorkout extends FragmentActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             date = extras.getString("date");
+            trainingSetId = extras.getInt("trainingSetId");
         }
 
     }
 
     public String getDate() {
         return date;
+    }
+
+    public int getTrainingSetId() {
+        return trainingSetId;
     }
 }
