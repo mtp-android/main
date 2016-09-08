@@ -64,8 +64,8 @@ public class Exercise1 extends WizardStep {
 
         exerciseOne = new ArrayList<>();
 
-        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle("Ćwiczenie 1 z 6");
+        //toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        //toolbar.setTitle("Ćwiczenie 1 z 6");
         TextView exName = (TextView) v.findViewById(R.id.exName);
 
         Activity trainingWorkout = getActivity();
@@ -136,8 +136,6 @@ public class Exercise1 extends WizardStep {
         restLabel = (TextView) v.findViewById(R.id.restLabel);
         updateRestLabel(timerCounter);
 
-        pw = (ProgressWheel) v.findViewById(R.id.pw_spinner);
-        pw.setProgress(360);
 
         btnStart = (Button) v.findViewById(R.id.restButton);
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -166,8 +164,7 @@ public class Exercise1 extends WizardStep {
                             } else {
 
                                 long value = millisUntilFinished / 1000;
-                                pw.setProgress((int) (value) * 4);
-                                pw.setText("" + value);
+                                restLabel.setText("Odpoczywaj przez: "+value+" sekund");
                                 timeRemaining = millisUntilFinished;
                             }
                         }
@@ -177,8 +174,6 @@ public class Exercise1 extends WizardStep {
                             mp.start();
                             timerCounter++;
                             updateRestLabel(timerCounter);
-                            pw.setProgress(360);
-                            pw.setText("90");
                             btnStart.setEnabled(true);
                             btnStart.setText("Odpoczynek");
                             getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -267,7 +262,7 @@ public class Exercise1 extends WizardStep {
     }
 
     private void updateRestLabel(int timerCounter) {
-        restLabel.setText("Przerwa pomiędzy seriami " + timerCounter + " z 5");
+        restLabel.setText("Aktualna seria: " + timerCounter + " z 5");
     }
 
     private void bindDataFields() {

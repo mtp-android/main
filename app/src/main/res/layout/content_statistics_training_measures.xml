@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Wybierz ikonę zegara obok nazwy ćwiczenia aby przejrzeć postępy"
+        android:text="Użyj ikony zegara obok nazwy ćwiczenia aby zobaczyć postępy."
         android:id="@+id/trainingToolTip"
         android:layout_weight="0.07"
         android:textColor="#d32f2f"
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="286dp"
         android:id="@+id/statsTrainingListView"
-        android:layout_below="@+id/trainingToolTip" />
+        android:layout_below="@+id/trainingToolTip"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

@@ -62,9 +62,30 @@ public class StatisticsTrainingMeasuresListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
+                int typeId = 0;
+
+                typeId = exercises[position].equals("Przysiady ze sztangą") ? 7 : typeId;
+                typeId = exercises[position].equals("Podciąganie na drążku w szerokim uchwycie") ? 8 : typeId;
+                typeId = exercises[position].equals("Wyciskanie sztangi w pozycji leżącej (płasko)") ? 9 : typeId;
+                typeId = exercises[position].equals("Wyciskanie sztangi nad głową") ? 10 : typeId;
+                typeId = exercises[position].equals("Uginanie przedramion z hantlami") ? 11 : typeId;
+                typeId = exercises[position].equals("Skłony w pozycji leżącej") ? 12 : typeId;
+                typeId = exercises[position].equals("Rzymski martwy ciąg") ? 13 : typeId;
+                typeId = exercises[position].equals("Wiosłowanie sztangi w pozycji półprostej") ? 14 : typeId;
+                typeId = exercises[position].equals("Wyciskanie sztangi na ławce w pozycji skośnej") ? 15 : typeId;
+                typeId = exercises[position].equals("Unoszenie hantli bokiem w pozycji siedzącej/stojącej") ? 16 : typeId;
+                typeId = exercises[position].equals("Prostowanie ramion w dół na wyciągu górnym") ? 17 : typeId;
+                typeId = exercises[position].equals("Unoszenie nóg w zwisie na drążku") ? 18 : typeId;
+                typeId = exercises[position].equals("Prostowanie łydek") ? 19 : typeId;
+                typeId = exercises[position].equals("Wznoszenie ramion z hantlami") ? 20 : typeId;
+                typeId = exercises[position].equals("Rozpiętki z hantlami w pozycji leżącej") ? 21 : typeId;
+                typeId = exercises[position].equals("Odwrotne rozpiętki na maszynie") ? 22 : typeId;
+                typeId = exercises[position].equals("Zginanie nadgarstków z wykorzystaniem nachwytu") ? 23 : typeId;
+                typeId = exercises[position].equals("Skręty tułowia") ? 24 : typeId;
+
                 Intent i = new Intent(context, StatisticsDisplayChart.class);
                 i.putExtra("statisticName", exercises[position]);
-                i.putExtra("typeId", position+7);
+                i.putExtra("typeId", typeId);
                 context.startActivity(i);
 
             }

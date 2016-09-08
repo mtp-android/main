@@ -214,11 +214,10 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         List<Fragment> allFragments = getSupportFragmentManager().getFragments();
         if(allFragments != null)
         {
-            DietHome fragment = (DietHome) allFragments.get(1);
+            DietHome fragment =  allFragments.get(1) instanceof DietHome ? (DietHome) allFragments.get(1) : (DietHome) allFragments.get(0) ;
             fragment.refreshBars();
             fragment.getMealsHeadersForDay(fragment.selectedDate);
             fragment.getSummaryForDay(fragment.selectedDate);
-
         }
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }

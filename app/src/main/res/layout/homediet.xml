@@ -4,6 +4,7 @@
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
     android:layout_height="match_parent"
+    android:tag="homeDiet"
     android:weightSum="1">
 
     <RelativeLayout

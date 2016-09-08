@@ -6,15 +6,7 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/title_training" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +15,11 @@
         android:text="Nazwa ćwiczenia"
         android:id="@+id/exName"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="18dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,8 +28,6 @@
         android:text="Przebieg ćwiczenia:"
         android:id="@+id/textView38"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
         android:textColor="#000000" />
 
     <TextView
@@ -386,7 +380,6 @@
         android:id="@+id/textView42"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:textStyle="bold"
         android:textColor="#000000" />
 
     <TextView
@@ -398,32 +391,6 @@
         android:layout_marginLeft="15dp"
         android:textColor="#d50000" />
 
-    <mgr.mtp.Utils.ProgressWheel
-        android:id="@+id/pw_spinner"
-        android:layout_width="58dp"
-        android:layout_height="62dp"
-        android:layout_centerInParent="true"
-        ProgressWheel:pwBarColor="#0097D6"
-        ProgressWheel:pwBarLength="50dp"
-        ProgressWheel:pwBarWidth="5dp"
-        ProgressWheel:pwContourSize="2dp"
-        ProgressWheel:pwRimColor="#330097D6"
-        ProgressWheel:pwRimWidth="5dp"
-        ProgressWheel:pwText="90"
-        ProgressWheel:pwTextColor="#222"
-        ProgressWheel:pwTextSize="25dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp" />
-
-    <Button
-        android:id="@+id/restButton"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="ODPOCZYNEK"
-        android:textSize="15dp"
-        android:layout_marginTop="-55dp" />
-
     <TextView
         android:id="@+id/restLabel"
         android:layout_width="wrap_content"
@@ -431,9 +398,18 @@
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
-        android:text="Przerwa pomiędzy seriami x/x"
+        android:text="Aktualna seria: 1 z 5"
         android:textSize="17dp"
         android:layout_marginLeft="15dp" />
+
+    <Button
+        android:id="@+id/restButton"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:text="ODPOCZYNEK"
+        android:textSize="15dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp" />
 
 
 </LinearLayout>

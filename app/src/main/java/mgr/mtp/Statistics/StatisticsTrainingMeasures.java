@@ -34,8 +34,25 @@ public class StatisticsTrainingMeasures extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = prefs.getInt("userId", 0);
 
-        String[] exercises = {getString(R.string.squats),getString(R.string.benchPress), getString(R.string.barbellRow),
-                getString(R.string.barbellCurls), getString(R.string.dips)};
+        String[] exercises = new String[]{"Odwrotne rozpiętki na maszynie",
+                "Podciąganie na drążku w szerokim uchwycie",
+                "Prostowanie ramion w dół na wyciągu górnym",
+                "Prostowanie łydek",
+                "Przysiady ze sztangą",
+                "Rozpiętki z hantlami w pozycji leżącej",
+                "Rzymski martwy ciąg",
+                "Skręty tułowia",
+                "Skłony w pozycji leżącej",
+                "Uginanie przedramion z hantlami",
+                "Unoszenie hantli bokiem w pozycji siedzącej/stojącej",
+                "Unoszenie nóg w zwisie na drążku",
+                "Wiosłowanie sztangi w pozycji półprostej",
+                "Wyciskanie sztangi na ławce w pozycji skośnej",
+                "Wyciskanie sztangi nad głową",
+                "Wyciskanie sztangi w pozycji leżącej (płasko)",
+                "Wznoszenie ramion z hantlami",
+                "Zginanie nadgarstków z wykorzystaniem nachwytu"};
+
 
         listViewAdapter = new StatisticsTrainingMeasuresListAdapter(StatisticsTrainingMeasures.this, exercises, userId);
         listView.setAdapter(listViewAdapter);

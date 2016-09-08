@@ -34,8 +34,6 @@ import mgr.mtp.Utils.ProgressWheel;
  */
 public class Exercise5 extends WizardStep {
 
-    ProgressWheel pw;
-    Toolbar toolbar;
     Button btnStart;
     TextView ex5_firstSetWeightET, ex5_firstSetRepsET, ex5_secondSetWeightET, ex5_secondSetRepsET,
             ex5_thirdSetWeightET, ex5_thirdSetRepsET, ex5_fourthSetWeightET, ex5_fourthSetRepsET,
@@ -76,8 +74,8 @@ public class Exercise5 extends WizardStep {
 
         exerciseFive = new ArrayList<>();
 
-        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle("Ćwiczenie 5 z 6");
+        //toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        //toolbar.setTitle("Ćwiczenie 5 z 6");
         TextView exName = (TextView) v.findViewById(R.id.exName);
 
         Activity trainingWorkout = getActivity();
@@ -147,9 +145,6 @@ public class Exercise5 extends WizardStep {
         restLabel = (TextView) v.findViewById(R.id.restLabel);
         updateRestLabel(timerCounter);
 
-        pw = (ProgressWheel) v.findViewById(R.id.pw_spinner);
-        pw.setProgress(360);
-
         btnStart = (Button) v.findViewById(R.id.restButton);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,8 +171,7 @@ public class Exercise5 extends WizardStep {
                             } else {
 
                                 long value = millisUntilFinished / 1000;
-                                pw.setProgress((int) (value) * 4);
-                                pw.setText("" + value);
+                                restLabel.setText("Odpoczywaj przez: "+value+" sekund");
                                 timeRemaining = millisUntilFinished;
                             }
                         }
@@ -187,8 +181,6 @@ public class Exercise5 extends WizardStep {
                             mp.start();
                             timerCounter++;
                             updateRestLabel(timerCounter);
-                            pw.setProgress(360);
-                            pw.setText("90");
                             btnStart.setEnabled(true);
                             btnStart.setText("Odpoczynek");
                         }
@@ -275,7 +267,7 @@ public class Exercise5 extends WizardStep {
     }
 
     private void updateRestLabel(int timerCounter) {
-        restLabel.setText("Przerwa pomiędzy seriami " + timerCounter + " z 5");
+        restLabel.setText("Aktualna seria: " + timerCounter + " z 5");
     }
 
     private void bindDataFields() {
