@@ -2,12 +2,11 @@ package mgr.mtp.Statistics;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import mgr.mtp.R;
@@ -65,13 +64,12 @@ public class StatisticsBodyMeasures extends AppCompatActivity {
         thighLabel = (TextView) findViewById(R.id.thighLabel);
 
         setOnClick(weightLabel, weightLabel.getText().toString(),1);
-        setOnClick(bodyFatLabel, bodyFatLabel.getText().toString(),13);
-        setOnClick(bicepLabel, bicepLabel.getText().toString(),3);
-        setOnClick(chestLabel, chestLabel.getText().toString(),4);
-        setOnClick(neckLabel, neckLabel.getText().toString(),12);
-        setOnClick(waistLabel, waistLabel.getText().toString(),5);
-        setOnClick(thighLabel, thighLabel.getText().toString(),6);
-
+        setOnClick(bicepLabel, bicepLabel.getText().toString(),2);
+        setOnClick(chestLabel, chestLabel.getText().toString(),3);
+        setOnClick(waistLabel, waistLabel.getText().toString(),4);
+        setOnClick(thighLabel, thighLabel.getText().toString(),5);
+        setOnClick(neckLabel, neckLabel.getText().toString(),6);
+        setOnClick(bodyFatLabel, bodyFatLabel.getText().toString(),7);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

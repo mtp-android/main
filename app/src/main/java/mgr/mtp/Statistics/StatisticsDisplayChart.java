@@ -2,7 +2,6 @@ package mgr.mtp.Statistics;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -137,7 +135,7 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         ArrayList<Entry> entries = new ArrayList<>();
         final ArrayList<String> labels = new ArrayList<>();
 
-        for(int i = 0; i < measures.size(); i++){
+        for(int i = measures.size(); i > 0; i--){
             entries.add(new Entry(i, measures.get(i).getValue()));
             labels.add(measures.get(i).getDate());
         }
