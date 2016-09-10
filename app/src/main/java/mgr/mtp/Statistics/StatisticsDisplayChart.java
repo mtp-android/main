@@ -29,6 +29,7 @@ import com.loopj.android.http.RequestParams;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -132,10 +133,12 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         }.getType();
         measures = gson.fromJson(response, listType);
 
+        Collections.reverse(measures);
+
         ArrayList<Entry> entries = new ArrayList<>();
         final ArrayList<String> labels = new ArrayList<>();
 
-        for(int i = measures.size(); i > 0; i--){
+        for(int i = 0; i < measures.size(); i++){
             entries.add(new Entry(i, measures.get(i).getValue()));
             labels.add(measures.get(i).getDate());
         }
@@ -181,7 +184,7 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         AxisValueFormatter formatter = new AxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return xLabels[(int) value];
+                return value % 1 == 0 ? xLabels[(int) value] : "";
             }
 
             // we don't draw numbers, so no decimal digits needed
