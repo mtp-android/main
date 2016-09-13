@@ -293,11 +293,11 @@ public class Exercise1 extends WizardStep {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("ex1set1max", set1max >= finalSet1 ? set1max : finalSet1);
-        editor.putInt("ex1set2max", set2max >= finalSet1 ? set2max : finalSet2);
-        editor.putInt("ex1set3max", set3max >= finalSet1 ? set3max : finalSet3);
-        editor.putInt("ex1set4max", set4max >= finalSet1 ? set4max : finalSet4);
-        editor.putInt("ex1set5max", set5max >= finalSet1 ? set5max : finalSet5);
+        editor.putInt("set"+trainingSetId+"ex1set1max", set1max >= finalSet1 ? set1max : finalSet1);
+        editor.putInt("set"+trainingSetId+"ex1set2max", set2max >= finalSet1 ? set2max : finalSet2);
+        editor.putInt("set"+trainingSetId+"ex1set3max", set3max >= finalSet1 ? set3max : finalSet3);
+        editor.putInt("set"+trainingSetId+"ex1set4max", set4max >= finalSet1 ? set4max : finalSet4);
+        editor.putInt("set"+trainingSetId+"ex1set5max", set5max >= finalSet1 ? set5max : finalSet5);
 
         editor.commit();
     }
@@ -306,11 +306,11 @@ public class Exercise1 extends WizardStep {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        set1max = prefs.getInt("ex1set1max", 5);
-        set2max = prefs.getInt("ex1set2max", 5);
-        set3max = prefs.getInt("ex1set3max", 5);
-        set4max = prefs.getInt("ex1set4max", 5);
-        set5max = prefs.getInt("ex1set5max", 5);
+        set1max = prefs.getInt("set"+trainingSetId+"ex1set1max", 5);
+        set2max = prefs.getInt("set"+trainingSetId+"ex1set2max", 5);
+        set3max = prefs.getInt("set"+trainingSetId+"ex1set3max", 5);
+        set4max = prefs.getInt("set"+trainingSetId+"ex1set4max", 5);
+        set5max = prefs.getInt("set"+trainingSetId+"ex1set5max", 5);
 
     }
 }

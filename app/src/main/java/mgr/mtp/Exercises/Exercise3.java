@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import mgr.mtp.DataModel.ExerciseSet;
 import mgr.mtp.R;
 import mgr.mtp.Training.TrainingWorkout;
-import mgr.mtp.Utils.ProgressWheel;
 
 /**
  * Created by lmedrzycki on 05.04.2016.
@@ -290,11 +288,11 @@ public class Exercise3 extends WizardStep {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("ex3set1max", set1max >= finalSet1 ? set1max : finalSet1);
-        editor.putInt("ex3set2max", set2max >= finalSet1 ? set2max : finalSet2);
-        editor.putInt("ex3set3max", set3max >= finalSet1 ? set3max : finalSet3);
-        editor.putInt("ex3set4max", set4max >= finalSet1 ? set4max : finalSet4);
-        editor.putInt("ex3set5max", set5max >= finalSet1 ? set5max : finalSet5);
+        editor.putInt("set"+trainingSetId+"ex3set1max", set1max >= finalSet1 ? set1max : finalSet1);
+        editor.putInt("set"+trainingSetId+"ex3set2max", set2max >= finalSet1 ? set2max : finalSet2);
+        editor.putInt("set"+trainingSetId+"ex3set3max", set3max >= finalSet1 ? set3max : finalSet3);
+        editor.putInt("set"+trainingSetId+"ex3set4max", set4max >= finalSet1 ? set4max : finalSet4);
+        editor.putInt("set"+trainingSetId+"ex3set5max", set5max >= finalSet1 ? set5max : finalSet5);
 
         editor.commit();
     }
@@ -303,11 +301,11 @@ public class Exercise3 extends WizardStep {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        set1max = prefs.getInt("ex3set1max", 5);
-        set2max = prefs.getInt("ex3set2max", 5);
-        set3max = prefs.getInt("ex3set3max", 5);
-        set4max = prefs.getInt("ex3set4max", 5);
-        set5max = prefs.getInt("ex3set5max", 5);
+        set1max = prefs.getInt("set"+trainingSetId+"ex3set1max", 5);
+        set2max = prefs.getInt("set"+trainingSetId+"ex3set2max", 5);
+        set3max = prefs.getInt("set"+trainingSetId+"ex3set3max", 5);
+        set4max = prefs.getInt("set"+trainingSetId+"ex3set4max", 5);
+        set5max = prefs.getInt("set"+trainingSetId+"ex3set5max", 5);
 
 
     }
