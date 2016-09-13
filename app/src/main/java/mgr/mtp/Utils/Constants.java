@@ -8,13 +8,13 @@ import java.text.SimpleDateFormat;
 public class Constants {
 
     // on emulator
-    public static String host = "http://10.0.2.2:8080";
+    //public static String host = "http://10.0.2.2:8080";
 
     // on device - router
     //public static String host = "http:/172.20.10.4:8080";
 
     // on device
-    //public static String host = "http://mtpandroid.unicloud.pl/mtp";
+    public static String host = "http://mtpandroid.unicloud.pl/mtp";
 
     public static SimpleDateFormat queryDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static SimpleDateFormat displayDateFormat = new SimpleDateFormat("dd-MM-yyyy");
