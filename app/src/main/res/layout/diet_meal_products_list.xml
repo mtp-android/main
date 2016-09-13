@@ -13,10 +13,10 @@
         android:inputType="textMultiLine"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/productAmount" />
+        android:layout_toStartOf="@+id/kcalValue" />
 
     <TextView
-        android:id="@+id/productAmount"
+        android:id="@+id/kcalValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="25dp"
@@ -33,7 +33,7 @@
         android:inputType="textMultiLine"
         android:text="szt"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/productAmount" />
+        android:layout_toEndOf="@+id/kcalValue" />
 
     <TextView
         android:id="@+id/productCalories"

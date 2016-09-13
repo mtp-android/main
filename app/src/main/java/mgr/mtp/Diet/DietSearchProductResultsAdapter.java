@@ -81,6 +81,9 @@ public class DietSearchProductResultsAdapter extends BaseAdapter {
         holder.product_fat.setText(String.valueOf(tempProduct.getFat()));
         holder.product_calories.setText(String.valueOf(tempProduct.getCalories()));
 
+
+
+
         holder.addToMeal.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {

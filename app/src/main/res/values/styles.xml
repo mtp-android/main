@@ -4,6 +4,17 @@
 
     </style>
 
+    <style name="MyButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/Indigo</item>
+        <item name="colorButtonNormal">@color/Btn</item>
+        <item name="android:textColor">@color/BtnText</item>
+    </style>
+
+    <style name="RedButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/Indigo</item>
+        <item name="colorButtonNormal">@color/Red</item>
+    </style>
+
     <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

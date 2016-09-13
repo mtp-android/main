@@ -83,7 +83,7 @@ public class DietMealHomeListAdapter extends BaseAdapter {
 
 
             holder.productName = (TextView) convertView.findViewById(R.id.productName);
-            holder.productAmount = (TextView) convertView.findViewById(R.id.productAmount);
+            holder.productAmount = (TextView) convertView.findViewById(R.id.kcalValue);
             holder.productUnit = (TextView) convertView.findViewById(R.id.productUnit);
             holder.productCalories = (TextView) convertView.findViewById(R.id.productCalories);
             holder.removeProduct = (ImageView) convertView.findViewById(R.id.deleteProduct);

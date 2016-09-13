@@ -9,14 +9,15 @@
 
     <TextView
         android:id="@+id/product_name"
-        android:layout_width="210dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:text="Nazwa produktu"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
-        android:textSize="14dp" />
+        android:textSize="16dp"
+        android:paddingBottom="5dp" />
 
     <TextView
         android:id="@+id/product_mrp"
@@ -28,7 +29,7 @@
         android:text="B:"
         android:textColor="#000000"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="12dp" />
+        android:textSize="13dp" />
 
     <TextView
         android:id="@+id/product_protein"
@@ -41,7 +42,7 @@
         android:text="100"
         android:textColor="#000000"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="12dp" />
+        android:textSize="14dp" />
 
     <TextView
         android:id="@+id/product_bb"
@@ -51,7 +52,7 @@
         android:text="WW:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:layout_alignTop="@+id/product_protein"
         android:layout_toEndOf="@+id/product_protein" />
 
@@ -65,18 +66,21 @@
         android:layout_marginLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:text="100" />
 
     <Button
         android:id="@+id/add_cart"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight ="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:drawableLeft="@drawable/ic_add_black_24dp"
-        style="?android:attr/borderlessButtonStyle" />
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -86,7 +90,7 @@
         android:text="T:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:layout_alignTop="@+id/product_carbs"
         android:layout_toEndOf="@+id/product_carbs"
         android:layout_marginStart="29dp" />
@@ -99,7 +103,7 @@
         android:text="100"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:layout_alignTop="@+id/textView3"
         android:layout_toEndOf="@+id/textView3" />
 
@@ -111,10 +115,9 @@
         android:text="KCAL:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:layout_alignTop="@+id/product_fat"
-        android:layout_toEndOf="@+id/product_name"
-        android:layout_marginStart="21dp" />
+        android:layout_toEndOf="@+id/product_fat" />
 
     <TextView
         android:id="@+id/product_calories"
@@ -124,7 +127,7 @@
         android:text="100"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:layout_alignTop="@+id/textView5"
         android:layout_toEndOf="@+id/textView5" />
 

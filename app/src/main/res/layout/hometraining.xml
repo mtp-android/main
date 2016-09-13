@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
@@ -48,6 +49,9 @@
             android:drawablePadding="10px"
             android:text="Zmień datę"
             android:id="@+id/setDateBtn"
+            android:theme="@style/MyButton"
+            android:drawableTint="#bde0fb"
+            android:textColor="#bde0fb"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"/>
 
@@ -88,6 +92,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_black_24dp" />
+        android:tint="#ffff"
+        android:src="@drawable/ic_add_black_24dp"
+        app:backgroundTint="@color/ColorPrimary" />
 
 </LinearLayout>

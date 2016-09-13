@@ -47,9 +47,13 @@
             android:drawableLeft="@drawable/ic_event_black_18dp"
             android:drawablePadding="10px"
             android:text="Zmień datę"
+            android:theme="@style/MyButton"
+            android:drawableTint="#bde0fb"
+            android:textColor="#bde0fb"
             android:id="@+id/setDateBtn"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            />
 
     </RelativeLayout>
 

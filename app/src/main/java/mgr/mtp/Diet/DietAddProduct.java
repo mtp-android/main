@@ -26,7 +26,6 @@ import com.loopj.android.http.RequestParams;
 import java.nio.charset.StandardCharsets;
 
 import cz.msebera.android.httpclient.Header;
-import mgr.mtp.Home;
 import mgr.mtp.R;
 import mgr.mtp.Utils.Constants;
 
@@ -81,9 +80,9 @@ public class DietAddProduct extends AppCompatActivity {
             factor = extras.getFloat("factor");
         }
 
-        caloriesValue = (TextView) findViewById(R.id.productAmount);
+        caloriesValue = (TextView) findViewById(R.id.kcalValue);
         proteinValue = (TextView) findViewById(R.id.proteinValue);
-        factorValue = (TextView) findViewById(R.id.factorValue);
+        //factorValue = (TextView) findViewById(R.id.factorValue);
         carbsValue = (TextView) findViewById(R.id.carbsValue);
         fatValue = (TextView) findViewById(R.id.fatValue);
         amount = (EditText) findViewById(R.id.amount);
@@ -100,7 +99,7 @@ public class DietAddProduct extends AppCompatActivity {
         proteinValue.setText("" + proteins);
         fatValue.setText("" + fat);
         carbsValue.setText("" + carbs);
-        factorValue.setText("" + factor + " g");
+        //factorValue.setText("" + factor + " g");
 
         unit = "g";
 

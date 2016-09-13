@@ -90,15 +90,19 @@
         android:layout_marginBottom="10dp" />
 
     <Button
+        android:theme="@style/MyButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aktualizacja pomiarów"
-        android:id="@+id/updateMeasuresBtn" />
+        android:id="@+id/updateMeasuresBtn"
+         />
 
     <Button
+        android:theme="@style/MyButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aktualizacja celów diety"
-        android:id="@+id/updateDietBtn" />
+        android:id="@+id/updateDietBtn"
+         />
 
 </LinearLayout>

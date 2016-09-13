@@ -65,7 +65,7 @@ public class DietHomeListAdapter extends BaseAdapter {
         rowView = inflater.inflate(R.layout.diet_header_list, null);
         holder.mealName =(TextView) rowView.findViewById(R.id.productName);
         holder.mealName.setText(result[position]);
-        holder.caloriesValue = (TextView) rowView.findViewById(R.id.productAmount);
+        holder.caloriesValue = (TextView) rowView.findViewById(R.id.kcalValue);
         holder.caloriesValue.setText(""+calories[position]);
 
         rowView.setOnClickListener(new View.OnClickListener() {
