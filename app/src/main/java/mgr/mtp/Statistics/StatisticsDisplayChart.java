@@ -29,6 +29,7 @@ import com.loopj.android.http.RequestParams;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -132,7 +133,7 @@ public class StatisticsDisplayChart extends AppCompatActivity {
         }.getType();
         measures = gson.fromJson(response, listType);
 
-        //Collections.reverse(measures);
+        Collections.reverse(measures);
 
         ArrayList<Entry> entries = new ArrayList<>();
         final ArrayList<String> labels = new ArrayList<>();

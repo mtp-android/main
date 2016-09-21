@@ -202,6 +202,31 @@ public class Exercise3 extends WizardStep {
             weight.setMinValue(5);
             weight.setMaxValue(150);
 
+            switch (id) {
+                case R.id.editone:
+                    reps.setValue(Integer.parseInt(ex3_firstSetRepsET.getText().toString()));
+                    weight.setValue(Integer.parseInt(ex3_firstSetWeightET.getText().toString()));
+                    break;
+                case R.id.edittwo:
+                    reps.setValue(Integer.parseInt(ex3_secondSetRepsET.getText().toString()));
+                    weight.setValue(Integer.parseInt(ex3_secondSetWeightET.getText().toString()));
+                    break;
+                case R.id.editthree:
+                    reps.setValue(Integer.parseInt(ex3_thirdSetRepsET.getText().toString()));
+                    weight.setValue(Integer.parseInt(ex3_thirdSetWeightET.getText().toString()));
+                    break;
+                case R.id.editfour:
+                    reps.setValue(Integer.parseInt(ex3_fourthSetRepsET.getText().toString()));
+                    weight.setValue(Integer.parseInt(ex3_fourthSetWeightET.getText().toString()));
+                    break;
+                case R.id.editfive:
+                    reps.setValue(Integer.parseInt(ex3_fifthSetRepsET.getText().toString()));
+                    weight.setValue(Integer.parseInt(ex3_fifthSetWeightET.getText().toString()));
+                    break;
+                default:
+                    break;
+            }
+
             builder.setView(theView)
                     .setPositiveButton(R.string.confirmed, new DialogInterface.OnClickListener() {
                         @Override
@@ -288,11 +313,11 @@ public class Exercise3 extends WizardStep {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("set"+trainingSetId+"ex3set1max", set1max >= finalSet1 ? set1max : finalSet1);
-        editor.putInt("set"+trainingSetId+"ex3set2max", set2max >= finalSet1 ? set2max : finalSet2);
-        editor.putInt("set"+trainingSetId+"ex3set3max", set3max >= finalSet1 ? set3max : finalSet3);
-        editor.putInt("set"+trainingSetId+"ex3set4max", set4max >= finalSet1 ? set4max : finalSet4);
-        editor.putInt("set"+trainingSetId+"ex3set5max", set5max >= finalSet1 ? set5max : finalSet5);
+        editor.putInt("set"+trainingSetId+"ex3set1max", set1max >= finalSet1 ? set1max : finalSet1 + 2);
+        editor.putInt("set"+trainingSetId+"ex3set2max", set2max >= finalSet1 ? set2max : finalSet2 + 2);
+        editor.putInt("set"+trainingSetId+"ex3set3max", set3max >= finalSet1 ? set3max : finalSet3 + 2);
+        editor.putInt("set"+trainingSetId+"ex3set4max", set4max >= finalSet1 ? set4max : finalSet4 + 2);
+        editor.putInt("set"+trainingSetId+"ex3set5max", set5max >= finalSet1 ? set5max : finalSet5 + 2);
 
         editor.commit();
     }
