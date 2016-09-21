@@ -46,7 +46,7 @@ public class DietHome extends Fragment {
 
     private Toolbar toolbar;
     ProgressDialog prgDialog;
-    private TextView dietDate;
+    public TextView dietDate;
     private Button setDateBtn;
 
 
@@ -130,7 +130,6 @@ public class DietHome extends Fragment {
 
         return view;
     }
-
     public void getSummaryForDay(Date selectedDate) {
         String date = Constants.queryDateFormat.format(selectedDate);
 

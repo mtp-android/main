@@ -29,13 +29,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import mgr.mtp.Diet.DietHome;
 import mgr.mtp.Diet.DietSettings;
 import mgr.mtp.Statistics.StatisticsHome;
 import mgr.mtp.Training.TrainingHome;
+import mgr.mtp.Utils.Constants;
 
 /**
  *
@@ -216,8 +219,14 @@ public class Home extends AppCompatActivity implements LocationListener, SensorE
         {
             DietHome fragment =  allFragments.get(1) instanceof DietHome ? (DietHome) allFragments.get(1) : (DietHome) allFragments.get(0) ;
             fragment.refreshBars();
-            fragment.getMealsHeadersForDay(fragment.selectedDate);
-            fragment.getSummaryForDay(fragment.selectedDate);
+            try {
+                Date selectedDate = Constants.queryDateFormat.parse(fragment.dietDate.getText().toString());
+                fragment.getMealsHeadersForDay(selectedDate);
+                fragment.getSummaryForDay(selectedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
