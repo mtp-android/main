@@ -182,10 +182,10 @@ public class DietSearchProduct extends AppCompatActivity {
                         tempProduct = new Product();
                         tempProduct.setId(obj.getInt("id"));
                         tempProduct.setName(obj.getString("name"));
-                        tempProduct.setProteins(obj.getInt("proteins"));
-                        tempProduct.setCarbohydrates(obj.getInt("carbs"));
-                        tempProduct.setFat(obj.getInt("fat"));
-                        tempProduct.setCalories(obj.getInt("calories"));
+                        tempProduct.setProteins((float) obj.getDouble("proteins"));
+                        tempProduct.setCarbohydrates((float)obj.getDouble("carbs"));
+                        tempProduct.setFat((float)obj.getDouble("fat"));
+                        tempProduct.setCalories((float)obj.getDouble("calories"));
                         tempProduct.setFactor(obj.getInt("factor"));
 
                         Log.e("name", tempProduct.getName());

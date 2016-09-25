@@ -40,7 +40,7 @@ public class Product {
         return calories;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(float calories) {
         this.calories = calories;
     }
 
@@ -48,7 +48,7 @@ public class Product {
         return carbohydrates;
     }
 
-    public void setCarbohydrates(int carbohydrates) {
+    public void setCarbohydrates(float carbohydrates) {
         this.carbohydrates = carbohydrates;
     }
 
@@ -56,7 +56,7 @@ public class Product {
         return fat;
     }
 
-    public void setFat(int fat) {
+    public void setFat(float fat) {
         this.fat = fat;
     }
 
@@ -64,7 +64,7 @@ public class Product {
         return proteins;
     }
 
-    public void setProteins(int proteins) {
+    public void setProteins(float proteins) {
         this.proteins = proteins;
     }
 
