@@ -72,6 +72,7 @@ public class StatisticsUpdateBodyMeasures extends PreferenceActivity {
 
         int weight = Integer.parseInt(prefs.getString("user_weight", "1"));
         int height = Integer.parseInt(prefs.getString("user_height", "1"));
+        int age = Integer.parseInt(prefs.getString("user_age", "1"));
         int bicep = Integer.parseInt(prefs.getString("measure_bicep", "1"));
         int chest = Integer.parseInt(prefs.getString("measure_chest", "1"));
         int waist = Integer.parseInt(prefs.getString("measure_waist", "1"));
@@ -89,12 +90,23 @@ public class StatisticsUpdateBodyMeasures extends PreferenceActivity {
         params.put("thigh", thigh);
         params.put("neck", neck);
 
-        double a = (4.15 * waist);
-        double b = a / 2.54;
-        double c = 0.082 * weight * 2.2;
-        double d = b - c - (gender == 1? 98.42 : 76.76);
-        double e = weight * 2.2;
-        Double bodyFat = d / e * 100;
+        // Obliczanie zawartości tkanki tluszczowej na podstawie [Deurenberg P 1991]
+        //
+        // Krok 1 - obliczanie BMI
+
+        double isMale = gender == 1 ? 1 : 0;
+
+        double bmi = weight / (height * height);
+
+        // Krok 2 - wlasciwy wzor
+
+        double a = 1.2 * bmi;
+        double b = 0.23 * age;
+        double c = 10.8 * isMale;
+        double d = 5.4;
+
+        Double bodyFat = a + b - c - d;
+
 
 
         SharedPreferences.Editor editor = prefs.edit();

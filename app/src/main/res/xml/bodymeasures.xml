@@ -2,12 +2,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue="80"
+        android:defaultValue="75"
         android:dialogTitle="@string/user_weight"
         android:inputType="number"
         android:key="user_weight"
         android:summary="@string/put_weight"
         android:title="@string/user_weight" />
+
+    <EditTextPreference
+        android:defaultValue="170"
+        android:dialogTitle="@string/user_height"
+        android:inputType="number"
+        android:key="user_height"
+        android:summary="@string/put_height"
+        android:title="@string/user_height" />
+
+    <EditTextPreference
+        android:defaultValue="25"
+        android:dialogTitle="@string/user_age"
+        android:inputType="number"
+        android:key="user_age"
+        android:summary="@string/put_age"
+        android:title="@string/user_age" />
 
     <EditTextPreference
         android:defaultValue="40"
