@@ -14,7 +14,7 @@ public class Constants {
     //public static String host = "http:/172.20.10.4:8080";
 
     // on device
-    public static String host = "http://mtpandroid.unicloud.pl/mtp";
+    public static String host = "https://android-mtp.herokuapp.com/";
 
     public static SimpleDateFormat queryDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static SimpleDateFormat displayDateFormat = new SimpleDateFormat("dd-MM-yyyy");
